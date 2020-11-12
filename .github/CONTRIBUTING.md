@@ -5,6 +5,8 @@ Contributing to the project
 1. **Don't break the build**
 2. **Search before making a new issue, pull request, or commit**: Someone might have already done what you wanted to do.
 3. **Test, test, and test**: Test your changes before you commit, or pull request.
+4. **Use the www folder**: Use this folder only for public facing files, sensitive files, such as database config should be outside of this folder.
+5. **Try to stick to the editorconfig**: An explanation on editorconfig can be found [here](https://editorconfig.org/)
 
 ## Issues
 #### Before creating a new issue make sure to...
