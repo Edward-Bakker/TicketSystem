@@ -1,4 +1,4 @@
-<!-- It is recommended that changes are committed to a new branch on your fork. Avoid directly editing the `development` or `main` branch. -->
+<!-- It is recommended that changes are committed to a new branch on your fork. Avoid directly editing the `development` or `master` branch. -->
 
 Resolves #<!-- issue ID here -->. <!-- If applicable. -->
 
