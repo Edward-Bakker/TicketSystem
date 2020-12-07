@@ -1,0 +1,140 @@
+@font-face {
+  font-family: Avenir;
+  src: url(assets/fonts/AvenirLTStd-Roman.otf);
+}
+@font-face {
+  font-family: Avenir;
+  src: url(assets/fonts/AvenirLTStd-Black.otf);
+  font-weight: bold;
+}
+@font-face {
+  font-family: Avenir;
+  src: url(assets/fonts/AvenirLTStd-Book.otf);
+  font-weight: light;
+}
+body {
+	font-family: Avenir, Arial, Times New Roman, sans-serif;
+	background-color: #EAEAEA;
+	overflow-y: hidden;
+}
+p {
+	margin: 0;
+	padding: 0;
+}
+header {
+	display: flex;
+	height: 80px;
+	background-color: white;
+}
+.triangle {
+	width: 50px;
+	height: 100%;
+}
+.logo-wrap {
+	display: flex;
+}
+.logo {
+	color: #FFD700;
+	background-color: black;
+	text-decoration: underline;
+	font-size: 4em;
+	padding: 0 20px;
+	margin: 0;
+	font-weight: lighter;
+}
+.placeholder {
+	height: 100%;
+	width: auto;
+	margin: 0 auto;
+}
+.login-name {
+	display: flex;
+	border-left: 2px solid #999999;
+	width: 200px;
+	height: 100%;
+	margin: 0;
+	padding: 0;
+	justify-content: center;
+	align-items: center;
+}
+header p {
+	padding-bottom: 10px;
+}
+.content-box {
+	background-color: white;
+	border-radius: 10px;
+	min-height: 0;
+}
+.scrollable {
+	height: calc(100vh - 157px);
+	overflow-y: scroll;
+	-ms-overflow-style: none; 
+	scrollbar-width: none; 
+}
+.scrollable::-webkit-scrollbar {
+	display: none;
+} 
+
+
+
+
+.wrapper {
+	display: grid;
+	grid-template-columns: 420px auto 210px;
+	grid-column-gap: 30px;
+	margin: 20px 0;
+	height: calc(100vh - 120px);
+}
+
+.ticket-list {
+	padding: 0 0 10px 20px;
+	margin-top: -5px;
+	height: 100%;
+}
+.ticket-list-p {
+	font-size: 1.5em;
+	margin-bottom: 10px;
+}
+.ticket {
+	padding: 10px 15px;
+	margin-bottom: 20px;
+}
+.ticket-top {
+	display: flex;
+	justify-content: space-between;
+}
+.ticket-list-title {
+	margin: 40px 0 10px 0;
+}
+.ticket-list-title p {
+	text-align: center;
+}
+.closed {
+	background-color: red;
+}
+.open {
+	background-color: lime;
+}
+.gold {
+	background-color: #FFD700;
+}
+.status-circle {
+	border: 1px solid black;
+	border-radius: 100%;
+	margin-bottom: 20px;
+	width: 27px;
+	height: 27px;
+}
+
+
+
+.active-ticket {
+	height: 100%;
+	
+}
+
+
+
+nav {
+	margin-right: 20px;
+}
