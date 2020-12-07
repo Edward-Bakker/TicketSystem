@@ -1,0 +1,55 @@
+body
+{
+
+
+}
+.Background
+{
+		background-image: url('Background5.png');
+	background-repeat:no-repeat;
+	margin-top:-11em;
+	width:55em;
+	height:45em;
+	z-index:1;
+	text-align:center;
+	
+}
+.mainBox
+{
+	width:41em;
+	height:39em;
+	margin-left:27em;
+	margin-top: 11.5em;
+	border-style:solid;
+	border-width: 0.5em;
+	border-color:gold;
+	z-index:55;
+	
+}
+.mainHeader 
+{
+	font-size: 5em;
+	color:gold;
+	margin-top: 0.05em;
+}
+.Button
+{
+	margin:1em;
+	width:13em;
+	height: 2.4em;
+	background-color:gold;
+	border-radius: 0.5em;
+	border-style:solid;
+	border-width: 0.2em;
+	border-color:gold;
+}
+input
+{	margin:6em;
+	background-color:none;
+	width:39em;
+	height:1em;
+	border-style:solid;
+	border-width: 0.3em;
+	border-color:gold;
+	
+}
