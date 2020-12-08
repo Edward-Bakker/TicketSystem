@@ -1,3 +1,8 @@
+@font-face 
+{
+    font-family: Avenir;
+    src: url(assets\fonts\AvenirLTStd-Black.otf);
+}
 .Heading
 {
     background-color: white;
@@ -29,6 +34,7 @@ body
     text-align: center;
     color: gold;
     font-size: 290%;
+    font-family: Avenir;
     margin: 0;
     padding-top: 0.2em;
     padding-bottom: 1em;
