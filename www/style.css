@@ -4,7 +4,7 @@
 }
 @font-face {
   font-family: Avenir;
-  src: url(assets/fonts/AvenirLTStd-Black.otf);
+  src: url(assets/fonts/AvenirLTStd-#999.otf);
   font-weight: bold;
 }
 @font-face {
@@ -116,7 +116,7 @@ header p {
 	padding: 10px 15px;
 	margin-bottom: 20px;
 }
-.ticket-top {
+.ticket-list-top {
 	display: flex;
 	justify-content: space-between;
 }
@@ -136,7 +136,7 @@ header p {
 	background-color: #FFD700;
 }
 .status-circle {
-	border: 1px solid black;
+	border: 1px solid #999;
 	border-radius: 100%;
 	margin-bottom: 20px;
 	width: 27px;
@@ -144,10 +144,11 @@ header p {
 }
 
 
-
+.create-ticket, .active-ticket {
+	padding: 20px 30px 20px 30px;
+}
 .create-ticket {
 	height: calc(100% - 76px);
-	padding: 20px 30px 20px 30px;
 }
 .create-wrapper h2 {
 	font-size: 2em;
@@ -168,6 +169,8 @@ form {
 }
 textarea {
 	resize: none;
+}
+#create-textarea {
 	height: calc(100% - 210px);
 }
 .button {
@@ -195,14 +198,14 @@ nav h2 {
 	margin: 0 auto 0 auto;
 	text-align: center;
 	padding-bottom: 20px;
-	border-bottom: 1px solid black;
+	border-bottom: 2px solid #999;
 }
 .nav-link-wrapper a {
 	display: block;
 	width: 70%;
 	margin: 20px auto 0 auto;
 	padding-bottom: 10px; 
-	border-bottom: 1px solid black;
+	border-bottom: 1px solid #999;
 	
 }
 .logout {
@@ -212,8 +215,55 @@ nav h2 {
 .nav-logout-line {
 	padding-top: 15px;
 	width: 80%;
-	border-top: 1px solid black;
+	border-top: 1px solid #999;
 	margin: 0 auto;
+}
+
+
+.active-ticket {
+	display: grid;
+	grid-template-rows: 60px auto 175px 60px;
+	
+}
+.ticket-top {
+	display: inline-flex;
+	padding-bottom: 10px;
+	align-items: center;
+	border-bottom: 2px solid #999;
+}
+.ticket-top h1 {
+	font-size: 2.5em;
+	font-weight: normal;
+	margin: 0 0 0 30px;
+}
+.ticket-top .line {
+	border-right: 1px solid #999;
+	height: 100%;
+	padding: 10px 40px 0 0;
+}
+.ticket-top .line .button {
+	margin: auto;
+	display: inline-block;
+}
+.ticket-content {
+	font-size: 1.2em;
+	margin-top: 30px;
+}
+.answer-form {
+	padding: 10px 0 0 0;
+	border-top: 2px solid #999;
+	box-sizing: border-box;
+}
+#answer {
+	height: 100%;
+}
+.ticket-bottom {
+	display: flex;
+	font-size: 1.2em;
+	justify-content: space-between;
+	margin-top: 10px;
+	padding-top: 20px;
+	border-top: 2px solid #999;
 }
 
 @media only screen and (max-width: 1392px) {
