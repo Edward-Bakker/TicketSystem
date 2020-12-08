@@ -12,10 +12,12 @@
   src: url(assets/fonts/AvenirLTStd-Book.otf);
   font-weight: light;
 }
+
+/* GENERAL STYLING AND REPEATED CLASSES */
 body {
 	font-family: Avenir, Arial, Times New Roman, sans-serif;
 	background-color: #EAEAEA;
-	overflow-y: hidden;
+	overflow-y: hidden; /*hides scrollbar of the page */
 }
 a {
 	text-decoration: none;
@@ -24,6 +26,10 @@ a {
 a:hover {
 	color: #888;
 }
+textarea {
+	resize: none;
+}
+
 h2 {
 	margin: 0;
 	padding: 0;
@@ -33,6 +39,35 @@ p {
 	margin: 0;
 	padding: 0;
 }
+.button {
+	width: 140px;
+	height: 37px;
+	margin-top: 20px;
+	border-radius: 10px;
+	background: #FFD700;
+	font-weight: lighter;
+	align-self: flex-end; 
+}
+.button:focus {
+	outline: none;
+}
+.wrapper {
+	display: grid;
+	grid-template-columns: 420px auto 210px;
+	grid-column-gap: 30px;
+	margin: 20px 0;
+	height: calc(100vh - 120px);
+}
+form {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+}
+/* GENERAL STYLING AND REPEATED CLASSES */
+
+
+
+/* HEADER STYLING */
 header {
 	display: inline-flex;
 	justify-content: space-between;
@@ -40,6 +75,7 @@ header {
 	min-width: 100%;
 	background-color: white;
 }
+/* the triangle to the right of "ForexNinja Help Desk" */
 .triangle {
 	width: 50px;
 	height: 100%;
@@ -77,11 +113,18 @@ header {
 header p {
 	padding-bottom: 10px;
 }
+/* HEADER STYLING */
+
+
+/* the white background with round corners */
 .content-box {
 	background-color: white;
 	border-radius: 10px;
 	min-height: 0;
 }
+
+
+/* Makes ticket list scrollable and removes the scrollbar */
 .scrollable {
 	height: calc(100vh - 157px);
 	overflow-y: scroll;
@@ -94,15 +137,7 @@ header p {
 
 
 
-
-.wrapper {
-	display: grid;
-	grid-template-columns: 420px auto 210px;
-	grid-column-gap: 30px;
-	margin: 20px 0;
-	height: calc(100vh - 120px);
-}
-
+/* TICKET LIST STYLING */
 .ticket-list {
 	padding: 0 0 10px 20px;
 	margin-top: -5px;
@@ -142,22 +177,23 @@ header p {
 	width: 27px;
 	height: 27px;
 }
+/* TICKET LIST STYLING */
 
 
+
+/* padding of the main content box */
 .create-ticket, .active-ticket {
 	padding: 20px 30px 20px 30px;
 }
+
+
+/* TICKET CREATION FORM STYLING */
 .create-ticket {
 	height: calc(100% - 76px);
 }
 .create-wrapper h2 {
 	font-size: 2em;
 	margin-left: 30px;
-}
-form {
-	display: flex;
-	flex-direction: column;
-	height: 100%;
 }
 #title, textarea {
 	box-sizing: border-box;
@@ -167,25 +203,17 @@ form {
 #title {
 	margin-bottom: 40px;
 }
-textarea {
-	resize: none;
-}
 #create-textarea {
 	height: calc(100% - 210px);
 }
-.button {
-	width: 140px;
-	height: 37px;
-	margin-top: 20px;
-	border-radius: 10px;
-	background: #FFD700;
-	font-weight: lighter;
-	align-self: flex-end; 
-}
-.button:focus {
-	outline: none;
-}
+/* TICKET CREATION FORM STYLING */
 
+
+
+
+
+
+/* SIDE NAVIGATION BAR STYLING */
 nav {
 	margin-right: 20px;
 	padding: 40px 0;
@@ -218,8 +246,10 @@ nav h2 {
 	border-top: 1px solid #999;
 	margin: 0 auto;
 }
+/* SIDE NAVIGATION BAR STYLING */
 
 
+/* VIEW TICKET MAIN CONTENT STYLING */
 .active-ticket {
 	display: grid;
 	grid-template-rows: 60px auto 175px 60px;
@@ -265,6 +295,10 @@ nav h2 {
 	padding-top: 20px;
 	border-top: 2px solid #999;
 }
+/* VIEW TICKET MAIN CONTENT STYLING */
+
+
+
 
 @media only screen and (max-width: 1392px) {
 
