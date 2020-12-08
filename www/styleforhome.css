@@ -1,0 +1,90 @@
+.Heading
+{
+    background-color: white;
+    width: 100%;
+    height: 6em;
+    margin: 0px;
+    padding: 0px;
+}
+h1
+{
+    padding: 0px;
+    margin: 0px;
+}
+h2{
+    padding: 0px;
+    margin: 0px;
+}
+body
+{
+    background-image: url("assets/HomePage.svg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: contain;
+    margin: 0px;
+    padding: 0px;
+}
+.title
+{
+    text-align: center;
+    color: gold;
+    font-size: 290%;
+    margin: 0;
+    padding-top: 0.2em;
+    padding-bottom: 1em;
+}
+.subtitle
+{
+    text-align: center;
+    margin: auto;
+    color: black;
+    background-color: gold;
+    width: 20em;
+    height: auto;
+    padding-top: 0px;
+    font-size: 130%;
+}
+.buttonsdivider
+{
+    width: 100%;
+    height: auto;
+    text-align: center;
+    margin: auto;
+    padding-top: 20%;
+}
+.buttons
+{
+  width: auto;
+  height: auto;
+  font-size: 130%;
+  text-align: center;
+  margin: auto;
+  align-items: center;
+ padding-left: 40%;
+  
+}
+ul
+{
+    list-style-type: none;
+    margin: 0px;
+    padding: 0px;
+    overflow: hidden;
+    text-align: center;
+    
+
+}
+li
+{
+float: left;
+padding: 5px;
+
+}
+li a
+{
+    display: block;
+    color: black;
+    text-align: center;
+    padding: 20px;
+    text-decoration: none;
+    background-color: gold;
+}
