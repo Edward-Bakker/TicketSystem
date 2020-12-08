@@ -64,7 +64,7 @@
 				</div>
 			</div>
 			
-			<div class="ticket content-box gold">
+			<div class="ticket content-box selected">
 				<div class="ticket-top">
 					<p>ID: 3</p>
 					<p>John Smith</p>
@@ -118,12 +118,32 @@
 		
 	</div>
 	
-	<div class="active-ticket  content-box">
-		
+	<div class="create-wrapper">
+		<h2>Create New Ticket</h2>
+		<div class="create-ticket content-box">
+			<form action="" method="post">
+				<input type="text" name="title" id="title" placeholder="Title">
+				<textarea name="question" placeholder="Enter question"></textarea>
+				<input class="button" type="submit" name="submit" id="submit">
+			</form>
+		</div>
 	</div>
 	
 	<nav class="content-box">
 	
+		<div>
+			<h2>Menu</h2>
+			
+			<div class="nav-link-wrapper">
+				<a href="createnewtcket.html">Create New Ticket</a>
+				<a href="changepassword.html">Change Password</a>
+			</div>
+		</div>
+		
+		<div class="nav-logout-line">
+			<button class="button logout">LOGOUT</button>
+		</div>
+		
 	</nav>
 	
 </div>
