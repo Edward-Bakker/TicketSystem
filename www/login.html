@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html lang="en">
     <head>
-        <title>Password reset</title>
+        <title>Login</title>
         <meta charset="utf-8">
         <link rel="stylesheet" href="css/form.css">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,10 +12,12 @@
             <!-- Main header -->
             <h1>ForexNinja</h1>
 
-            <!-- Password reset form -->
-            <form action="passwordreset.html" method="POST">
+            <!-- Login form -->
+            <form action="login.html" method="POST">
                 <input type="text" name="email" placeholder="Email">
-                <input type="submit" name="submit" value="Reset password">
+                <input type="text" name="password" placeholder="Password">
+                <input type="submit" name="submit" value="Log in">
+                <a href="passwordreset.html">Forgot password</a>
             </form>
         </div>
     </body>

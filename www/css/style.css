@@ -46,7 +46,7 @@ p {
 	border-radius: 10px;
 	background: #FFD700;
 	font-weight: lighter;
-	align-self: flex-end; 
+	align-self: flex-end;
 }
 .button:focus {
 	outline: none;
@@ -128,12 +128,12 @@ header p {
 .scrollable {
 	height: calc(100vh - 157px);
 	overflow-y: scroll;
-	-ms-overflow-style: none; 
-	scrollbar-width: none; 
+	-ms-overflow-style: none;
+	scrollbar-width: none;
 }
 .scrollable::-webkit-scrollbar {
 	display: none;
-} 
+}
 
 
 
@@ -232,9 +232,9 @@ nav h2 {
 	display: block;
 	width: 70%;
 	margin: 20px auto 0 auto;
-	padding-bottom: 10px; 
+	padding-bottom: 10px;
 	border-bottom: 1px solid #999;
-	
+
 }
 .logout {
 	display: block;
@@ -253,7 +253,7 @@ nav h2 {
 .active-ticket {
 	display: grid;
 	grid-template-rows: 60px auto 175px 60px;
-	
+
 }
 .ticket-top {
 	display: inline-flex;
@@ -304,8 +304,8 @@ nav h2 {
 
 header {
 	height: 60px;
-	
-	
+
+
 }
 .logo-wrap {
 	min-width: 557px;
