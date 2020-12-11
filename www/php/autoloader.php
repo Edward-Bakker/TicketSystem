@@ -16,4 +16,5 @@
     }
 
     AutoLoader::register();
+    $init = new Init();
 ?>

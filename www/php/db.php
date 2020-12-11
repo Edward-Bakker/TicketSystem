@@ -21,18 +21,20 @@
         {
             $this->dbConnectionObject = new mysqli($this->db_host, $this->db_user, $this->db_pass, $this->db_name);
 
-            if($this->dbConnectionObject !== false)
-            {
-                return $this->dbConnectionObject->prepare($query);
-            }
-            else
-            {
-                $error = new Error();
+            if($this->dbConnectionObject->connect_error) {
+                $debugConfig = config::getDebugConfig();
 
-                $msg = "Unable to connect to the database. Code: " . mysqli_errno($this->dbConnectionObj) . ": " . mysqli_error($this->dbConnectionObj);
-                $error->report($msg);
-                return false;
+                if($debugConfig->show_error)
+                {
+                    die('Connect Error (' . $this->dbConnectionObject->connect_errno . ') ' . $this->dbConnectionObject->connect_error);
+                }
+                else
+                {
+                    die();
+                }
             }
+
+            return $this->dbConnectionObject->prepare($query);
         }
 
         protected function close()

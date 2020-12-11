@@ -26,9 +26,9 @@
                     }
                 }
                 $stmt->close();
+                $this->close();
+                return $result;
             }
-            $this->close();
-            return $result;
         }
     }
 ?>
