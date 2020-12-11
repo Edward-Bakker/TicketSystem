@@ -1,3 +1,4 @@
+<?php require 'php/autoloader.php'; ?>
 <!DOCTYPE HTML>
 <html lang="en">
     <head>
@@ -13,8 +14,8 @@
             <h1>ForexNinja</h1>
 
             <!-- Password reset form -->
-            <form action="passwordreset.html" method="POST">
-                <input type="text" name="email" placeholder="Email">
+            <form action="passwordreset.php" method="POST">
+                <input type="email" name="email" placeholder="Email">
                 <input type="submit" name="submit" value="Reset password">
             </form>
         </div>

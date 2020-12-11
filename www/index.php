@@ -1,3 +1,4 @@
+<?php require 'php/autoloader.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -29,8 +30,8 @@
     <footer>
         <div class="buttons">
         <ul>
-            <li><a href="LoginPage.html">LOGIN</a></li>
-            <li><a href="SignUpPage.html">SIGNUP</a></li>
+            <li><a href="login.php">LOGIN</a></li>
+            <li><a href="signup.php">SIGNUP</a></li>
         </ul>
         </div>
 

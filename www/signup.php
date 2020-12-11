@@ -1,3 +1,4 @@
+<?php require 'php/autoloader.php'; ?>
 <!DOCTYPE HTML>
 <html lang="en">
     <head>
@@ -13,11 +14,11 @@
             <h1>ForexNinja</h1>
 
             <!-- Sign-up form -->
-            <form action="signup.html" method="POST">
+            <form action="signup.php" method="POST">
                 <input type="text" name="username" placeholder="Username">
-                <input type="text" name="email" placeholder="Email">
-                <input type="text" name="password" placeholder="Password">
-                <input type="text" name="passwordConfirm" placeholder="Confirm password">
+                <input type="email" name="email" placeholder="Email">
+                <input type="password" name="password" placeholder="Password">
+                <input type="password" name="passwordConfirm" placeholder="Confirm password">
                 <input type="submit" name="submit" value="Sign up">
             </form>
         </div>

@@ -1,10 +1,11 @@
+<?php require 'php/autoloader.php'; ?>
 <!DOCTYPE html>
 <html>
 <head>
 	<link rel="stylesheet" href="css/normalize.css">
 	<link rel="stylesheet" href="css/style.css">
 	<meta charset="utf-8">
-	<title>Create new ticket</title>
+	<title>Your Tickets</title>
 </head>
 <body>
 
@@ -31,7 +32,7 @@
 
 		<div class="scrollable">
 			<div class="ticket content-box">
-				<a href="viewticket.html">
+				<a href="viewticket.php">
 					<div class="ticket-list-top">
 						<p>ID: 1</p>
 						<p>John Smith</p>
@@ -43,14 +44,14 @@
 
 					<div class="status-circle closed"></div>
 
-					<div class="ticket-bottom">
+					<div class="ticket-list-bottom">
 						<p>CREATED ON: 20/11/2020 TIME: 13:21</p>
 					</div>
 				</a>
 			</div>
 
 			<div class="ticket content-box">
-				<a href="viewticket.html">
+				<a href="viewticket.php">
 					<div class="ticket-list-top">
 						<p>ID: 2</p>
 						<p>John Smith</p>
@@ -62,14 +63,14 @@
 
 					<div class="status-circle closed"></div>
 
-					<div class="ticket-bottom">
+					<div class="ticket-list-bottom">
 						<p>CREATED ON: 20/11/2020 TIME: 13:21</p>
 					</div>
 				</a>
 			</div>
 
 			<div class="ticket content-box selected">
-				<a href="viewticket.html">
+				<a href="viewticket.php">
 					<div class="ticket-list-top">
 						<p>ID: 3</p>
 						<p>John Smith</p>
@@ -81,14 +82,14 @@
 
 					<div class="status-circle open"></div>
 
-					<div class="ticket-bottom">
+					<div class="ticket-list-bottom">
 						<p>CREATED ON: 20/11/2020 TIME: 13:21</p>
 					</div>
 				</a>
 			</div>
 
 			<div class="ticket content-box">
-				<a href="viewticket.html">
+				<a href="viewticket.php">
 					<div class="ticket-list-top">
 						<p>ID: 4</p>
 						<p>John Smith</p>
@@ -100,14 +101,14 @@
 
 					<div class="status-circle open"></div>
 
-					<div class="ticket-bottom">
+					<div class="ticket-list-bottom">
 						<p>CREATED ON: 20/11/2020 TIME: 13:21</p>
 					</div>
 				</a>
 			</div>
 
 			<div class="ticket content-box">
-				<a href="viewticket.html">
+				<a href="viewticket.php">
 					<div class="ticket-list-top">
 						<p>ID: 5</p>
 						<p>John Smith</p>
@@ -119,7 +120,7 @@
 
 					<div class="status-circle open"></div>
 
-					<div class="ticket-bottom">
+					<div class="ticket-list-bottom">
 						<p>CREATED ON: 20/11/2020 TIME: 13:21</p>
 					</div>
 				</a>
@@ -129,14 +130,29 @@
 
 	</div>
 
-	<div class="create-wrapper">
-		<h2>Create New Ticket</h2>
-		<div class="create-ticket content-box">
-			<form class="create-form" action="" method="post">
-				<input type="text" name="title" id="title" placeholder="Title">
-				<textarea name="question" placeholder="Enter question" id="create-textarea"></textarea>
-				<input class="button" type="submit" name="submit" id="submit">
-			</form>
+	<div class="active-ticket content-box">
+		<div class="ticket-top">
+
+			<div class="line">
+				<button class="button">Delete ticket</button>
+			</div>
+			<h1>Help with USD/EUR</h1>
+
+		</div>
+
+		<p class="ticket-content">
+			Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+		</p>
+
+		<form class="answer-form" action="" method="post">
+			<label for="answer">Answer</label>
+			<textarea name="answer" id="answer"></textarea>
+		</form>
+
+		<div class="ticket-bottom">
+			<p>John Smith</p>
+
+			<p>CREATED ON: 20/11/2020 TIME: 13:21</p>
 		</div>
 	</div>
 
@@ -146,8 +162,8 @@
 			<h2>Menu</h2>
 
 			<div class="nav-link-wrapper">
-				<a href="createnewticket.html">Create New Ticket</a>
-				<a href="PasswordReset.html">Change Password</a>
+				<a href="createnewticket.php">Create New Ticket</a>
+				<a href="settings.php">Settings</a>
 			</div>
 		</div>
 
