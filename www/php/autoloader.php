@@ -4,7 +4,7 @@
         {
             spl_autoload_register(function ($className)
             {
-                $file = 'php/' . $className . '.php';
+                $file = 'php/' . strtolower($className) . '.php';
                 if(file_exists($file))
                 {
                     require $file;
