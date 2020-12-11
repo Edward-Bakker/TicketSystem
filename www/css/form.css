@@ -1,0 +1,69 @@
+@import url(http://fonts.googleapis.com/css?family=Roboto);
+
+* {
+    font-family: 'Roboto', Arial, Helvetica, sans-serif;
+    margin: 0px;
+    padding: 0px;
+}
+
+body {
+    background-image: url('../assets/background.svg');
+    background-repeat: no-repeat;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+p {
+    font-size: 2vw;
+    margin-top: 0%;
+}
+
+.mainBox {
+    width: 40vw;
+    height: 80vh;
+    border: 0.5vw solid gold;
+}
+
+.mainBox > h1 {
+    font-size: 7vw;
+    color: gold;
+    text-align: center;
+    text-decoration: underline;
+}
+
+
+.mainBox > form {
+    display: flex;
+    height: auto;
+    flex-flow: column nowrap;
+    align-items: center;
+    justify-content: center;
+}
+
+.mainBox > form > input {
+    width: 75%;
+    margin: 10px 0;
+    border: 5px solid gold;
+    font-size: 2rem;
+}
+
+.mainBox > form > input::placeholder {
+    text-align: center;
+    color: grey;
+}
+
+.mainBox > form > input[type="submit"] {
+    margin-top: 25px;
+    width: 35%;
+    font-weight: bold;
+    background-color: gold;
+    border: 1px solid gold;
+    border-radius: 15px;
+}
+
+.mainBox > form > a {
+    color: royalblue;
+}
