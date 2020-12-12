@@ -43,9 +43,6 @@ $hashPassword = password_hash($newPass, PASSWORD_DEFAULT);
 $sql = "UPDATE accounts
         SET password = $hashPassword,
         WHERE email = $email";
-
-
-
 }
 
 ?>
