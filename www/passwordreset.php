@@ -45,7 +45,8 @@ $sql = "UPDATE accounts
         SET password = $hashPassword,
         WHERE email = $email";
 
-$stmt = mysqli_prepare()
+$stmt = mysqli_prepare();
+
 }
 
 ?>
