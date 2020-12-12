@@ -14,10 +14,40 @@
             <h1>ForexNinja</h1>
 
             <!-- Password reset form -->
-            <form action="passwordreset.php" method="POST">
+            <form action="" method="POST">
                 <input type="email" name="email" placeholder="Email">
-                <input type="submit" name="submit" value="Reset password">
+                <input type="submit" name="password-reset-submit" value="Reset password">
             </form>
         </div>
+        <?php
+
+if(isset($_POST["password-reset-submit"]))
+{
+$email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
+var_dump($email);
+
+function randomPassword() {
+    $alphabet = "abcdefghijklmnopqrstuwxyzABCDEFGHIJKLMNOPQRSTUWXYZ0123456789";
+    $pass = array(); 
+    $alphaLength = strlen($alphabet) - 1; 
+    for ($i = 0; $i < 10; $i++) {
+        $n = rand(0, $alphaLength);
+        $pass[] = $alphabet[$n];
+    }
+    return implode($pass); 
+}
+
+$newPass = randomPassword();
+
+$hashPassword = password_hash($newPass, PASSWORD_DEFAULT);
+
+$sql = "UPDATE accounts
+        SET password = $hashPassword,
+        WHERE email = $email";
+
+$stmt = mysqli_prepare()
+}
+
+?>
     </body>
 </html>

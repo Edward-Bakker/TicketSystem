@@ -22,5 +22,6 @@
                 <input type="submit" name="submit" value="Sign up">
             </form>
         </div>
+        
     </body>
 </html>
