@@ -24,7 +24,6 @@
 if(isset($_POST["password-reset-submit"]))
 {
 $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
-var_dump($email);
 
 function randomPassword() {
     $alphabet = "abcdefghijklmnopqrstuwxyzABCDEFGHIJKLMNOPQRSTUWXYZ0123456789";
@@ -45,7 +44,7 @@ $sql = "UPDATE accounts
         SET password = $hashPassword,
         WHERE email = $email";
 
-$stmt = mysqli_prepare();
+
 
 }
 
