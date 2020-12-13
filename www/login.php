@@ -18,7 +18,7 @@
                 {
                     $accounts = new Accounts();
                     if($accounts->login($email, $password)) {
-                        // Logged in
+                        // Correct login credentials
                     } else {
                         // Wrong login credentials
                     }
