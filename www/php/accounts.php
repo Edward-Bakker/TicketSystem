@@ -1,5 +1,9 @@
 <?php
-    class Accounts extends DB {
+    class Accounts extends DB
+    {
+        // Takes an email, and password and checks
+        // whether the password matches the password in
+        // the database, returns true on correct password
         public function login($email, $password)
         {
             $query = "SELECT password FROM accounts WHERE email = ?";

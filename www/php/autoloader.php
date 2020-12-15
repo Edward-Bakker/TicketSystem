@@ -1,5 +1,9 @@
 <?php
-    class AutoLoader {
+    class AutoLoader
+    {
+        // Instantiates a new class and
+        // loads the file according to
+        // the class
         public static function register()
         {
             spl_autoload_register(function ($className)

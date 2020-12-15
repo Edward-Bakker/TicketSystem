@@ -1,5 +1,8 @@
 <?php
-    class Init {
+    class Init
+    {
+        // Initiates anything a page has to
+        // run before showing.
         public function __construct()
         {
             $debugConfig = config::getDebugConfig();
