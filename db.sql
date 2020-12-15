@@ -29,8 +29,8 @@ CREATE TABLE IF NOT EXISTS `accounts` (
     `insert_time`               TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     `last_login`                TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 
-    PRIMARY KEY (`id`),
-    INDEX `index_email` (`email`)
+    CONSTRAINT `PK_userid` PRIMARY KEY (`id`),
+    INDEX `idx_email` (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -48,7 +48,7 @@ CREATE TABLE IF NOT EXISTS `tickets` (
     `updated_at`                TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     `closed_at`                 TIMESTAMP NULL DEFAULT NULL,
 
-    PRIMARY KEY (`id`),
+    CONSTRAINT `PK_ticketid` PRIMARY KEY (`id`),
     CONSTRAINT `FK_userid` FOREIGN KEY `FK_userid` (`user_id`)
         REFERENCES `accounts` (`id`)
         ON UPDATE CASCADE ON DELETE CASCADE
@@ -67,7 +67,7 @@ CREATE TABLE IF NOT EXISTS `comments` (
     `created_at`                TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     `updated_at`                TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 
-    PRIMARY KEY (`id`),
+    CONSTRAINT `PK_commentid` PRIMARY KEY (`id`),
     CONSTRAINT `FK_ticketid` FOREIGN KEY `FK_ticketid` (`ticket_id`)
         REFERENCES `tickets` (`id`)
         ON UPDATE CASCADE ON DELETE CASCADE,
