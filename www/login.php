@@ -35,7 +35,7 @@
                 <input type="email" name="email" placeholder="Email" required>
                 <input type="password" name="password" placeholder="Password" required>
                 <input type="submit" name="submit" value="Log in">
-                <p><a href="mailto:victor.peters@nhlstenden.com">click here</a> to email the admin requesting a password reset</p>
+                <a href="mailto:victor.peters@nhlstenden.com">Reset password</a>
             </form>
         </div>
     </body>
