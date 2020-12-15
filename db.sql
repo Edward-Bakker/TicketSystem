@@ -25,7 +25,6 @@ CREATE TABLE IF NOT EXISTS `accounts` (
     `password`                  VARCHAR(255) NOT NULL,
     `adminlevel`                ENUM('0','1') NOT NULL DEFAULT '0',
     `approved`                  ENUM('0','1') NOT NULL DEFAULT '0',
-    `response_email`            ENUM('0','1') NOT NULL DEFAULT '0',
     `insert_time`               TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     `last_login`                TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 

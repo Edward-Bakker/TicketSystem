@@ -34,5 +34,45 @@
             $this->close();
             return $result;
         }
+
+        // Takes username, email, password
+        // stores it in the database with
+        // the password hashed
+        public function register($username, $email, $password)
+        {
+            $query = "SELECT email FROM accounts WHERE email = ?";
+            $emailTaken = false;
+            if($stmt = $this->connect($query))
+            {
+                $stmt->bind_param('s', $email);
+
+                $stmt->execute();
+
+                $stmt->store_result();
+
+                if($stmt->num_rows >= 1)
+                {
+                    $emailTaken = true;
+                }
+            }
+
+            if(!$emailTaken)
+            {
+                $query = "INSERT INTO accounts (name, email, password) VALUES (?, ?, ?)";
+                $password = password_hash($password, PASSWORD_DEFAULT);
+
+                if($stmt = $this->connect($query))
+                {
+                    $stmt->bind_param('sss', $username, $email, $password);
+
+                    $stmt->execute();
+
+                    $stmt->close();
+                }
+                $this->close();
+            } else {
+                return "Email taken";
+            }
+        }
     }
 ?>

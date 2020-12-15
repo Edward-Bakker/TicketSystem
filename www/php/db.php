@@ -38,7 +38,7 @@
                 }
                 else
                 {
-                    die();
+                    die('Something went wrong');
                 }
             }
 
