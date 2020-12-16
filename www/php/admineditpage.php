@@ -28,7 +28,7 @@
             <br>
             <input type="Text" name="email" value="<?php echo $values["email"]?>"> <b>Email</b> <br>
             <br>
-            <input type="Text" name="password" value="<?php echo $values["password"]?>"> <b>Hash Password</b> <br>
+            <input type="Text" name="password" value="<?php echo $values["password"]?>"> <b>Password (new password will be hashed automatically)</b> <br>
             <br>
             <input type="Text" name="adminlevel" value="<?php echo $values["adminlevel"]?>"> <b>Admin Level</b> <br>
             <br>
@@ -42,14 +42,14 @@
         <?php
         if(isset($_POST["submit"]))
         {
-                $Name = $_POST["name"];
-                $Email = $_POST["email"];
-                $password = $_POST["password"];
+                $name = $_POST["name"];
+                $email = $_POST["email"];
+                $password = password_hash($_POST["password"], PASSWORD_DEFAULT);
                 $adminlevel = $_POST["adminlevel"];
                 $approved = $_POST["approved"];
                 
                 $sql2 = "UPDATE accounts
-                         SET name = '$Name', email= '$email', password = '$password', adminlevel = '$adminlevel', approved = '$approved'                               
+                         SET name = '$name', email= '$email', password = '$password', adminlevel = '$adminlevel', approved = '$approved'                               
                          WHERE id = $id";
                 
                 $stmt2 = mysqli_prepare($link, $sql2) or die(mysqli_error($link));
