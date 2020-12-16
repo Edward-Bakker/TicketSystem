@@ -74,5 +74,34 @@
                 return "Email taken";
             }
         }
+
+        // Gets the user's username
+        public function getUsersName($id)
+        {
+            $query = "SELECT name FROM accounts WHERE id = ?";
+
+            if($stmt = $this->connect($query))
+            {
+                $stmt->bind_param('i', $id);
+
+                $stmt->execute();
+
+                $stmt->bind_result($username);
+
+                $stmt->store_result();
+
+                $result = null;
+                if($stmt->num_rows !== 0)
+                {
+                    while($stmt->fetch())
+                    {
+                        $result = $username;
+                    }
+                }
+                $stmt->close();
+            }
+            $this->close();
+            return $result;
+        }
     }
 ?>
