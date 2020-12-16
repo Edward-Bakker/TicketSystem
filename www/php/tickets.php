@@ -31,9 +31,18 @@
         }
 
         // Gets all tickets for the admin
-        public function getAllTickets()
+        // or only the flagged ones if
+        // flagged paramater is true
+        public function getAllTickets($flagged = false)
         {
-            $query = "SELECT id, subject, content, closed, user_id, created_at, updated_at, closed_at FROM tickets";
+            if($flagged)
+            {
+                $query = "SELECT id, subject, content, closed, user_id, created_at, updated_at, closed_at FROM tickets WHERE flagged = '1'";
+            }
+            else
+            {
+                $query = "SELECT id, subject, content, closed, user_id, created_at, updated_at, closed_at FROM tickets";
+            }
 
             if($stmt = $this->connect($query))
             {
@@ -57,6 +66,24 @@
             }
             $this->close();
             return $result;
+        }
+
+        // Sets whether the ticket is
+        // flagged or not depending
+        // on the parameters
+        public function setTicketFlag($id, $flagged)
+        {
+            $query = "UPDATE tickets SET flagged = ? WHERE id = ?";
+
+            if($stmt = $this->connect($query))
+            {
+                $stmt->bind_param('si', $flagged, $id);
+
+                $stmt->execute();
+
+                $stmt->close();
+            }
+            $this->close();
         }
     }
 ?>
