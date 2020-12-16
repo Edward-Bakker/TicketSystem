@@ -11,11 +11,6 @@
            <?php
            $link = mysqli_connect("localhost", "root", "", "ticketsystem")
            OR Die("Could not connect to database!" . mysqli_error($link));
-
-            if(isset($_POST["back"]))
-            {
-                header("Location: http://localhost/GITHUB/TicketSystem/www/Admin.php");
-            }
             
             $id = $_GET["id"];
             $sql = "SELECT * FROM accounts WHERE id=$id";
@@ -36,10 +31,16 @@
             <br>
             <input type="Submit" name="submit" value="Submit">
             <input type="Submit" name="back" value="Back">
+            <input type="Submit"name="delete" value="Delete User">
         </form>
 
 
         <?php
+         if(isset($_POST["back"]))
+        {
+             header("Location: http://localhost/GITHUB/TicketSystem/www/Admin.php");
+        }
+
         if(isset($_POST["submit"]))
         {
                 $name = $_POST["name"];
@@ -58,6 +59,17 @@
                 mysqli_stmt_close($stmt2);
                 mysqli_close($link);
                 header("Location: http://localhost/GITHUB/TicketSystem/www/Admin.php");
+        }
+
+        if(isset($_POST["delete"]))
+        {
+            $sql3 = "DELETE FROM accounts WHERE id = $id";
+            $stmt3 = mysqli_prepare($link, $sql3) or die(mysqli_error($link));
+            mysqli_stmt_execute($stmt3) or die(mysqli_error($link));
+            mysqli_stmt_close($stmt);
+            mysqli_stmt_close($stmt3);
+            mysqli_close($link);
+            header("Location: http://localhost/GITHUB/TicketSystem/www/Admin.php");
         }
         ?>
     </body>
