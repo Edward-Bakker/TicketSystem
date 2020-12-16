@@ -43,8 +43,8 @@
 
         if(isset($_POST["submit"]))
         {
-                $name = $_POST["name"];
-                $email = $_POST["email"];
+                $name = filter_input(INPUT_POST , "name" , FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+                $email = filter_input(INPUT_POST , "email" , FILTER_SANITIZE_EMAIL);
                 $password = password_hash($_POST["password"], PASSWORD_DEFAULT);
                 $adminlevel = $_POST["adminlevel"];
                 $approved = $_POST["approved"];
