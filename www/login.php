@@ -17,9 +17,12 @@
                 if(!empty($email) && !empty($password))
                 {
                     $accounts = new Accounts();
-                    if($accounts->login($email, $password)) {
+                    if($accounts->login($email, $password))
+                    {
                         // Correct login credentials
-                    } else {
+                    }
+                    else
+                    {
                         // Wrong login credentials
                     }
                 }

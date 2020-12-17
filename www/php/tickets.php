@@ -46,8 +46,6 @@
 
             if($stmt = $this->connect($query))
             {
-                $stmt->bind_param('i', $userID);
-
                 $stmt->execute();
 
                 $stmt->bind_result($id, $subject, $content, $closed, $userID, $createdAt, $updatedAt, $closedAt);

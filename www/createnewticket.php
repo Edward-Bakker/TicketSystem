@@ -26,108 +26,35 @@
 </header>
 
 <div class="wrapper">
-	<div class="ticket-list">
-
+    <div class="ticket-list">
 		<p class="ticket-list-p">Your Tickets</p>
-
 		<div class="scrollable">
+            <?php
+                $tickets = new Tickets();
+                $accounts = new Accounts();
+                $allTickets = $tickets->getAllTickets();
+                foreach($allTickets as $ticket):
+            ?>
 			<div class="ticket content-box">
-				<a href="viewticket.php">
+				<a href="viewticket.php?id=<?= $ticket[0] ?>">
 					<div class="ticket-list-top">
-						<p>ID: 1</p>
-						<p>John Smith</p>
+						<p>ID: <?= $ticket[0] ?></p>
+						<p><?= $accounts->getUsersName($ticket[4]) ?></p>
 					</div>
 
 					<div class="ticket-list-title">
-						<p class="ticket-list-p">Help with USD/EUR</p>
+						<p class="ticket-list-p"><?= $ticket[1] ?></p>
 					</div>
 
 					<div class="status-circle closed"></div>
 
-					<div class="ticket-bottom">
-						<p>CREATED ON: 20/11/2020 TIME: 13:21</p>
+					<div class="ticket-list-bottom">
+						<p>CREATED ON: <?= $ticket[5] ?></p>
 					</div>
 				</a>
 			</div>
-
-			<div class="ticket content-box">
-				<a href="viewticket.php">
-					<div class="ticket-list-top">
-						<p>ID: 2</p>
-						<p>John Smith</p>
-					</div>
-
-					<div class="ticket-list-title">
-						<p class="ticket-list-p">Help with USD/EUR</p>
-					</div>
-
-					<div class="status-circle closed"></div>
-
-					<div class="ticket-bottom">
-						<p>CREATED ON: 20/11/2020 TIME: 13:21</p>
-					</div>
-				</a>
-			</div>
-
-			<div class="ticket content-box selected">
-				<a href="viewticket.php">
-					<div class="ticket-list-top">
-						<p>ID: 3</p>
-						<p>John Smith</p>
-					</div>
-
-					<div class="ticket-list-title">
-						<p class="ticket-list-p">Help with USD/EUR</p>
-					</div>
-
-					<div class="status-circle open"></div>
-
-					<div class="ticket-bottom">
-						<p>CREATED ON: 20/11/2020 TIME: 13:21</p>
-					</div>
-				</a>
-			</div>
-
-			<div class="ticket content-box">
-				<a href="viewticket.php">
-					<div class="ticket-list-top">
-						<p>ID: 4</p>
-						<p>John Smith</p>
-					</div>
-
-					<div class="ticket-list-title">
-						<p class="ticket-list-p">Help with USD/EUR</p>
-					</div>
-
-					<div class="status-circle open"></div>
-
-					<div class="ticket-bottom">
-						<p>CREATED ON: 20/11/2020 TIME: 13:21</p>
-					</div>
-				</a>
-			</div>
-
-			<div class="ticket content-box">
-				<a href="viewticket.php">
-					<div class="ticket-list-top">
-						<p>ID: 5</p>
-						<p>John Smith</p>
-					</div>
-
-					<div class="ticket-list-title">
-						<p class="ticket-list-p">Help with USD/EUR</p>
-					</div>
-
-					<div class="status-circle open"></div>
-
-					<div class="ticket-bottom">
-						<p>CREATED ON: 20/11/2020 TIME: 13:21</p>
-					</div>
-				</a>
-			</div>
-
+            <?php endforeach; ?>
 		</div>
-
 	</div>
 
 	<div class="create-wrapper">
