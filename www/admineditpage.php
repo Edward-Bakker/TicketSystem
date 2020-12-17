@@ -31,7 +31,6 @@
             <br>
             <input type="Submit" name="submit" value="Submit">
             <input type="Submit" name="back" value="Back">
-            <input type="Submit"name="delete" value="Delete User">
         </form>
 
 
@@ -58,16 +57,6 @@
                 mysqli_stmt_close($stmt);
                 mysqli_close($link);
                 header("Location: admin.php");
-        }
-
-        if(isset($_POST["delete"]))
-        {
-            $sql = "DELETE FROM accounts WHERE id = $id";
-            $stmt = mysqli_prepare($link, $sql) or die(mysqli_error($link));
-            mysqli_stmt_execute($stmt) or die(mysqli_error($link));
-            mysqli_stmt_close($stmt);
-            mysqli_close($link);
-            header("Location: admin.php");
         }
         ?>
     </body>
