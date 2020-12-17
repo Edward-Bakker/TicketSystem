@@ -16,7 +16,7 @@
             $sql = "SELECT * FROM accounts WHERE id=$id";
             $stmt = mysqli_query($link, $sql);
             $values = mysqli_fetch_array($stmt);
-            
+           
             ?>
         <form name="Input" method="POST">
             <input type="Text" name="name" value="<?php echo $values["name"]?>"> <b>Name</b> <br>
@@ -38,7 +38,7 @@
         <?php
          if(isset($_POST["back"]))
         {
-             header("Location: http://localhost/GITHUB/TicketSystem/www/Admin.php");
+             header("Location: admin.php");
         }
 
         if(isset($_POST["submit"]))
@@ -49,27 +49,25 @@
                 $adminlevel = $_POST["adminlevel"];
                 $approved = $_POST["approved"];
                 
-                $sql2 = "UPDATE accounts
+                $sql = "UPDATE accounts
                          SET name = '$name', email= '$email', password = '$password', adminlevel = '$adminlevel', approved = '$approved'                               
                          WHERE id = $id";
                 
-                $stmt2 = mysqli_prepare($link, $sql2) or die(mysqli_error($link));
-                mysqli_stmt_execute($stmt2) or die(mysqli_error($link));
+                $stmt = mysqli_prepare($link, $sql) or die(mysqli_error($link));
+                mysqli_stmt_execute($stmt) or die(mysqli_error($link));
                 mysqli_stmt_close($stmt);
-                mysqli_stmt_close($stmt2);
                 mysqli_close($link);
-                header("Location: http://localhost/GITHUB/TicketSystem/www/Admin.php");
+                header("Location: admin.php");
         }
 
         if(isset($_POST["delete"]))
         {
-            $sql3 = "DELETE FROM accounts WHERE id = $id";
-            $stmt3 = mysqli_prepare($link, $sql3) or die(mysqli_error($link));
-            mysqli_stmt_execute($stmt3) or die(mysqli_error($link));
+            $sql = "DELETE FROM accounts WHERE id = $id";
+            $stmt = mysqli_prepare($link, $sql) or die(mysqli_error($link));
+            mysqli_stmt_execute($stmt) or die(mysqli_error($link));
             mysqli_stmt_close($stmt);
-            mysqli_stmt_close($stmt3);
             mysqli_close($link);
-            header("Location: http://localhost/GITHUB/TicketSystem/www/Admin.php");
+            header("Location: admin.php");
         }
         ?>
     </body>
