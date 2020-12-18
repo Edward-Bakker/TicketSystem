@@ -1,4 +1,20 @@
-<?php require 'php/autoloader.php'; ?>
+<?php require 'php/autoloader.php'; 
+session_start();
+if(($_SESSION["valid"] == false))
+{
+    echo "Not Logged in, please login to continue, redirect in 5 seconds...";
+    header("Refresh: 5; login.php");
+    return;
+}elseif(($_SESSION["approved"] == false))
+{
+    echo "Not approved, please contact the admin, redirect in 5 seconds...";
+    header("Refresh: 5; login.php");
+    return;
+}else
+{
+    
+}
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -95,7 +111,7 @@
 		</div>
 
 		<div class="nav-logout-line">
-			<button class="button logout">LOGOUT</button>
+			<a href="login.php"><button class="button logout">LOGOUT</button></a>
 		</div>
 
 	</nav>

@@ -1,4 +1,10 @@
-<?php require 'php/autoloader.php'; ?>
+<?php require 'php/autoloader.php'; 
+session_start();
+$_SESSION["valid"] = false;
+$_SESSION["admin"] = false;
+$_SESSION["approved"] = false;
+$_SESSION["admin"] = false;
+?>
 <!DOCTYPE HTML>
 <html lang="en">
     <head>
@@ -19,7 +25,32 @@
                     $accounts = new Accounts();
                     if($accounts->login($email, $password))
                     {
-                        // Correct login credentials
+                        $_SESSION["valid"] = true;
+                        $config = config::getDBConfig();
+                        $link = mysqli_connect($config->db_host, $config->db_user, $config->db_pass, $config->db_name)
+                        OR Die("Could not connect to database!" . mysqli_error($link));
+                        $sql = "SELECT approved, adminlevel FROM accounts WHERE email = '$email'";
+                        $stmt = mysqli_query($link, $sql);
+                        while($values = mysqli_fetch_array($stmt))
+                        {
+                            if($values["approved"] === "1")
+                            {
+                                $_SESSION["approved"] = true;
+                            }else
+                            {
+                                $_SESSION["approved"] = false;
+                            }
+                            if($values["adminlevel"] === "1")
+                            {
+                                $_SESSION["admin"] = true;
+                            } else
+                            {
+                                $_SESSION["admin"] = false;
+                            }
+                            header("Location: viewticket.php");
+                            mysqli_stmt_close($stmt);
+                            mysqli_close($link);
+                        }
                     }
                     else
                     {
