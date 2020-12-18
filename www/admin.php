@@ -1,3 +1,4 @@
+<?php require 'php/autoloader.php';?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,7 +15,8 @@
 <h1>Admin Page</h1>
 <hr>
     <?php
-    $link = mysqli_connect("localhost", "root", "", "ticketsystem")
+    $config = config::getDBConfig();
+    $link = mysqli_connect($config->db_host, $config->db_user, $config->db_pass, $config->db_name)
     OR Die("Could not connect to database!" . mysqli_error($link));
     
     $sql = "SELECT * FROM accounts ORDER BY id ASC";

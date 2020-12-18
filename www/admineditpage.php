@@ -1,3 +1,4 @@
+<?php require 'php/autoloader.php';?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -9,15 +10,16 @@
         <h1>Edit</h1>
         <hr>
            <?php
-           $link = mysqli_connect("localhost", "root", "", "ticketsystem")
+           $config = config::getDBConfig();
+           $link = mysqli_connect($config->db_host, $config->db_user, $config->db_pass, $config->db_name)
            OR Die("Could not connect to database!" . mysqli_error($link));
             
-            $id = $_GET["id"];
+            $id = filter_input(INPUT_GET, "id", FILTER_SANITIZE_NUMBER_INT);
             $sql = "SELECT * FROM accounts WHERE id=$id";
             $stmt = mysqli_query($link, $sql);
             $values = mysqli_fetch_array($stmt);
-           
             ?>
+            
         <form name="Input" method="POST">
             <input type="Text" name="name" value="<?php echo $values["name"]?>"> <b>Name</b> <br>
             <br>
@@ -42,20 +44,14 @@
 
         if(isset($_POST["submit"]))
         {
-                $name = filter_input(INPUT_POST , "name" , FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+                $name = filter_input(INPUT_POST , "name" , FILTER_SANITIZE_STRING);
                 $email = filter_input(INPUT_POST , "email" , FILTER_SANITIZE_EMAIL);
                 $password = password_hash($_POST["password"], PASSWORD_DEFAULT);
                 $adminlevel = $_POST["adminlevel"];
                 $approved = $_POST["approved"];
                 
-                $sql = "UPDATE accounts
-                         SET name = '$name', email= '$email', password = '$password', adminlevel = '$adminlevel', approved = '$approved'                               
-                         WHERE id = $id";
-                
-                $stmt = mysqli_prepare($link, $sql) or die(mysqli_error($link));
-                mysqli_stmt_execute($stmt) or die(mysqli_error($link));
-                mysqli_stmt_close($stmt);
-                mysqli_close($link);
+                $accounts = new accounts();
+                $accounts->editaccounts($id, $name, $email, $password, $adminlevel, $approved);
                 header("Location: admin.php");
         }
         ?>

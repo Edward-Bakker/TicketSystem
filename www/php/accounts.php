@@ -103,5 +103,21 @@
             $this->close();
             return $result;
         }
+
+        public function editaccounts($id, $name, $email, $password, $adminlevel, $approved)
+        {
+            $query = "UPDATE accounts 
+            SET name = ?, email= ?, password = ?, adminlevel = ?, approved = ? WHERE id = ?";
+
+            if($stmt = $this->connect($query))
+            {
+                $stmt->bind_param("ssssss", $name, $email, $password, $adminlevel, $approved, $id);
+
+                $stmt->execute();
+
+                $stmt->close();
+            }
+            $this->close();
+        }
     }
 ?>
