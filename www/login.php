@@ -1,10 +1,10 @@
 <?php require 'php/autoloader.php'; 
-session_start();
-$_SESSION["valid"] = false;
-$_SESSION["admin"] = false;
-$_SESSION["approved"] = false;
-$_SESSION["admin"] = false;
-?>
+// session_start();
+// $_SESSION["valid"] = false;
+// $_SESSION["admin"] = false;
+// $_SESSION["approved"] = false;
+// $_SESSION["admin"] = false;
+// ?>
 <!DOCTYPE HTML>
 <html lang="en">
     <head>
