@@ -1,10 +1,11 @@
 <?php require 'php/autoloader.php'; 
-// session_start();
-// $_SESSION["valid"] = false;
-// $_SESSION["admin"] = false;
-// $_SESSION["approved"] = false;
-// $_SESSION["admin"] = false;
-// ?>
+ session_start();
+ $_SESSION["valid"] = false;
+ $_SESSION["admin"] = false;
+ $_SESSION["approved"] = false;
+ $_SESSION["admin"] = false;
+   $_SESSION["name"] = "";
+ ?>
 <!DOCTYPE HTML>
 <html lang="en">
     <head>
@@ -29,10 +30,12 @@
                         $config = config::getDBConfig();
                         $link = mysqli_connect($config->db_host, $config->db_user, $config->db_pass, $config->db_name)
                         OR Die("Could not connect to database!" . mysqli_error($link));
-                        $sql = "SELECT approved, adminlevel FROM accounts WHERE email = '$email'";
+                        $sql = "SELECT approved, adminlevel, name FROM accounts WHERE email = '$email'";
                         $stmt = mysqli_query($link, $sql);
                         while($values = mysqli_fetch_array($stmt))
                         {
+                            $_SESSION["name"] = $values["name"];
+
                             if($values["approved"] === "1")
                             {
                                 $_SESSION["approved"] = true;
@@ -54,7 +57,7 @@
                     }
                     else
                     {
-                        // Wrong login credentials
+                        echo "<div class =" .  "mainbox" . "<p>" . "Wrong login credentials" . "</p>" . "</div";
                     }
                 }
             }

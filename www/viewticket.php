@@ -1,19 +1,19 @@
 <?php require 'php/autoloader.php'; 
-// session_start();
-// if(($_SESSION["valid"] == false))
-// {
-//     echo "Not Logged in, please login to continue, redirect in 5 seconds...";
-//     header("Refresh: 5; login.php");
-//     return;
-// }elseif(($_SESSION["approved"] == false))
-// {
-//     echo "Not approved, please contact the admin, redirect in 5 seconds...";
-//     header("Refresh: 5; login.php");
-//     return;
-// }else
-// {
+ session_start();
+if(($_SESSION["valid"] == false))
+{
+    echo "Not Logged in, please login to continue, redirect in 5 seconds...";
+    header("Refresh: 5; login.php");
+    return;
+}elseif(($_SESSION["approved"] == false))
+{
+    echo "Not approved, please contact the admin, redirect in 5 seconds...";
+    header("Refresh: 5; login.php");
+    return;
+}else
+{
     
-// }
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -37,7 +37,7 @@
 	<img class="placeholder" src="assets/stocks-placeholder.png" alt="placeholder">
 
 	<div class="login-name">
-		<p>Welcome, Victor Peters</p>
+		<?php echo "<p>" . "Welcome, " . $_SESSION["name"] . "</p>"  ?>
 	</div>
 </header>
 

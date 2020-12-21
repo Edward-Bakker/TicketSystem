@@ -1,4 +1,11 @@
-<?php require 'php/autoloader.php'; ?>
+<?php require 'php/autoloader.php'; 
+session_start();
+$_SESSION["valid"] = false;
+$_SESSION["admin"] = false;
+$_SESSION["approved"] = false;
+$_SESSION["admin"] = false;
+  $_SESSION["name"] = "";
+?>
 <!DOCTYPE HTML>
 <html lang="en">
     <head>
@@ -24,6 +31,7 @@
                         $returnValue = $accounts->register($username, $email, $password);
                     }
                 }
+                header("Location: login.php");
             }
         ?>
         <!--  This is for the yellow box -->
