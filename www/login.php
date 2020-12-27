@@ -1,10 +1,8 @@
 <?php require 'php/autoloader.php'; 
-//  session_start();
-//  $_SESSION["valid"] = false;
-//  $_SESSION["admin"] = false;
-//  $_SESSION["approved"] = false;
-//  $_SESSION["admin"] = false;
-//    $_SESSION["name"] = "";
+ session_start();
+ $_SESSION["valid"] = false;
+ $_SESSION["id"] = "";
+ $_SESSION["name"] = "";
  ?>
 <!DOCTYPE HTML>
 <html lang="en">
@@ -30,29 +28,15 @@
                         $config = config::getDBConfig();
                         $link = mysqli_connect($config->db_host, $config->db_user, $config->db_pass, $config->db_name)
                         OR Die("Could not connect to database!" . mysqli_error($link));
-                        $sql = "SELECT approved, adminlevel, name FROM accounts WHERE email = '$email'";
+                        $sql = "SELECT id, approved, adminlevel, name FROM accounts WHERE email = '$email'";
                         $stmt = mysqli_query($link, $sql);
                         while($values = mysqli_fetch_array($stmt))
                         {
+                            $_SESSION["id"] = $values["id"];
                             $_SESSION["name"] = $values["name"];
-
-                            if($values["approved"] === "1")
-                            {
-                                $_SESSION["approved"] = true;
-                            }else
-                            {
-                                $_SESSION["approved"] = false;
-                            }
-                            if($values["adminlevel"] === "1")
-                            {
-                                $_SESSION["admin"] = true;
-                            } else
-                            {
-                                $_SESSION["admin"] = false;
-                            }
-                            header("Location: viewticket.php");
                             mysqli_stmt_close($stmt);
                             mysqli_close($link);
+                            header("Location: viewticket.php");
                         }
                     }
                     else

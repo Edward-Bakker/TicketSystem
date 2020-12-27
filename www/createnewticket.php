@@ -3,17 +3,32 @@
 // if(($_SESSION["valid"] == false))
 // {
 //     echo "Not Logged in, please login to continue, redirect in 5 seconds...";
-//     header("Refresh: 5; login.php");
-//     return;
-// }elseif(($_SESSION["approved"] == false))
+// 	header("Refresh: 5; login.php");
+// 	return;
+// 	mysqli_stmt_close($stmt);
+// 	mysqli_close($link);
+// }
+
+// $id=$_SESSION["id"];
+// $config = config::getDBConfig();
+// $link = mysqli_connect($config->db_host, $config->db_user, $config->db_pass, $config->db_name)
+// OR Die("Could not connect to database!" . mysqli_error($link));
+// $sql = "SELECT approved, adminlevel FROM accounts WHERE id = $id";
+// $stmt = mysqli_query($link, $sql);
+// $values = mysqli_fetch_array($stmt);
+
+// if($values["approved"] === "0")
 // {
 //     echo "Not approved, please contact the admin, redirect in 5 seconds...";
-//     header("Refresh: 5; login.php");
-//     return;
+// 	header("Refresh: 5; login.php");
+// 	return;
+// 	mysqli_stmt_close($stmt);
+// 	mysqli_close($link);
 // }else
 // {
     
 // }
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -37,7 +52,7 @@
 	<img class="placeholder" src="assets/stocks-placeholder.png" alt="placeholder">
 
 	<div class="login-name">
-		<p>Welcome, Victor Peters</p>
+	<?php //echo "<p>" . "Welcome, " . $_SESSION["name"] . "</p>"  ?>
 	</div>
 </header>
 
