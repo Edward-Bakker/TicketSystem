@@ -95,10 +95,9 @@
 				<input type="text" name="title" id="title" placeholder="Title">
 				<textarea name="question" placeholder="Enter question" id="create-textarea"></textarea>
 				<input class="button" type="submit" name="submit" id="submit">
-				<form action="upload.php" method="post" enctype="multipart/form-data">
-  Upload A File:
-  <input type="file" name="fileToUpload" id="fileToUpload">
-  <input type="submit" value="Upload File" name="submit">
+				<form action="upload.php" method="POST" enctype="multipart/form-data">
+	<input type="file" name="file">
+	<button type="submit" name="submit">Upload</button>
 </form>
 			</form>
 		</div>
