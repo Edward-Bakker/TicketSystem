@@ -28,7 +28,7 @@
                         $config = config::getDBConfig();
                         $link = mysqli_connect($config->db_host, $config->db_user, $config->db_pass, $config->db_name)
                         OR Die("Could not connect to database!" . mysqli_error($link));
-                        $sql = "SELECT id, approved, adminlevel, name FROM accounts WHERE email = '$email'";
+                        $sql = "SELECT id, name FROM accounts WHERE email = '$email'";
                         $stmt = mysqli_query($link, $sql);
                         while($values = mysqli_fetch_array($stmt))
                         {
