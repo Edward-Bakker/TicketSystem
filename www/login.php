@@ -57,7 +57,7 @@
                 <input type="password" name="password" placeholder="Password" required>
                 <input type="submit" name="submit" value="Log in">
                 <a href="mailto:victor.peters@nhlstenden.com">Reset password</a>
-                <a href="/signup.php">Register</a>
+                <a href="signup.php">Register</a>
             </form>
         </div>
     </body>

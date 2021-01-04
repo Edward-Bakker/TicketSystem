@@ -119,5 +119,21 @@
             }
             $this->close();
         }
+
+        public function editaccountssettings($id, $name, $email)
+        {
+            $query = "UPDATE accounts 
+            SET name = ?, email= ? WHERE id = ?";
+
+            if($stmt = $this->connect($query))
+            {
+                $stmt->bind_param("sss", $name, $email, $id);
+
+                $stmt->execute();
+
+                $stmt->close();
+            }
+            $this->close();
+        }
     }
 ?>

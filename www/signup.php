@@ -45,7 +45,7 @@ $_SESSION["name"] = "";
                 <input type="password" name="password" placeholder="Password">
                 <input type="password" name="passwordConfirm" placeholder="Confirm password">
                 <input type="submit" name="submit" value="Sign up">
-                <a href="/login.php">Login</a>
+                <a href="login.php">Login</a>
             </form>
         </div>
     </body>
