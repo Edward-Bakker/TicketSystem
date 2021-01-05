@@ -25,7 +25,8 @@ body
     background-image: url("../assets/homepage.svg");
     background-repeat: no-repeat;
     background-attachment: fixed;
-    background-size: contain;
+    background-size: cover;
+    background-position: center;
     margin: 0px;
     padding: 0px;
 }
@@ -56,17 +57,17 @@ body
     height: auto;
     text-align: center;
     margin: auto;
-    padding-top: 20%;
+    padding-top: 200px;
 }
 .buttons
 {
-  width: auto;
-  height: auto;
-  font-size: 130%;
-  text-align: center;
-  margin: auto;
-  align-items: center;
- padding-left: 40%;
+	width: auto;
+	height: auto;
+	font-size: 130%;
+	text-align: center;
+	margin: auto;
+	align-items: center;
+	padding-left: 40%;
 
 }
 ul
@@ -81,8 +82,8 @@ ul
 }
 li
 {
-float: left;
-padding: 5px;
+	float: left;
+	padding: 5px;
 
 }
 li a

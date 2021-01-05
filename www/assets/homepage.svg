@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Generator: Adobe Illustrator 25.0.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!-- Generator: Adobe Illustrator 24.0.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
 <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 viewBox="0 0 1920 1080" style="enable-background:new 0 0 1920 1080;" xml:space="preserve">
 <style type="text/css">
@@ -7,27 +7,29 @@
 	.st1{fill:none;stroke:#FFFFFF;stroke-width:23;stroke-linecap:round;}
 	.st2{fill:none;stroke:#FFFFFF;stroke-width:23;stroke-linecap:square;}
 	.st3{fill:#FFFFFF;}
-	.st4{stroke:#000000;stroke-miterlimit:10;}
+	.st4{stroke:#000000;stroke-width:0.75;stroke-miterlimit:10;}
 </style>
 <g>
 	<g>
 		<g>
-			<defs>
-				<rect id="SVGID_1_" x="-37.1" width="2035.2" height="1080"/>
-			</defs>
-			<clipPath id="SVGID_2_">
-				<use xlink:href="#SVGID_1_"  style="overflow:visible;"/>
-			</clipPath>
-			<g id="Home_Page" class="st0">
-				<path id="Polygon_2" d="M1473.4-225.6L305.8,2046.8L-996.6-878.4L1473.4-225.6z"/>
-				<line id="Line_1" class="st1" x1="925.6" y1="588.5" x2="992.6" y2="655.5"/>
-				<path id="Path_1" class="st2" d="M932.6,596.5c0,0,50.6,49.3,67.3,66"/>
-				<path id="Path_2" class="st3" d="M1016.7,662.8l-11.2,22l-42.8-44.6L1016.7,662.8z"/>
+			<g>
+				<defs>
+					<rect id="SVGID_1_" x="-67.1" width="1957.1" height="1080"/>
+				</defs>
+				<clipPath id="SVGID_2_">
+					<use xlink:href="#SVGID_1_"  style="overflow:visible;"/>
+				</clipPath>
+				<g id="Home_Page" class="st0">
+					<path id="Polygon_2" d="M1385.4-225.6L262.6,2046.8L-989.8-878.4L1385.4-225.6z"/>
+					<line id="Line_1" class="st1" x1="858.7" y1="588.5" x2="923.1" y2="655.5"/>
+					<path id="Path_1" class="st2" d="M865.4,596.5c0,0,48.7,49.3,64.7,66"/>
+					<path id="Path_2" class="st3" d="M946.3,662.8l-10.8,22l-41.2-44.6L946.3,662.8z"/>
+				</g>
 			</g>
 		</g>
 	</g>
 </g>
-<path class="st4" d="M1017.7,662.8l5.9,5.8l4.8,4.3l4.2,1.9l5.8-0.5l5.3-3.7l8.4-7.7l18-18.4l68-67.6c0,0,3.9-0.7,4.3-0.9
-	s5,1.1,5,1.1l2.1,1l2.4,2.1l1.3,1.6l1.6,2.6l0.6,2.9v2.8l-0.9,2l-2.2,4.5l-111.8,110.6l-1.4,0.8l-2.7,0.9h-4l-3-2.7l-22.8-21.4
-	L1017.7,662.8z"/>
+<path class="st4" d="M946.2,662.6l5.9,5.8l4.8,4.3l4.2,1.9l5.8-0.5l5.3-3.7l8.4-7.7l18-18.4l68-67.6c0,0,3.9-0.7,4.3-0.9
+	s5,1.1,5,1.1l2.1,1l2.4,2.1l1.3,1.6l1.6,2.6l0.6,2.9v2.8l-0.9,2l-2.2,4.5L969,707l-1.4,0.8l-2.7,0.9h-4l-3-2.7l-22.8-21.4
+	L946.2,662.6z"/>
 </svg>
