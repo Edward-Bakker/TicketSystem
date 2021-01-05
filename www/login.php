@@ -24,6 +24,7 @@
                     $accounts = new Accounts();
                     if($accounts->login($email, $password))
                     {
+                        $accounts->setLastLogin($email);
                         $_SESSION["valid"] = true;
                         $config = config::getDBConfig();
                         $link = mysqli_connect($config->db_host, $config->db_user, $config->db_pass, $config->db_name)

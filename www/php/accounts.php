@@ -75,6 +75,22 @@
             }
         }
 
+        public function setLastLogin($email)
+        {
+            $timestamp = date("Y-m-d H:i:s");
+            $query = "UPDATE accounts SET last_login = ? WHERE email = ?";
+
+            if($stmt = $this->connect($query))
+            {
+                $stmt->bind_param('ss', $timestamp, $email);
+
+                $stmt->execute();
+
+                $stmt->close();
+            }
+            $this->close();
+        }
+
         // Gets the user's username
         public function getUsersName($id)
         {
@@ -106,7 +122,7 @@
 
         public function editaccounts($id, $name, $email, $password, $adminlevel, $approved)
         {
-            $query = "UPDATE accounts 
+            $query = "UPDATE accounts
             SET name = ?, email= ?, password = ?, adminlevel = ?, approved = ? WHERE id = ?";
 
             if($stmt = $this->connect($query))
@@ -122,7 +138,7 @@
 
         public function editaccountssettings($id, $name, $email)
         {
-            $query = "UPDATE accounts 
+            $query = "UPDATE accounts
             SET name = ?, email= ? WHERE id = ?";
 
             if($stmt = $this->connect($query))

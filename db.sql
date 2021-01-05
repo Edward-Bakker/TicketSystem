@@ -29,7 +29,7 @@ CREATE TABLE IF NOT EXISTS `accounts` (
     `last_login`                TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 
     CONSTRAINT `PK_userid` PRIMARY KEY (`id`),
-    INDEX `idx_email` (`email`)
+    UNIQUE KEY `unique_email` (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
