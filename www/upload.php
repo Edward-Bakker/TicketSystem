@@ -1,8 +1,7 @@
 <?php
-
-if (isset($_POST['submit'])){
+if (isset($_POST['upload'])){
     $file = $_FILES['file'];
-    
+
     $fileName = $_FILES['file']['name'];
     $fileTmpName = $_FILES['file']['tmp_name'];
     $fileSize = $_FILES['file']['size'];
@@ -20,7 +19,7 @@ if (isset($_POST['submit'])){
                 $fileNameNew = uniqid('', true).'.'.$fileActualExt;
                 $fileDestination = 'uploads/'.$fileNameNew;
                 move_uploaded_file($fileTmpName, $fileDestination);
-
+                header("Location:createnewticket.php");
             } else {
                 echo"This file is too big.";
             }
@@ -33,4 +32,5 @@ if (isset($_POST['submit'])){
     }
 
 }
+
 ?>
