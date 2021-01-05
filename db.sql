@@ -60,7 +60,6 @@ CREATE TABLE IF NOT EXISTS `tickets` (
 CREATE TABLE IF NOT EXISTS `comments` (
     `id`                        INT NOT NULL AUTO_INCREMENT,
     `content`                   TEXT NOT NULL,
-    `file`                      VARCHAR(255) NULL,
     `ticket_id`                 INT NOT NULL,
     `user_id`                   INT NOT NULL,
     `created_at`                TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
