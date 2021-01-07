@@ -54,11 +54,18 @@
 
             <!-- Login form -->
             <form action="login.php" method="POST">
-                <input type="email" name="email" placeholder="Email" required>
-                <input type="password" name="password" placeholder="Password" required>
-                <input type="submit" name="submit" value="Log in">
-                <a href="mailto:victor.peters@nhlstenden.com">Reset password</a>
-                <a href="signup.php">Register</a>
+                    
+                <div class="input-wrap">
+                    <input type="email" name="email" placeholder="Email" required>
+                    <input type="password" name="password" placeholder="Password" required>
+                    <input type="submit" name="submit" value="Log in">
+                </div>
+                    
+                <div class="bottom-buttons">
+                    <a href="mailto:victor.peters@nhlstenden.com">Reset password</a>
+                    <a href="signup.php">Register</a>
+                </div>
+                    
             </form>
         </div>
     </body>

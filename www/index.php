@@ -8,33 +8,34 @@
     <title>HomePage</title>
 </head>
 <body>
+    
     <!--The White heading where the API will go-->
-    <header class="Heading">
+    <header class="heading">
+        <img src="assets/stocks-placeholder.png">
     </header>
+    
+    <div class="wrapper">
+        
 
-    <!--The title FOREXNINJA-->
-    <header class="title">
-        <h1><u>ForexNinja</u></h1>
-    </header>
-
-    <!--The subtitle with box saying help desk-->
-    <article class="subtitle">
-        <h2>Help Desk</h2>
-    </article>
-
-    <!--A invisible block to seperate the buttons from the title-->
-    <article class="buttonsdivider">
-    </article>
-
-    <!--The buttons to go to login page or signup page in a list form-->
-    <footer>
-        <div class="buttons">
-        <ul>
-            <li><a href="login.php">LOGIN</a></li>
-            <li><a href="signup.php">SIGNUP</a></li>
-        </ul>
+        <!--The title FOREXNINJA-->
+        <div class="title">
+            <h1><u>ForexNinja</u></h1>
         </div>
 
-    </footer>
+        <!--The subtitle with box saying help desk-->
+        <article class="subtitle">
+            <h2>Help Desk</h2>
+        </article>
+
+
+        <!--The buttons to go to login page or signup page in a list form-->
+
+        <div class="buttons">
+            <ul>
+                <li><a href="login.php">LOGIN</a></li>
+                <li><a href="signup.php">SIGNUP</a></li>
+            </ul>
+        </div>
+    </div>
 </body>
 </html>

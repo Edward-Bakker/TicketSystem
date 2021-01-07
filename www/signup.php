@@ -39,12 +39,15 @@ $_SESSION["name"] = "";
 
             <!-- Sign-up form -->
             <form action="signup.php" method="POST">
-                <input type="text" name="username" placeholder="Username">
-                <input type="email" name="email" placeholder="Email">
-                <?php if(isset($returnValue) && $returnValue === "Email taken") echo "Email taken"  ?>
-                <input type="password" name="password" placeholder="Password">
-                <input type="password" name="passwordConfirm" placeholder="Confirm password">
-                <input type="submit" name="submit" value="Sign up">
+                <div class="input-wrap">
+                    <input type="text" name="username" placeholder="Username">
+                    <input type="email" name="email" placeholder="Email">
+                    <?php if(isset($returnValue) && $returnValue === "Email taken") echo "Email taken"  ?>
+                    <input type="password" name="password" placeholder="Password">
+                    <input type="password" name="passwordConfirm" placeholder="Confirm password">
+                    <input type="submit" name="submit" value="Sign up">
+                </div>
+                    
                 <a href="login.php">Login</a>
             </form>
         </div>
