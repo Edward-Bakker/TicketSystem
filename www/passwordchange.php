@@ -15,11 +15,15 @@
 
             <!-- Password reset form -->
             <form action="passwordchange.php" method="POST">
-                <input type="email" name="email" placeholder="Email">
-                <input type="password" name="currentPassword" placeholder="Enter your current password">
-                <input type="password" name="newPassword" placeholder="Enter new password" >
-                <input type="password" name="newPasswordConfirm" placeholder="Retype new password">
-                <input type="submit" name="submit" value="Reset password">
+                
+                <div class="input-wrap">
+                    <input type="email" name="email" placeholder="Email">
+                    <input type="password" name="currentPassword" placeholder="Enter your current password">
+                    <input type="password" name="newPassword" placeholder="Enter new password" >
+                    <input type="password" name="newPasswordConfirm" placeholder="Retype new password">
+                    <input type="submit" name="submit" value="Reset password">
+                </div>
+                
             </form>
         </div>
         <?php
