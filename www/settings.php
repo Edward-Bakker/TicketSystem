@@ -34,11 +34,13 @@ if($values["approved"] === "0")
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/form.css">
     <title>Settings</title>
 </head>
 <body>
+    <div class="mainBox">
+    
     <h1>User Settings</h1>
-    <hr>
 
         <?php
         //connects to database
@@ -53,19 +55,21 @@ if($values["approved"] === "0")
         $values = mysqli_fetch_array($stmt);
         ?>
             
-        <form name="Input" method="POST">
+        <form name="Input" action="settings.php" method="POST">
         <!-- dynamically inputs all data from the database into the form -->
-            <input type="Text" name="name" value="<?php echo $values["name"]?>"> <b>Name</b> <br>
-            <br>
-            <input type="Text" name="email" value="<?php echo $values["email"]?>"> <b>Email</b> <br>
-            <br>
-            <input type="Submit" name="changePassword" value="Change Password">
-            <br>
-            <br>
-            <input type="Submit" name="submit" value="Submit">
-            <input type="Submit" name="back" value="Back">
+           
+            <div class="input-wrap">
+                <input type="Text" name="name" value="<?php echo $values["name"]?>" placeholder="Name">
+                <input type="Text" name="email" value="<?php echo $values["email"]?>" placeholder="Email">
+                <input type="Submit" name="changePassword" value="Change Password">
+                <input type="Submit" name="submit" value="Submit">
+                <input type="Submit" name="back" value="Back">
+            </div>
+            
         </form>
-
+    
+    </div>
+    
         <?php
         // takes the user back to the ticket page
          if(isset($_POST["back"]))

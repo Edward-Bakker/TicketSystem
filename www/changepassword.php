@@ -37,21 +37,26 @@ if($values["approved"] === "0")
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/form.css">
     <title>Change Password</title>
 </head>
 <body>
+    <div class="mainBox">
     <h1>Change Password</h1>
-    <hr>
+    
+        <form name="Input" action="changepassword.php" method="POST">
 
-    <form name="Input" method="POST">
-            <input type="Text" name="oldpassword" value=""> <b>Old Password</b> <br>
-            <br>
-            <input type="Text" name="newpassword" value=""> <b>New Password</b> <br>
-            <br>
-            <input type="Text" name="reppassword" value=""> <b>Repeat Password</b> <br>
-            <input type="submit" name="submit"> <br>
-    </form>
-
+            <div class="input-wrap">
+                <input type="Text" name="oldpassword" value="" placeholder="Old Password">
+                <input type="Text" name="newpassword" value="" placeholder="New Password">
+                <input type="Text" name="reppassword" value="" placeholder="Repeat Password">
+                <input type="submit" name="submit"> 
+            </div>
+    
+        </form>
+    </div>
+        
+        
 <?php
  if(isset($_POST['submit']))
  {

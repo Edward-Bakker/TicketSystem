@@ -27,10 +27,12 @@ p {
     min-width: 480px;
     height: 80vh;
     border: 0.5vw solid gold;
+    padding: 20px;
+    box-sizing: border-box;
 }
 
 .mainBox > h1 {
-    font-size: 5em;
+    font-size: 4em;
     font-weight: normal;
     color: gold;
     text-align: center;
@@ -61,6 +63,7 @@ p {
 
 .input-wrap input::placeholder {
     text-align: center;
+    font-size: 26px;
     color: grey;
 }
 
