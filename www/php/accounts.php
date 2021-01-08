@@ -151,5 +151,21 @@
             }
             $this->close();
         }
+
+        public function changepassword($email, $password)
+        {
+            $query = "UPDATE accounts
+            SET   password = ? WHERE email = ?";
+
+            if($stmt = $this->connect($query))
+            {
+                $stmt->bind_param("ss",  $password, $email);
+
+                $stmt->execute();
+
+                $stmt->close();
+            }
+            $this->close();
+        }
     }
 ?>
