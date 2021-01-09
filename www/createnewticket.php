@@ -91,14 +91,13 @@
 	<div class="create-wrapper">
 		<h2>Create New Ticket</h2>
 		<div class="create-ticket content-box">
-			<form class="create-form" action="submit.php" method="post">
+			<form class="create-form" action="submit.php" method="post" enctype="multipart/form-data">
 				<input type="text" name="title" id="title" placeholder="Title" required>
 				<textarea name="question" placeholder="Enter question" id="create-textarea"required></textarea>
 				<input class="button" type="submit" name="submit" id="submit">
-			</form>
-			<form action="upload.php" method="POST" enctype="multipart/form-data">
+				<action="submit.php" method="POST" enctype="multipart/form-data">
 				<input type="file" name="file">
-				<button type="submit" name="upload">Upload</button>
+				
 			</form>
 			
 		</div>

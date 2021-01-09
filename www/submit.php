@@ -13,14 +13,26 @@ $title = mysqli_real_escape_string($conn, $_POST['title']);
 $question = mysqli_real_escape_string($conn, $_POST['question']);
 $id = mysqli_real_escape_string($conn, $_SESSION['id']);
 
+$msg = "";
 
-$sql = "INSERT into tickets(`user_id`, `subject`, `content`) VALUES (?, ?, ?);";
-$stmt = mysqli_stmt_init($conn);
-    if (!mysqli_stmt_prepare($stmt, $sql)){
-        echo'Database error';
-    } else {
-        mysqli_stmt_bind_param($stmt, "sss", $id, $title, $question);
-        mysqli_stmt_execute($stmt);
-        header("Location:createnewticket.php?success");
+if (isset($_POST['submit'])){
+    // Get image name
+    $file = $_FILES['file']['name'];
+    // Get text
+    $title = mysqli_real_escape_string($conn, $_POST['title']);
+    $question = mysqli_real_escape_string($conn, $_POST['question']);
+    $id = mysqli_real_escape_string($conn, $_SESSION['id']);
+    // image file directory
+    $target = "uploads/".basename($file);
+
+    $sql = "INSERT INTO tickets (`file`, `subject`, `content`, `user_id`) VALUES ('$file', '$title', '$question', '$id')";
+    // execute query
+    mysqli_query($conn, $sql);
+    header("Location:createnewticket.php?success");
+    if (move_uploaded_file($_FILES['file']['tmp_name'], $target)) {
+        $msg = "Image uploaded successfully";
+    }else{
+        $msg = "Failed to upload image";
     }
-   //$title = filter_input(INPUT_POST, 'title', FILTER_DEFAULT);
+}
+?>
