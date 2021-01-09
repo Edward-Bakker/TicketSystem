@@ -1,4 +1,4 @@
-<?php require 'php/autoloader.php'; 
+<?php require 'php/autoloader.php';
 session_start();
 if(($_SESSION["valid"] == false))
 {
@@ -26,7 +26,7 @@ if($values["approved"] === "0")
 	mysqli_close($link);
 }else
 {
-    
+
 }
 ?>
 <!DOCTYPE html>
@@ -56,6 +56,7 @@ if($values["approved"] === "0")
         ?>
             
         <form name="Input" action="settings.php" method="POST">
+
         <!-- dynamically inputs all data from the database into the form -->
            
             <div class="input-wrap">
@@ -79,7 +80,7 @@ if($values["approved"] === "0")
 
         if(isset($_POST["changePassword"]))
         {
-            header("Location: changepassword.php");
+            header("Location: passwordchange.php");
         }
 
         //filters all data and edits the database on submit to what was entered in the form
@@ -87,7 +88,7 @@ if($values["approved"] === "0")
         {
                 $name = filter_input(INPUT_POST , "name" , FILTER_SANITIZE_STRING);
                 $email = filter_input(INPUT_POST , "email" , FILTER_SANITIZE_EMAIL);
-                
+
                 $accounts = new accounts();
                 $accounts->editaccountssettings($id, $name, $email);
                 header("Location: admin.php");

@@ -41,7 +41,8 @@
                 {
                     if($newPassword === $newPasswordConfirm)
                     {
-                        $accounts->setPasswordUser($newPassword, $email);
+                        $newPassword=password_hash($newPassword, PASSWORD_DEFAULT);
+                        $accounts->changepassword($email, $newPassword);
                         echo "You have successfully changed your password ";
                     }
                     else echo "New passwords fields dont match";
