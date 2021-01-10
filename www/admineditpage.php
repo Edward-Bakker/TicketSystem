@@ -81,6 +81,8 @@
          if(isset($_POST["back"]))
         {
              header("Location: admin.php");
+             mysqli_stmt_close($stmt);
+             mysqli_close($link);
         }
 
         //filters all data and edits the database on submit to what was entered in the form
@@ -88,13 +90,29 @@
         {
                 $name = filter_input(INPUT_POST , "name" , FILTER_SANITIZE_STRING);
                 $email = filter_input(INPUT_POST , "email" , FILTER_SANITIZE_EMAIL);
-                $password = password_hash($_POST["password"], PASSWORD_DEFAULT);
+                $password = filter_input(INPUT_POST , "password" , FILTER_SANITIZE_STRING);
+                $hashedpassworddb = $values["password"];
                 $adminlevel = $_POST["adminlevel"];
                 $approved = $_POST["approved"];
                 
-                $accounts = new accounts();
-                $accounts->editaccounts($id, $name, $email, $password, $adminlevel, $approved);
-                header("Location: admin.php");
+                if($password === $hashedpassworddb)
+                {
+                   $accounts = new accounts();
+                   $accounts->editaccounts($id, $name, $email, $password, $adminlevel, $approved);
+                   header("Location: admin.php");
+                }
+                else
+                {
+                    $hashednewpass = password_hash($password, PASSWORD_DEFAULT);
+                    $password = $hashednewpass;
+                    $accounts = new accounts();
+                    $accounts->editaccounts($id, $name, $email, $password, $adminlevel, $approved);
+                    header("Location: admin.php");
+                }
+                
+                
+
+                
         }
         ?>
     </body>
