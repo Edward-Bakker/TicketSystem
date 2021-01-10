@@ -91,7 +91,7 @@ if($values["approved"] === "0")
 
                 $accounts = new accounts();
                 $accounts->editaccountssettings($id, $name, $email);
-                header("Location: admin.php");
+                header("Location: viewticket.php");
         }
         ?>
 </body>
