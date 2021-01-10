@@ -38,6 +38,7 @@ CREATE TABLE IF NOT EXISTS `accounts` (
 
 CREATE TABLE IF NOT EXISTS `tickets` (
     `id`                        INT NOT NULL AUTO_INCREMENT,
+    `file`                      VARCHAR(255) ,
     `subject`                   VARCHAR(255) NOT NULL,
     `content`                   TEXT NOT NULL,
     `flagged`                   ENUM('0','1') NOT NULL DEFAULT '0',

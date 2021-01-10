@@ -126,7 +126,7 @@ header p {
 
 /* Makes ticket list scrollable and removes the scrollbar */
 .scrollable {
-    height: calc(100vh - 157px);
+   // height: calc(100vh - 157px);
     overflow-y: scroll;
     -ms-overflow-style: none;
     scrollbar-width: none;

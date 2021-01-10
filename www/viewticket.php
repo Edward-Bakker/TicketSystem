@@ -1,5 +1,5 @@
 <?php require 'php/autoloader.php';
-// session_start();
+session_start();
 // if(($_SESSION["valid"] == false))
 // {
 //     echo "Not Logged in, please login to continue, redirect in 5 seconds...";
