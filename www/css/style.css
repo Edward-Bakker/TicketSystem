@@ -17,7 +17,12 @@ font-weight: light;
 body {
     font-family: Avenir, Arial, Times New Roman, sans-serif;
     background-color: #EAEAEA;
-    overflow-y: hidden; /*hides scrollbar of the page */
+    overflow-y: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+body::-webkit-scrollbar {
+    display: none;
 }
 a {
     text-decoration: none;
@@ -71,7 +76,7 @@ form {
 header {
     display: inline-flex;
     justify-content: space-between;
-    height: 80px;
+    height: 60px;
     min-width: 100%;
     background-color: white;
 }
@@ -91,9 +96,10 @@ header {
     color: #FFD700;
     background-color: black;
     text-decoration: underline;
-    font-size: 4em;
+    font-size: 3em;
     padding: 0 20px;
     margin: 0;
+    height: 100%;
     font-weight: lighter;
 }
 .placeholder {
@@ -120,13 +126,13 @@ header p {
 .content-box {
     background-color: white;
     border-radius: 10px;
-    min-height: 0;
+    box-sizing: border-box;
 }
 
 
 /* Makes ticket list scrollable and removes the scrollbar */
 .scrollable {
-   // height: calc(100vh - 157px);
+    height: calc(100vh - 137px);
     overflow-y: scroll;
     -ms-overflow-style: none;
     scrollbar-width: none;
@@ -148,6 +154,7 @@ header p {
     margin-bottom: 10px;
 }
 .ticket {
+    height: auto;
     padding: 10px 15px;
     margin-bottom: 20px;
 }
@@ -189,7 +196,7 @@ header p {
 
 /* TICKET CREATION FORM STYLING */
 .create-ticket {
-    height: calc(100% - 76px);
+    height: calc(100% - 37px);
 }
 .create-wrapper h2 {
     font-size: 2em;
@@ -198,13 +205,14 @@ header p {
 #title, textarea {
     box-sizing: border-box;
     width: 100%;
-    font-size: 3em;
+    font-size: 1.5em;
 }
 #title {
     margin-bottom: 40px;
 }
 #create-textarea {
     height: calc(100% - 210px);
+    min-height: 200px;
 }
 
 
@@ -244,7 +252,7 @@ nav h2 {
     padding-top: 15px;
     width: 80%;
     border-top: 1px solid #999;
-    margin: 0 auto;
+    margin: 20px auto;
 }
 
 
@@ -262,7 +270,7 @@ nav h2 {
     border-bottom: 2px solid #999;
 }
 .ticket-top h1 {
-    font-size: 2.5em;
+    font-size: 2em;
     font-weight: normal;
     margin: 0 0 0 30px;
 }
@@ -278,6 +286,7 @@ nav h2 {
 .ticket-content {
     font-size: 1.2em;
     margin-top: 30px;
+    height: auto;
 }
 .answer-form {
     padding: 10px 0 0 0;
@@ -302,17 +311,11 @@ nav h2 {
 
 @media only screen and (max-width: 1392px) {
 
-header {
-    height: 60px;
 
-
-}
 .logo-wrap {
     min-width: 557px;
 }
-.logo {
-    font-size: 3em;
-}
+
 .login-name {
     min-width: 202px;
 }

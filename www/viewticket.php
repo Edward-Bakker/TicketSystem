@@ -41,7 +41,7 @@ session_start();
 
 <header>
 	<div class="logo-wrap">
-		<h1 class="logo">ForexNinja Help Desk</h1>
+                <a href="viewticket.php"><h1 class="logo">ForexNinja Help Desk</h1></a>
 
 		<svg class="triangle">
 			<polygon points="0,0 50,0 0,100"/>

@@ -43,7 +43,7 @@ p {
 .mainBox > form {
     display: flex;
     margin-top: 10px;
-    height: calc(80vh - 106px);
+    height: calc(80vh - 120px);
     flex-flow: column nowrap;
     align-items: center;
     justify-content: space-between;

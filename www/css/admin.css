@@ -1,0 +1,34 @@
+body {
+    font-family: Avenir, Arial, Times New Roman, sans-serif;
+}
+header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: black;
+    height: 80px;
+    padding-top: 20px;
+}
+header h1 {
+    display: inline-block;
+    color: gold;
+    font-size: 3em;
+    margin: 0;
+}
+
+table, th, td {
+    border-spacing: 0;
+    text-align: center;
+}
+table {
+    width: 95vw;
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+th, td {
+    padding:2px 4px;
+    border-bottom: 1px solid black;
+}
+.hover:hover {
+    background-color: lightgrey;
+}

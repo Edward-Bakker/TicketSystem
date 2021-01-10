@@ -41,16 +41,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/admin.css">
+    <link rel="stylesheet" href="css/normalize.css">
     <title>Forex Ninja Admin Page</title>
-    <style>
-    table, th, td{
-    border: 1px solid black;
-    }
-    </style>
 </head>
 <body>
-<h1>Admin Page</h1>
-<hr>
+    
+    <header>
+        <h1>Admin Page</h1>
+    </header>  
+        
     <?php
     // connects to database
     $config = config::getDBConfig();
@@ -64,7 +64,7 @@
         echo "<tr><th>" . "ID" . "</th><th>" . "name" . "</th><th>" . "email" . "</th><th>" . "password hash" . "</th><th>" . "adminlevel" . "</th><th>" . "approved" . "</th><th>" . "last login" . "</th><th>" . "Registered Date" . "</th><th>" . "Edit" . "</th></tr>";
         while ($row = mysqli_fetch_array($stmt)) 
         {
-            echo "<tr><td>" . $row["id"] . "</td><td>" . $row["name"] . "</td><td>" . $row["email"] . "</td><td>" . $row["password"] . "</td><td>" . $row["adminlevel"] . "</td><td>" . $row["approved"] . "</td><td>" . $row["last_login"] . "</td><td>" . $row["insert_time"]  . "</td><td>" . "<a href= 'admineditpage.php?id=" . $row["id"] . "'>EDIT</a></td></tr>";                                                         
+            echo "<tr class=\"hover\"><td>" . $row["id"] . "</td><td>" . $row["name"] . "</td><td>" . $row["email"] . "</td><td>" . $row["password"] . "</td><td>" . $row["adminlevel"] . "</td><td>" . $row["approved"] . "</td><td>" . $row["last_login"] . "</td><td>" . $row["insert_time"]  . "</td><td>" . "<a href= 'admineditpage.php?id=" . $row["id"] . "'>EDIT</a></td></tr>";                                                         
         }
         echo "</table>";
         mysqli_close($link);
