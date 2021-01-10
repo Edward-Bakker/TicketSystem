@@ -75,7 +75,7 @@ if($values["approved"] === "0")
         // takes the user back to the ticket page
          if(isset($_POST["back"]))
         {
-             header("Location: admin.php");
+             header("Location: viewticket.php");
         }
 
         if(isset($_POST["changePassword"]))
@@ -91,7 +91,7 @@ if($values["approved"] === "0")
 
                 $accounts = new accounts();
                 $accounts->editaccountssettings($id, $name, $email);
-                header("Location: admin.php");
+                header("Location: viewticket.php");
         }
         ?>
 </body>
