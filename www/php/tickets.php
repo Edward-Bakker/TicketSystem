@@ -66,6 +66,62 @@
             return $result;
         }
 
+        public function getTicket($ticketID)
+        {
+            $query = "SELECT id, subject, content, closed, user_id, created_at, updated_at, closed_at FROM tickets WHERE id = ?";
+
+            if($stmt = $this->connect($query))
+            {
+                $stmt->bind_param('i', $ticketID);
+
+                $stmt->execute();
+
+                $stmt->bind_result($id, $subject, $content, $closed, $userID, $createdAt, $updatedAt, $closedAt);
+
+                $stmt->store_result();
+
+                $result = [];
+                if($stmt->num_rows === 1)
+                {
+                    while($stmt->fetch())
+                    {
+                        $result = [$id, $subject, $content, $closed, $userID, $createdAt, $updatedAt, $closedAt];
+                    }
+                }
+                $stmt->close();
+            }
+            $this->close();
+            return $result;
+        }
+
+        public function getTicketComments($ticketID)
+        {
+            $query = "SELECT id, content, ticket_id, user_id, created_at, updated_at FROM comments WHERE ticket_id = ?";
+
+            if($stmt = $this->connect($query))
+            {
+                $stmt->bind_param('i', $ticketID);
+
+                $stmt->execute();
+
+                $stmt->bind_result($id, $content, $ticketID, $userID, $createdAt, $updatedAt);
+
+                $stmt->store_result();
+
+                $result = [];
+                if($stmt->num_rows !== 0)
+                {
+                    while($stmt->fetch())
+                    {
+                        array_push($result, [$id, $content, $ticketID, $userID, $createdAt, $updatedAt]);
+                    }
+                }
+                $stmt->close();
+            }
+            $this->close();
+            return $result;
+        }
+
         // Sets whether the ticket is
         // flagged or not depending
         // on the parameters

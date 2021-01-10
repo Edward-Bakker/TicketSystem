@@ -152,6 +152,34 @@
             $this->close();
         }
 
+        public function getUserAdmin($id)
+        {
+            $query = "SELECT adminlevel FROM accounts WHERE id = ?";
+
+            if($stmt = $this->connect($query))
+            {
+                $stmt->bind_param('i', $id);
+
+                $stmt->execute();
+
+                $stmt->bind_result($adminlevel);
+
+                $stmt->store_result();
+
+                $result = null;
+                if($stmt->num_rows === 1)
+                {
+                    while($stmt->fetch())
+                    {
+                        $result = $adminlevel;
+                    }
+                }
+                $stmt->close();
+            }
+            $this->close();
+            return $result;
+        }
+
         public function changepassword($email, $password)
         {
             $query = "UPDATE accounts

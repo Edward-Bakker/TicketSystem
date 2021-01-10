@@ -1,4 +1,4 @@
-<?php require 'php/autoloader.php'; 
+<?php require 'php/autoloader.php';
 // session_start();
 // if(($_SESSION["valid"] == false))
 // {
@@ -26,7 +26,7 @@
 // 	mysqli_close($link);
 // }else
 // {
-    
+
 // }
 ?>
 <!DOCTYPE html>
@@ -61,7 +61,26 @@
 		<div class="scrollable">
             <?php
                 $tickets = new Tickets();
-                $accounts = new Accounts();
+				$accounts = new Accounts();
+
+				$ticketID = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
+
+				if(isset($ticketID) && !empty($ticketID))
+				{
+					$ticketContent = $tickets->getTicket($ticketID);
+                }
+
+                $ticketExists = false;
+                if(isset($ticketContent) && $ticketContent !== [])
+                {
+                    $ticketExists = true;
+                    // Check if user is admin, or user is ticket owner
+                    if($accounts->getUserAdmin($_SESSION["id"]) == 0 && $ticketContent[4] !== $_SESSION["id"])
+                    {
+                        header('location: viewticket.php', true);
+                    }
+                }
+
                 $allTickets = $tickets->getAllTickets();
                 foreach($allTickets as $ticket):
             ?>
@@ -93,12 +112,28 @@
 			<div class="line">
 				<button class="button">Delete ticket</button>
 			</div>
-			<h1>Help with USD/EUR</h1>
-
+			<h1><?= ($ticketExists) ? $ticketContent[1] : '' ?></h1>
 		</div>
 
-		<p class="ticket-content">
-			Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+		<p class="ticket-content scrollable">
+            <?php
+            if($ticketExists)
+            {
+                if($ticketContent[4] === $_SESSION["id"])
+                    echo '<div class="comment own">' . $ticketContent[2] . '</div>';
+                else
+                    echo '<div class="comment">' . $ticketContent[2] . '</div>';
+
+                $allComments = $tickets->getTicketComments($ticketID);
+                foreach($allComments as $comment)
+                {
+                    if($comment[3] === $_SESSION["id"])
+                        echo '<div class="comment own"><p>' . $comment[1] . '</p></div>';
+                    else
+                        echo '<div class="comment"><p>' . $comment[1] . '</p><br> - <i>' . $accounts->getUsersName($comment[3]) . '</i></div>';
+                }
+            }
+            ?>
 		</p>
 
 		<form class="answer-form" action="" method="post">
@@ -107,10 +142,10 @@
 		</form>
 
 		<div class="ticket-bottom">
-			<p>John Smith</p>
+            <p><?= ($ticketExists) ? $accounts->getUsersName($ticketContent[4]) : '' ?></p>
 
-			<p>CREATED ON: 20/11/2020 TIME: 13:21</p>
-		</div>
+            <p>CREATED ON: <?= ($ticketExists) ? $ticketContent[5] : '' ?></p>
+        </div>
 	</div>
 
 	<nav class="content-box">
