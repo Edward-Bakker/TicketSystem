@@ -63,7 +63,8 @@ session_start();
                 $tickets = new Tickets();
 				$accounts = new Accounts();
 
-				$ticketID = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
+                $ticketID = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
+
 
 				if(isset($ticketID) && !empty($ticketID))
 				{
@@ -115,7 +116,7 @@ session_start();
 			<h1><?= ($ticketExists) ? $ticketContent[1] : '' ?></h1>
 		</div>
 
-		<p class="ticket-content scrollable">
+		<div class="ticket-content scrollable">
             <?php
             if($ticketExists)
             {
@@ -134,7 +135,7 @@ session_start();
                 }
             }
             ?>
-		</p>
+		</div>
 
 		<form class="answer-form" action="" method="post">
 			<label for="answer">Answer</label>

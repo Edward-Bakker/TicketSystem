@@ -33,7 +33,7 @@
                         $stmt = mysqli_query($link, $sql);
                         while($values = mysqli_fetch_array($stmt))
                         {
-                            $_SESSION["id"] = $values["id"];
+                            $_SESSION["id"] = (int)$values["id"];
                             $_SESSION["name"] = $values["name"];
                             mysqli_stmt_close($stmt);
                             mysqli_close($link);
@@ -54,18 +54,18 @@
 
             <!-- Login form -->
             <form action="login.php" method="POST">
-                    
+
                 <div class="input-wrap">
                     <input type="email" name="email" placeholder="Email" required>
                     <input type="password" name="password" placeholder="Password" required>
                     <input type="submit" name="submit" value="Log in">
                 </div>
-                    
+
                 <div class="bottom-buttons">
                     <a href="mailto:victor.peters@nhlstenden.com">Reset password</a>
                     <a href="signup.php">Register</a>
                 </div>
-                    
+
             </form>
         </div>
     </body>
