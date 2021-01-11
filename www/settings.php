@@ -83,7 +83,7 @@ if($values["approved"] === "0")
             header("Location: passwordchange.php");
         }
 
-        //filters all data and edits the database on submit to what was entered in the form
+        //filters all data and edits the database on submit to what was entered
         if(isset($_POST["submit"]))
         {
                 $name = filter_input(INPUT_POST , "name" , FILTER_SANITIZE_STRING);
