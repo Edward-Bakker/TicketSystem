@@ -31,7 +31,7 @@ if (isset($_POST['submit'])){
         echo "Success";
     }
     else {
-        echo "There was a nerror with executing the statement ". mysqli_error($conn);
+        echo "There was a error with executing the statement ". mysqli_error($conn);
     }
     header("Location:createnewticket.php?success");
     if (move_uploaded_file($_FILES['file']['tmp_name'], $target)) {
