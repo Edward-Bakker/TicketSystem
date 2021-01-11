@@ -87,7 +87,7 @@ if ($values["approved"] === "0") {
                 $allTickets = $tickets->getAllTickets($adminTrue, $_SESSION['id']);
                 foreach ($allTickets as $ticket) :
                 ?>
-                    <div class="ticket content-box">
+                    <div class="ticket content-box <?php if($_GET['id'] == $ticket[0]){echo("selected");}  ?>">
                         <a href="viewticket.php?id=<?= $ticket[0] ?>">
                             <div class="ticket-list-top">
                                 <p>ID: <?= $ticket[0] ?></p>
