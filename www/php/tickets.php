@@ -4,7 +4,7 @@
         // Gets all tickets from specific user
         public function getUsersTickets($userID)
         {
-            $query = "SELECT id, subject, content, closed, user_id, created_at, updated_at, closed_at FROM tickets WHERE used_id = ?";
+            $query = "SELECT id, subject, content, closed, user_id, created_at, updated_at, closed_at FROM tickets WHERE user_id = ?";
 
             if($stmt = $this->connect($query))
             {
@@ -33,19 +33,24 @@
         // Gets all tickets for the admin
         // or only the flagged ones if
         // flagged paramater is true
-        public function getAllTickets($flagged = false)
+
+
+        public function getAllTickets($admin,$accountId)
         {
-            if($flagged)
-            {
-                $query = "SELECT id, subject, content, closed, user_id, created_at, updated_at, closed_at FROM tickets WHERE flagged = '1'";
-            }
-            else
-            {
+             if($admin==0){
+                $query = "SELECT id, subject, content, closed, user_id, created_at, updated_at, closed_at FROM tickets WHERE user_id= ?";
+
+             }
+             else {
                 $query = "SELECT id, subject, content, closed, user_id, created_at, updated_at, closed_at FROM tickets";
-            }
+             }
+
 
             if($stmt = $this->connect($query))
             {
+                if($admin==0){
+                $stmt->bind_param('i', $accountId);
+                }
                 $stmt->execute();
 
                 $stmt->bind_result($id, $subject, $content, $closed, $userID, $createdAt, $updatedAt, $closedAt);
@@ -65,6 +70,7 @@
             $this->close();
             return $result;
         }
+
 
         public function getTicket($ticketID)
         {
@@ -92,6 +98,64 @@
             }
             $this->close();
             return $result;
+        }
+        public function getTicketForUser($accountId)
+        {
+            $query = "SELECT id, subject, content, closed, user_id, created_at, updated_at, closed_at FROM tickets WHERE user_id = ?";
+
+            if($stmt = $this->connect($query))
+            {
+                $stmt->bind_param('i', $accountId);
+
+                $stmt->execute();
+
+                $stmt->bind_result($id, $subject, $content, $closed, $userID, $createdAt, $updatedAt, $closedAt);
+
+                $stmt->store_result();
+
+                $result = [];
+                if($stmt->num_rows === 1)
+                {
+                    while($stmt->fetch())
+                    {
+                        $result = [$id, $subject, $content, $closed, $userID, $createdAt, $updatedAt, $closedAt];
+                    }
+                }
+                $stmt->close();
+            }
+            $this->close();
+            return $result;
+        }
+
+
+        public function submitTicket($title, $content, $userID)
+        {
+            $query = "INSERT INTO tickets (subject, content, user_id) VALUES (?, ?, ?)";
+
+            if($stmt = $this->connect($query))
+            {
+                $stmt->bind_param('ssi', $title, $content, $userID);
+
+                $stmt->execute();
+
+                $stmt->close();
+            }
+            $this->close();
+        }
+
+        public function commentTicket($comment, $ticketID, $userID)
+        {
+            $query = "INSERT INTO comments (content, ticket_id, user_id) VALUES (?, ?, ?)";
+
+            if($stmt = $this->connect($query))
+            {
+                $stmt->bind_param('sii', $comment, $ticketID, $userID);
+
+                $stmt->execute();
+
+                $stmt->close();
+            }
+            $this->close();
         }
 
         public function getTicketComments($ticketID)
@@ -139,5 +203,45 @@
             }
             $this->close();
         }
+
+        public function closeOrOpenTicket($id)
+        {
+            $query= "SELECT id, closed Where id=?";
+            if($stmt= $this->connect($query)){
+                $stmt->bind_param('i', $id);
+                $stmt->bind_result($id,$closed);
+                $stmt->store_result();
+                $stmt->execute();
+            }
+            if($closed==0)
+            {
+            $query = "UPDATE tickets SET closed = '1' WHERE id = ?";
+
+            if($stmt = $this->connect($query))
+            {
+                $stmt->bind_param('i', $id);
+
+                $stmt->execute();
+
+                $stmt->close();
+            }
+            $this->close();
+        }
+        else{
+            {
+            $query = "UPDATE tickets SET closed = '0' WHERE id = ?";
+
+            if($stmt = $this->connect($query))
+            {
+                $stmt->bind_param('i', $id);
+
+                $stmt->execute();
+
+                $stmt->close();
+            }
+            $this->close();
+        }
+        }
+    }
     }
 ?>

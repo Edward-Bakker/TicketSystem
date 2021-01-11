@@ -1,33 +1,34 @@
 <?php require 'php/autoloader.php';
 session_start();
-// if(($_SESSION["valid"] == false))
-// {
-//     echo "Not Logged in, please login to continue, redirect in 5 seconds...";
-// 	header("Refresh: 5; login.php");
-// 	return;
-// 	mysqli_stmt_close($stmt);
-// 	mysqli_close($link);
-// }
+if(($_SESSION["valid"] == false))
+{
+    echo "Not Logged in, please login to continue, redirect in 5 seconds...";
+	header("Refresh: 5; login.php");
+	return;
+	mysqli_stmt_close($stmt);
+	mysqli_close($link);
+}
 
-// $id=$_SESSION["id"];
-// $config = config::getDBConfig();
-// $link = mysqli_connect($config->db_host, $config->db_user, $config->db_pass, $config->db_name)
-// OR Die("Could not connect to database!" . mysqli_error($link));
-// $sql = "SELECT approved, adminlevel FROM accounts WHERE id = $id";
-// $stmt = mysqli_query($link, $sql);
-// $values = mysqli_fetch_array($stmt);
+$id=$_SESSION["id"];
+$config = config::getDBConfig();
+$link = mysqli_connect($config->db_host, $config->db_user, $config->db_pass, $config->db_name)
+OR Die("Could not connect to database!" . mysqli_error($link));
+$sql = "SELECT approved, adminlevel FROM accounts WHERE id = $id";
+$stmt = mysqli_query($link, $sql);
+$values = mysqli_fetch_array($stmt);
+$adminTrue= $values['adminlevel'];
 
-// if($values["approved"] === "0")
-// {
-//     echo "Not approved, please contact the admin, redirect in 5 seconds...";
-// 	header("Refresh: 5; login.php");
-// 	return;
-// 	mysqli_stmt_close($stmt);
-// 	mysqli_close($link);
-// }else
-// {
+if($values["approved"] === "0")
+{
+    echo "Not approved, please contact the admin, redirect in 5 seconds...";
+	header("Refresh: 5; login.php");
+	return;
+	mysqli_stmt_close($stmt);
+	mysqli_close($link);
+}else
+{
 
-// }
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -51,7 +52,7 @@ session_start();
 	<img class="placeholder" src="assets/stocks-placeholder.png" alt="placeholder">
 
 	<div class="login-name">
-		<?php //echo "<p>" . "Welcome, " . $_SESSION["name"] . "</p>"  ?>
+		<?php echo "<p>" . "Welcome, " . $_SESSION["name"] . "</p>"  ?>
 	</div>
 </header>
 
@@ -76,13 +77,13 @@ session_start();
                 {
                     $ticketExists = true;
                     // Check if user is admin, or user is ticket owner
-                    if($accounts->getUserAdmin($_SESSION["id"]) == 0 && $ticketContent[4] !== $_SESSION["id"])
-                    {
-                        header('location: viewticket.php', true);
-                    }
+                    // if($accounts->getUserAdmin($_SESSION["id"]) == 0 && $ticketContent[4] !== $_SESSION['id'])
+                    // {
+                    //     header('location: viewticket.php', true);
+                    // }
                 }
 
-                $allTickets = $tickets->getAllTickets();
+                $allTickets = $tickets->getAllTickets($adminTrue,$_SESSION['id']);
                 foreach($allTickets as $ticket):
             ?>
 			<div class="ticket content-box">
@@ -111,13 +112,22 @@ session_start();
 		<div class="ticket-top">
 
 			<div class="line">
-				<button class="button">Delete ticket</button>
+            <form method="post">
+            <input type="submit" name="delete" class="button" value="Delete"></form>
+
 			</div>
 			<h1><?= ($ticketExists) ? $ticketContent[1] : '' ?></h1>
 		</div>
 
 		<div class="ticket-content scrollable">
             <?php
+//  //Changing the status of the ticket to closed or open
+//             if(isset($_POST['delete']))
+//             {
+
+//                 closeOrOpenTicket($_GET['id']);
+//             }
+
             if($ticketExists)
             {
                 if($ticketContent[4] === $_SESSION["id"])

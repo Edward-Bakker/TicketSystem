@@ -1,33 +1,34 @@
-<?php require 'php/autoloader.php'; 
-// session_start();
-// if(($_SESSION["valid"] == false))
-// {
-//     echo "Not Logged in, please login to continue, redirect in 5 seconds...";
-// 	header("Refresh: 5; login.php");
-// 	return;
-// 	mysqli_stmt_close($stmt);
-// 	mysqli_close($link);
-// }
+<?php require 'php/autoloader.php';
+//Session checking if you are logged in or not
+session_start();
+if(($_SESSION["valid"] == false))
+{
+    echo "Not Logged in, please login to continue, redirect in 5 seconds...";
+	header("Refresh: 5; login.php");
+	return;
+	mysqli_stmt_close($stmt);
+	mysqli_close($link);
+}
 
-// $id=$_SESSION["id"];
-// $config = config::getDBConfig();
-// $link = mysqli_connect($config->db_host, $config->db_user, $config->db_pass, $config->db_name)
-// OR Die("Could not connect to database!" . mysqli_error($link));
-// $sql = "SELECT approved, adminlevel FROM accounts WHERE id = $id";
-// $stmt = mysqli_query($link, $sql);
-// $values = mysqli_fetch_array($stmt);
+$id=$_SESSION["id"];
+$config = config::getDBConfig();
+$link = mysqli_connect($config->db_host, $config->db_user, $config->db_pass, $config->db_name)
+OR Die("Could not connect to database!" . mysqli_error($link));
+$sql = "SELECT approved, adminlevel FROM accounts WHERE id = $id";
+$stmt = mysqli_query($link, $sql);
+$values = mysqli_fetch_array($stmt);
+$adminTrue= $values['adminlevel'];
+if($values["approved"] === "0")
+{
+    echo "Not approved, please contact the admin, redirect in 5 seconds...";
+	header("Refresh: 5; login.php");
+	return;
+	mysqli_stmt_close($stmt);
+	mysqli_close($link);
+}else
+{
 
-// if($values["approved"] === "0")
-// {
-//     echo "Not approved, please contact the admin, redirect in 5 seconds...";
-// 	header("Refresh: 5; login.php");
-// 	return;
-// 	mysqli_stmt_close($stmt);
-// 	mysqli_close($link);
-// }else
-// {
-    
-// }
+}
 
 ?>
 <!DOCTYPE html>
@@ -63,7 +64,7 @@
             <?php
                 $tickets = new Tickets();
                 $accounts = new Accounts();
-                $allTickets = $tickets->getAllTickets();
+                $allTickets = $tickets->getAllTickets($adminTrue,$_SESSION['id']);
                 foreach($allTickets as $ticket):
             ?>
 			<div class="ticket content-box">
@@ -97,9 +98,9 @@
 				<input class="button" type="submit" name="submit" id="submit">
 				<action="submit.php" method="POST" enctype="multipart/form-data">
 				<input type="file" name="file">
-				
+
 			</form>
-			
+
 		</div>
 	</div>
 
