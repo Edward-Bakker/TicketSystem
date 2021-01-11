@@ -33,10 +33,47 @@
         <img class="placeholder" src="assets/stocks-placeholder.png" alt="placeholder">
 
         <div class="login-name">
-            Welcome <?= $accounts->getUsersName($userID) ?>
+            <p>Welcome <?= $accounts->getUsersName($userID) ?></p>
+            
+            <button id="openbtn" onclick="openNav()">☰</button>
         </div>
+        
+        
     </header>
+    
+    <div id="sidepanel">
+            <button id="closebtn" onclick="closeNav()">☰</button>
+            <nav class="burger">
+                <div>
+                    <h2>Menu</h2>
 
+                    <div class="nav-link-wrapper">
+                        <a href="createnewticket.php">Create New Ticket</a>
+                        <a href="settings.php">Settings</a>
+                    </div>
+                </div> 
+
+                <div class="nav-logout-line">
+                    <a id="logout" href="login.php"><button class="button logout">LOGOUT</button></a>
+                </div>
+            </nav>
+    </div>
+    <div id="cover" onclick="closeNav()"></div>
+    <script>
+            /*Opens and closes the sidebar; Creates the dimming effect on the rest of the page*/
+            function openNav() {
+                    document.getElementById("sidepanel").style.width = "230px";
+                    document.getElementById("cover").style.width = "1000px";
+                    document.getElementById("cover").style.backgroundColor = "rgba(0,0,0,0.4)";
+            }
+
+            function closeNav() {
+                    document.getElementById("sidepanel").style.width = "0";
+                    setTimeout(function(){document.getElementById("cover").style.width = "0";}, 200);
+                    document.getElementById("cover").style.backgroundColor = "rgba(0,0,0,0)";
+            }
+    </script>
+    
     <div class="wrapper">
         <div class="ticket-list">
             <p class="ticket-list-p">Your Tickets</p>
