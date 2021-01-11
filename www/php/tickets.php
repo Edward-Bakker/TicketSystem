@@ -204,22 +204,14 @@
             $this->close();
         }
 
-        public function closeOrOpenTicket($id)
+        public function setTicketStatus($id, $status)
         {
-            $query= "SELECT id, closed Where id=?";
-            if($stmt= $this->connect($query)){
-                $stmt->bind_param('i', $id);
-                $stmt->bind_result($id,$closed);
-                $stmt->store_result();
-                $stmt->execute();
-            }
-            if($closed==0)
-            {
-            $query = "UPDATE tickets SET closed = '1' WHERE id = ?";
+            $timestamp = date("Y-m-d H:i:s");
+            $query = "UPDATE tickets SET closed = ?, closed_at = ? WHERE id = ?";
 
             if($stmt = $this->connect($query))
             {
-                $stmt->bind_param('i', $id);
+                $stmt->bind_param('ssi', $status, $timestamp, $id);
 
                 $stmt->execute();
 
@@ -227,21 +219,5 @@
             }
             $this->close();
         }
-        else{
-            {
-            $query = "UPDATE tickets SET closed = '0' WHERE id = ?";
-
-            if($stmt = $this->connect($query))
-            {
-                $stmt->bind_param('i', $id);
-
-                $stmt->execute();
-
-                $stmt->close();
-            }
-            $this->close();
-        }
-        }
-    }
     }
 ?>
