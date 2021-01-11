@@ -2,9 +2,11 @@
     class Tickets extends DB
     {
         // Gets all tickets from specific user
-        public function getUsersTickets($userID)
+        public function getUsersTickets($userID, $flagged = false)
         {
             $query = "SELECT id, subject, content, closed, user_id, created_at, updated_at, closed_at FROM tickets WHERE user_id = ?";
+            if($flagged)
+                $query = "SELECT id, subject, content, closed, user_id, created_at, updated_at, closed_at FROM tickets WHERE user_id = ? AND flagged = '1'";
 
             if($stmt = $this->connect($query))
             {
@@ -37,9 +39,7 @@
         {
             $query = "SELECT id, subject, content, closed, user_id, created_at, updated_at, closed_at FROM tickets";
             if($flagged)
-            {
                 $query = "SELECT id, subject, content, closed, user_id, created_at, updated_at, closed_at FROM tickets WHERE flagged = '1'";
-            }
 
 
             if($stmt = $this->connect($query))
