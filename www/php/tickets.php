@@ -33,8 +33,6 @@
         // Gets all tickets for the admin
         // or only the flagged ones if
         // flagged paramater is true
-
-
         public function getAllTickets($flagged = false)
         {
             $query = "SELECT id, subject, content, closed, user_id, created_at, updated_at, closed_at FROM tickets";
@@ -65,7 +63,6 @@
             $this->close();
             return $result;
         }
-
 
         public function getTicket($ticketID)
         {
