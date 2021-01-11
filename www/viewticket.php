@@ -84,7 +84,11 @@ if ($values["approved"] === "0") {
                     }
 
                 }
-                $allTickets = $tickets->getAllTickets($adminTrue, $_SESSION['id']);
+                if($adminTrue)
+                    $allTickets = $tickets->getAllTickets();
+                else
+                    $allTickets = $tickets->getUsersTickets($_SESSION['id']);
+
                 foreach ($allTickets as $ticket) :
                 ?>
                     <div class="ticket content-box <?php if($_GET['id'] == $ticket[0]){echo("selected");}  ?>">

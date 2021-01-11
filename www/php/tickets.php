@@ -35,22 +35,17 @@
         // flagged paramater is true
 
 
-        public function getAllTickets($admin,$accountId)
+        public function getAllTickets($flagged = false)
         {
-             if($admin==0){
-                $query = "SELECT id, subject, content, closed, user_id, created_at, updated_at, closed_at FROM tickets WHERE user_id= ?";
-
-             }
-             else {
-                $query = "SELECT id, subject, content, closed, user_id, created_at, updated_at, closed_at FROM tickets";
-             }
+            $query = "SELECT id, subject, content, closed, user_id, created_at, updated_at, closed_at FROM tickets";
+            if($flagged)
+            {
+                $query = "SELECT id, subject, content, closed, user_id, created_at, updated_at, closed_at FROM tickets WHERE flagged = '1'";
+            }
 
 
             if($stmt = $this->connect($query))
             {
-                if($admin==0){
-                $stmt->bind_param('i', $accountId);
-                }
                 $stmt->execute();
 
                 $stmt->bind_result($id, $subject, $content, $closed, $userID, $createdAt, $updatedAt, $closedAt);
@@ -99,34 +94,6 @@
             $this->close();
             return $result;
         }
-        public function getTicketForUser($accountId)
-        {
-            $query = "SELECT id, subject, content, closed, user_id, created_at, updated_at, closed_at FROM tickets WHERE user_id = ?";
-
-            if($stmt = $this->connect($query))
-            {
-                $stmt->bind_param('i', $accountId);
-
-                $stmt->execute();
-
-                $stmt->bind_result($id, $subject, $content, $closed, $userID, $createdAt, $updatedAt, $closedAt);
-
-                $stmt->store_result();
-
-                $result = [];
-                if($stmt->num_rows === 1)
-                {
-                    while($stmt->fetch())
-                    {
-                        $result = [$id, $subject, $content, $closed, $userID, $createdAt, $updatedAt, $closedAt];
-                    }
-                }
-                $stmt->close();
-            }
-            $this->close();
-            return $result;
-        }
-
 
         public function submitTicket($title, $content, $userID)
         {
