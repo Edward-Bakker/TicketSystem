@@ -1,11 +1,8 @@
 <?php require 'php/autoloader.php';
 
-$db_host = "localhost";
-$db_user = "ticketsystem_user";
-$db_pass = "changeme";
-$db_name = "ticketsystem";
-
-$conn = new mysqli($db_host, $db_user, $db_pass,$db_name) or die("Connect failed: %s\n". $conn -> error);
+$config = config::getDBConfig();
+$conn = mysqli_connect($config->db_host, $config->db_user, $config->db_pass, $config->db_name)
+OR Die("Could not connect to database!" . mysqli_error($link));
 
 session_start();
 
@@ -16,16 +13,19 @@ $id = mysqli_real_escape_string($conn, $_SESSION['id']);
 $msg = "";
 
 if (isset($_POST['submit'])){
-    // Get image name
-    $file = $_FILES['file']['name'];
+    // Get image name and give it a unique string so that it cannot have conflicts
+    $filename = $_FILES['file']['name'];
+    $randstring = bin2hex(random_bytes(10));
+    $uniqfilename = $randstring . $filename;
+
     // Get text
     $title = mysqli_real_escape_string($conn, $_POST['title']);
     $question = mysqli_real_escape_string($conn, $_POST['question']);
     $id = mysqli_real_escape_string($conn, $_SESSION['id']);
     // image file directory
-    $target = "uploads/".basename($file);
+    $target = "uploads/" . basename($uniqfilename);
 
-    $sql = "INSERT INTO tickets ( `subject`, `content`, `user_id`) VALUES ( '$title', '$question', '$id')";
+    $sql = "INSERT INTO tickets ( `subject`, `content`, `user_id`, `file`) VALUES ( '$title', '$question', '$id', '$uniqfilename')";
     // execute query
     if(mysqli_query($conn, $sql)){
         echo "Success";

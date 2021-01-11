@@ -53,7 +53,7 @@ if($values["approved"] === "0")
 	<img class="placeholder" src="assets/stocks-placeholder.png" alt="placeholder">
 
 	<div class="login-name">
-	<?php //echo "<p>" . "Welcome, " . $_SESSION["name"] . "</p>"  ?>
+	<?php echo "<p>" . "Welcome, " . $_SESSION["name"] . "</p>"  ?>
 	</div>
 </header>
 
