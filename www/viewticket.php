@@ -1,30 +1,13 @@
-<?php require 'php/autoloader.php';
-session_start();
-if (($_SESSION["valid"] == false)) {
-    echo "Not Logged in, please login to continue, redirect in 5 seconds...";
-    header("Refresh: 5; login.php");
-    return;
-    mysqli_stmt_close($stmt);
-    mysqli_close($link);
-}
+<?php
+    require 'php/autoloader.php';
+    $tickets = new Tickets();
+    $accounts = new Accounts();
 
-$id = $_SESSION["id"];
-$config = config::getDBConfig();
-$link = mysqli_connect($config->db_host, $config->db_user, $config->db_pass, $config->db_name)
-    or die("Could not connect to database!" . mysqli_error($link));
-$sql = "SELECT approved, adminlevel FROM accounts WHERE id = $id";
-$stmt = mysqli_query($link, $sql);
-$values = mysqli_fetch_array($stmt);
-$adminTrue = $values['adminlevel'];
-
-if ($values["approved"] === "0") {
-    echo "Not approved, please contact the admin, redirect in 5 seconds...";
-    header("Refresh: 5; login.php");
-    return;
-    mysqli_stmt_close($stmt);
-    mysqli_close($link);
-} else {
-}
+    $userID = $_SESSION['userID'];
+    if(!isset($userID) || $accounts->getUserApproved($userID) == 0)
+    {
+        header('location: index.php', true);
+    }
 ?>
 <!DOCTYPE html>
 <html>
@@ -40,9 +23,7 @@ if ($values["approved"] === "0") {
 
     <header>
         <div class="logo-wrap">
-            <a href="viewticket.php">
-                <h1 class="logo">ForexNinja Help Desk</h1>
-            </a>
+            <a href="viewticket.php"><h1 class="logo">ForexNinja Help Desk</h1></a>
 
             <svg class="triangle">
                 <polygon points="0,0 50,0 0,100" />
@@ -52,7 +33,7 @@ if ($values["approved"] === "0") {
         <img class="placeholder" src="assets/stocks-placeholder.png" alt="placeholder">
 
         <div class="login-name">
-            <?php echo "<p>" . "Welcome, " . $_SESSION["name"] . "</p>"  ?>
+            Welcome <?= $accounts->getUsersName($userID) ?>
         </div>
     </header>
 
@@ -61,11 +42,7 @@ if ($values["approved"] === "0") {
             <p class="ticket-list-p">Your Tickets</p>
             <div class="scrollable">
                 <?php
-                $tickets = new Tickets();
-                $accounts = new Accounts();
-
                 $ticketID = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
-
 
                 if (isset($ticketID) && !empty($ticketID)) {
                     $ticketContent = $tickets->getTicket($ticketID);
@@ -84,10 +61,11 @@ if ($values["approved"] === "0") {
                     }
 
                 }
-                if($adminTrue)
+
+                if($accounts->getUserAdmin($userID) == 1)
                     $allTickets = $tickets->getAllTickets();
                 else
-                    $allTickets = $tickets->getUsersTickets($_SESSION['id']);
+                    $allTickets = $tickets->getUsersTickets($userID);
 
                 foreach ($allTickets as $ticket) :
                 ?>
@@ -102,7 +80,7 @@ if ($values["approved"] === "0") {
                                 <p class="ticket-list-p"><?= $ticket[1] ?></p>
                             </div>
 
-                            <div class="status-circle <?php if($ticket[3]==0){ echo 'open';}else{echo 'closed';} ?>"></div>
+                            <div class="status-circle <?= ($ticket[3] == 0) ? 'open' : 'closed' ?>"></div>
 
                             <div class="ticket-list-bottom">
                                 <p>CREATED ON: <?= $ticket[5] ?></p>
@@ -117,28 +95,26 @@ if ($values["approved"] === "0") {
             <div class="ticket-top">
 
                 <div class="line">
-                    <form method="post">
-                        <input type="submit" name="delete" class="button" value="<?= ($ticketExists && !$ticketContent[3]) ? 'Close' : 'Open' ?> Ticket">
+                    <form action="<?= $_SERVER['REQUEST_URI'] ?>" method="post">
+                        <input class="button" type="submit" name="submit-close" value="<?= ($ticketExists && !$ticketContent[3]) ? 'Close' : 'Open' ?> Ticket" id="submit">
                     </form>
-
                 </div>
                 <h1><?= ($ticketExists) ? $ticketContent[1] : '' ?></h1>
             </div>
 
             <div class="ticket-content scrollable">
                 <?php
-                //Changing the status of the ticket to closed or open
-
-
-                if ($ticketExists ) {
-                    if ($ticketContent[4] === $_SESSION["id"])
+                if ($ticketExists)
+                {
+                    if ($ticketContent[4] === $userID)
                         echo '<div class="comment own">' . $ticketContent[2] . '</div>';
                     else
                         echo '<div class="comment">' . $ticketContent[2] . '</div>';
 
                     $allComments = $tickets->getTicketComments($ticketID);
-                    foreach ($allComments as $comment) {
-                        if ($comment[3] === $_SESSION["id"])
+                    foreach ($allComments as $comment)
+                    {
+                        if ($comment[3] === $userID)
                             echo '<div class="comment own"><p>' . $comment[1] . '</p></div>';
                         else
                             echo '<div class="comment"><p>' . $comment[1] . '</p><br> - <i>' . $accounts->getUsersName($comment[3]) . '</i></div>';
@@ -146,12 +122,17 @@ if ($values["approved"] === "0") {
                 }
                 ?>
             </div>
-<?php if($ticketContent[3]==0): ?>
-            <form class="answer-form" action="" method="post">
+
+            <?php if($ticketExists && !$ticketContent[3]): ?>
+            <form class="answer-form" action="<?= $_SERVER['REQUEST_URI'] ?>" method="post" enctype="multipart/form-data">
                 <label for="answer">Answer</label>
                 <textarea name="answer" id="answer"></textarea>
+                <input type="file" name="file">
+
+                <input class="button" type="submit" name="submit" value="Submit" id="submit">
             </form>
-<?php endif; ?>
+            <?php endif; ?>
+
             <div class="ticket-bottom">
                 <p><?= ($ticketExists) ? $accounts->getUsersName($ticketContent[4]) : '' ?></p>
 
@@ -167,11 +148,12 @@ if ($values["approved"] === "0") {
                 <div class="nav-link-wrapper">
                     <a href="createnewticket.php">Create New Ticket</a>
                     <a href="settings.php">Settings</a>
+                    <?= ($accounts->getUserAdmin($userID) == 1) ? '<a href="admin.php">Admin</a>' : '' ?>
                 </div>
             </div>
 
             <div class="nav-logout-line">
-                <a href="login.php"><button class="button logout">LOGOUT</button></a>
+                <a href="logout.php"><button class="button logout">LOGOUT</button></a>
             </div>
 
         </nav>

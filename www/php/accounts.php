@@ -75,6 +75,60 @@
             }
         }
 
+        public function getAllUsers()
+        {
+            $query = "SELECT id, name, email, adminlevel, approved, last_login, insert_time FROM accounts";
+
+            if($stmt = $this->connect($query))
+            {
+                $stmt->execute();
+
+                $stmt->bind_result($id, $name, $email, $adminLevel, $approved, $lastLogin, $registerDate);
+
+                $stmt->store_result();
+
+                $result = [];
+                if($stmt->num_rows !== 0)
+                {
+                    while($stmt->fetch())
+                    {
+                        array_push($result, [$id, $name, $email, $adminLevel, $approved, $lastLogin, $registerDate]);
+                    }
+                }
+                $stmt->close();
+            }
+            $this->close();
+            return $result;
+        }
+
+        public function getUserInfo($id)
+        {
+            $query = "SELECT id, name, email, password, adminlevel, approved, last_login, insert_time FROM accounts WHERE id = ?";
+
+            if($stmt = $this->connect($query))
+            {
+                $stmt->bind_param('i', $id);
+
+                $stmt->execute();
+
+                $stmt->bind_result($id, $name, $email, $password, $adminLevel, $approved, $lastLogin, $registerDate);
+
+                $stmt->store_result();
+
+                $result = [];
+                if($stmt->num_rows !== 0)
+                {
+                    while($stmt->fetch())
+                    {
+                        $result = [$id, $name, $email, $password, $adminLevel, $approved, $lastLogin, $registerDate];
+                    }
+                }
+                $stmt->close();
+            }
+            $this->close();
+            return $result;
+        }
+
         public function setLastLogin($email)
         {
             $timestamp = date("Y-m-d H:i:s");
@@ -89,6 +143,34 @@
                 $stmt->close();
             }
             $this->close();
+        }
+
+        public function getUsersID($email)
+        {
+            $query = "SELECT id FROM accounts WHERE email = ?";
+
+            if($stmt = $this->connect($query))
+            {
+                $stmt->bind_param('s', $email);
+
+                $stmt->execute();
+
+                $stmt->bind_result($id);
+
+                $stmt->store_result();
+
+                $result = null;
+                if($stmt->num_rows === 1)
+                {
+                    while($stmt->fetch())
+                    {
+                        $result = $id;
+                    }
+                }
+                $stmt->close();
+            }
+            $this->close();
+            return $result;
         }
 
         // Gets the user's username
@@ -120,7 +202,7 @@
             return $result;
         }
 
-        public function editaccounts($id, $name, $email, $password, $adminlevel, $approved)
+        public function editAccounts($id, $name, $email, $password, $adminlevel, $approved)
         {
             $query = "UPDATE accounts
             SET name = ?, email= ?, password = ?, adminlevel = ?, approved = ? WHERE id = ?";
@@ -136,7 +218,7 @@
             $this->close();
         }
 
-        public function editaccountssettings($id, $name, $email)
+        public function editAccountSettings($id, $name, $email)
         {
             $query = "UPDATE accounts
             SET name = ?, email= ? WHERE id = ?";
@@ -150,6 +232,34 @@
                 $stmt->close();
             }
             $this->close();
+        }
+
+        public function getUserApproved($id)
+        {
+            $query = "SELECT approved FROM accounts WHERE id = ?";
+
+            if($stmt = $this->connect($query))
+            {
+                $stmt->bind_param('i', $id);
+
+                $stmt->execute();
+
+                $stmt->bind_result($approved);
+
+                $stmt->store_result();
+
+                $result = null;
+                if($stmt->num_rows === 1)
+                {
+                    while($stmt->fetch())
+                    {
+                        $result = $approved;
+                    }
+                }
+                $stmt->close();
+            }
+            $this->close();
+            return $result;
         }
 
         public function getUserAdmin($id)

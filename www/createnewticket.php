@@ -1,35 +1,13 @@
-<?php require 'php/autoloader.php';
-//Session checking if you are logged in or not
-session_start();
-if(($_SESSION["valid"] == false))
-{
-    echo "Not Logged in, please login to continue, redirect in 5 seconds...";
-	header("Refresh: 5; login.php");
-	return;
-	mysqli_stmt_close($stmt);
-	mysqli_close($link);
-}
+<?php
+    require 'php/autoloader.php';
+    $tickets = new Tickets();
+    $accounts = new Accounts();
+    $userID = $_SESSION['userID'];
 
-$id=$_SESSION["id"];
-$config = config::getDBConfig();
-$link = mysqli_connect($config->db_host, $config->db_user, $config->db_pass, $config->db_name)
-OR Die("Could not connect to database!" . mysqli_error($link));
-$sql = "SELECT approved, adminlevel FROM accounts WHERE id = $id";
-$stmt = mysqli_query($link, $sql);
-$values = mysqli_fetch_array($stmt);
-$adminTrue= $values['adminlevel'];
-if($values["approved"] === "0")
-{
-    echo "Not approved, please contact the admin, redirect in 5 seconds...";
-	header("Refresh: 5; login.php");
-	return;
-	mysqli_stmt_close($stmt);
-	mysqli_close($link);
-}else
-{
-
-}
-
+    if(!isset($userID) || $accounts->getUserApproved($userID) == 0)
+    {
+        header('location: index.php', true);
+    }
 ?>
 <!DOCTYPE html>
 <html>
@@ -43,7 +21,7 @@ if($values["approved"] === "0")
 
 <header>
 	<div class="logo-wrap">
-		<a href="viewticket.php"><h1 class="logo">ForexNinja Help Desk</h1></a>
+		<a href="createnewticket.php"><h1 class="logo">ForexNinja Help Desk</h1></a>
 
 		<svg class="triangle">
 			<polygon points="0,0 50,0 0,100"/>
@@ -53,7 +31,7 @@ if($values["approved"] === "0")
 	<img class="placeholder" src="assets/stocks-placeholder.png" alt="placeholder">
 
 	<div class="login-name">
-	<?php echo "<p>" . "Welcome, " . $_SESSION["name"] . "</p>"  ?>
+	    Welcome <?= $accounts->getUsersName($userID) ?>
 	</div>
 </header>
 
@@ -62,9 +40,11 @@ if($values["approved"] === "0")
 		<p class="ticket-list-p">Your Tickets</p>
 		<div class="scrollable">
             <?php
-                $tickets = new Tickets();
-                $accounts = new Accounts();
-                $allTickets = $tickets->getAllTickets($adminTrue,$_SESSION['id']);
+                if($accounts->getUserAdmin($userID) == 1)
+                $allTickets = $tickets->getAllTickets();
+            else
+                $allTickets = $tickets->getUsersTickets($userID);
+
                 foreach($allTickets as $ticket):
             ?>
 			<div class="ticket content-box">
@@ -78,7 +58,7 @@ if($values["approved"] === "0")
 						<p class="ticket-list-p"><?= $ticket[1] ?></p>
 					</div>
 
-					<div class="status-circle closed"></div>
+					<div class="status-circle <?= ($ticket[3] == 0) ? 'open' : 'closed' ?>"></div>
 
 					<div class="ticket-list-bottom">
 						<p>CREATED ON: <?= $ticket[5] ?></p>
@@ -92,15 +72,13 @@ if($values["approved"] === "0")
 	<div class="create-wrapper">
 		<h2>Create New Ticket</h2>
 		<div class="create-ticket content-box">
-			<form class="create-form" action="submit.php" method="post" enctype="multipart/form-data">
-				<input type="text" name="title" id="title" placeholder="Title" required>
-				<textarea name="question" placeholder="Enter question" id="create-textarea"required></textarea>
-				<input class="button" type="submit" name="submit" id="submit">
-				<action="submit.php" method="POST" enctype="multipart/form-data">
-				<input type="file" name="file">
+            <form class="create-form" action="submit.php" method="POST" enctype="multipart/form-data">
+                <input type="text" name="title" id="title" placeholder="Title">
+                <textarea name="question" placeholder="Enter question" id="create-textarea"></textarea>
+                <input type="file" name="file">
 
-			</form>
-
+                <input class="button" type="submit" name="submit" value="Submit" id="submit">
+            </form>
 		</div>
 	</div>
 
@@ -112,11 +90,12 @@ if($values["approved"] === "0")
 			<div class="nav-link-wrapper">
 				<a href="createnewticket.php">Create New Ticket</a>
 				<a href="settings.php">Settings</a>
+                <?= ($accounts->getUserAdmin($_SESSION['userID']) == 1) ? '<a href="admin.php">Admin</a>' : '' ?>
 			</div>
 		</div>
 
 		<div class="nav-logout-line">
-			<a href = "login.php"><button class="button logout">LOGOUT</button></a>
+			<a href = "logout.php"><button class="button logout">LOGOUT</button></a>
 		</div>
 
 	</nav>

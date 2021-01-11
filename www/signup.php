@@ -1,9 +1,4 @@
-<?php require 'php/autoloader.php';
-session_start();
-$_SESSION["valid"] = false;
-$_SESSION["id"] = "";
-$_SESSION["name"] = "";
-?>
+<?php require 'php/autoloader.php'; ?>
 <!DOCTYPE HTML>
 <html lang="en">
     <head>
@@ -47,7 +42,7 @@ $_SESSION["name"] = "";
                     <input type="password" name="passwordConfirm" placeholder="Confirm password">
                     <input type="submit" name="submit" value="Sign up">
                 </div>
-                    
+
                 <a href="login.php">Login</a>
             </form>
         </div>

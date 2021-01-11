@@ -1,9 +1,4 @@
-<?php require 'php/autoloader.php';
- session_start();
- $_SESSION["valid"] = false;
- $_SESSION["id"] = "";
- $_SESSION["name"] = "";
- ?>
+<?php require 'php/autoloader.php'; ?>
 <!DOCTYPE HTML>
 <html lang="en">
     <head>
@@ -14,6 +9,11 @@
     </head>
     <body>
         <?php
+            $accounts = new Accounts();
+            if(isset($_SESSION['userID']) && $accounts->getUserApproved($_SESSION['userID']) == 1)
+            {
+                header('location: viewticket.php', true);
+            }
             if(isset($_POST['submit']))
             {
                 $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
@@ -21,28 +21,17 @@
 
                 if(!empty($email) && !empty($password))
                 {
-                    $accounts = new Accounts();
                     if($accounts->login($email, $password))
                     {
+                        session_regenerate_id();
                         $accounts->setLastLogin($email);
-                        $_SESSION["valid"] = true;
-                        $config = config::getDBConfig();
-                        $link = mysqli_connect($config->db_host, $config->db_user, $config->db_pass, $config->db_name)
-                        OR Die("Could not connect to database!" . mysqli_error($link));
-                        $sql = "SELECT id, name FROM accounts WHERE email = '$email'";
-                        $stmt = mysqli_query($link, $sql);
-                        while($values = mysqli_fetch_array($stmt))
-                        {
-                            $_SESSION["id"] = (int)$values["id"];
-                            $_SESSION["name"] = $values["name"];
-                            mysqli_stmt_close($stmt);
-                            mysqli_close($link);
-                            header("Location: viewticket.php");
-                        }
+                        $accountID = $accounts->getUsersID($email);
+                        $_SESSION['userID'] = $accountID;
+                        header('location: viewticket.php', true);
                     }
                     else
                     {
-                        echo "<div class =" .  "mainbox" . "<p>" . "Wrong login credentials" . "</p>" . "</div";
+                        $error = [true];
                     }
                 }
             }
@@ -59,6 +48,7 @@
                     <input type="email" name="email" placeholder="Email" required>
                     <input type="password" name="password" placeholder="Password" required>
                     <input type="submit" name="submit" value="Log in">
+                    <?= (isset($error) && $error[0]) ? 'Wrong email, or password' : '' ?>
                 </div>
 
                 <div class="bottom-buttons">

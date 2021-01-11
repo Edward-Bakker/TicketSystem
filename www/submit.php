@@ -1,43 +1,50 @@
-<?php require 'php/autoloader.php';
+<?php
+    require 'php/autoloader.php';
 
-$config = config::getDBConfig();
-$conn = mysqli_connect($config->db_host, $config->db_user, $config->db_pass, $config->db_name)
-OR Die("Could not connect to database!" . mysqli_error($link));
+    $accounts = new Accounts();
+    $tickets = new Tickets();
 
-session_start();
-
-$title = mysqli_real_escape_string($conn, $_POST['title']);
-$question = mysqli_real_escape_string($conn, $_POST['question']);
-$id = mysqli_real_escape_string($conn, $_SESSION['id']);
-
-$msg = "";
-
-if (isset($_POST['submit'])){
-    // Get image name and give it a unique string so that it cannot have conflicts
-    $filename = $_FILES['file']['name'];
-    $randstring = bin2hex(random_bytes(10));
-    $uniqfilename = $randstring . $filename;
-
-    // Get text
-    $title = mysqli_real_escape_string($conn, $_POST['title']);
-    $question = mysqli_real_escape_string($conn, $_POST['question']);
-    $id = mysqli_real_escape_string($conn, $_SESSION['id']);
-    // image file directory
-    $target = "uploads/" . basename($uniqfilename);
-
-    $sql = "INSERT INTO tickets ( `subject`, `content`, `user_id`, `file`) VALUES ( '$title', '$question', '$id', '$uniqfilename')";
-    // execute query
-    if(mysqli_query($conn, $sql)){
-        echo "Success";
+    $userID = $_SESSION['userID'];
+    if(!isset($userID) || $accounts->getUserApproved($userID) == 0)
+    {
+        header('location: index.php', true);
     }
-    else {
-        echo "There was a error with executing the statement ". mysqli_error($conn);
+
+    if(isset($_POST['submit']))
+    {
+        $title = filter_input(INPUT_POST, 'title', FILTER_SANITIZE_STRING);
+        $question = filter_input(INPUT_POST, 'question', FILTER_SANITIZE_STRING);
+
+        if(file_exists($_FILES['file']['tmp_name']) || is_uploaded_file($_FILES['file']['tmp_name']))
+        {
+            $file = $_FILES['file']['tmp_name'];
+            $fileName = $_FILES['file']['name'];
+
+            $filehandler = new Filehandler();
+
+            if($return = $filehandler->uploadfile($file, $fileName))
+            {
+                if(!empty($title) && !empty($question))
+                {
+                    if(in_array($return[1], ['png', 'jpeg'], true))
+                    {
+                        $question = $question . '<img src="' . $return[0] . '" alt="Question image">';
+                    }
+                    elseif (in_array($return[1], ['pdf'], true))
+                    {
+                        $question = $question . '<a href="' . $return[0] . '" target="_blank"">PDF</a>';
+                    }
+                    $tickets->submitTicket($title, $question, $userID);
+                }
+            }
+            else
+            {
+                if(!empty($title) && !empty($question))
+                {
+                    $tickets->submitTicket($title, $question, $userID);
+                }
+            }
+        }
     }
-    header("Location:createnewticket.php?success");
-    if (move_uploaded_file($_FILES['file']['tmp_name'], $target)) {
-        $msg = "Image uploaded successfully";
-    }else{
-        $msg = "Failed to upload image";
-    }
-}
+    header ('location: viewticket.php');
 ?>

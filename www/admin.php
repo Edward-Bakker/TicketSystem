@@ -1,40 +1,10 @@
-<?php require 'php/autoloader.php';
-session_start();
-if(($_SESSION["valid"] == false))
-{
-    echo "Not Logged in, please login to continue, redirect in 5 seconds...";
-	header("Refresh: 5; login.php");
-	return;
-	mysqli_stmt_close($stmt);
-	mysqli_close($link);
-}
-
-$id=$_SESSION["id"];
-$config = config::getDBConfig();
-$link = mysqli_connect($config->db_host, $config->db_user, $config->db_pass, $config->db_name)
-OR Die("Could not connect to database!" . mysqli_error($link));
-$sql = "SELECT approved, adminlevel FROM accounts WHERE id = $id";
-$stmt = mysqli_query($link, $sql);
-$values = mysqli_fetch_array($stmt);
-
-if($values["approved"] === "0")
-{
-    echo "Not approved, please contact the admin, redirect in 5 seconds...";
-	header("Refresh: 5; login.php");
-	return;
-	mysqli_stmt_close($stmt);
-	mysqli_close($link);
-}elseif($values["adminlevel"] === "0")
-{
-    echo "Not admin, please contact the admin, redirect in 5 seconds...";
-	header("Refresh: 5; viewticket.php");
-	return;
-	mysqli_stmt_close($stmt);
-	mysqli_close($link);
-}else
-{
-    
-}
+<?php
+    require 'php/autoloader.php';
+    $accounts = new Accounts();
+    if(!isset($_SESSION['userID']) || $accounts->getUserAdmin($_SESSION['userID']) == 0)
+    {
+        header('location: index.php', true);
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -46,29 +16,29 @@ if($values["approved"] === "0")
     <title>Forex Ninja Admin Page</title>
 </head>
 <body>
-    
+
     <header>
-        <h1>Admin Page</h1>
-    </header>  
-        
+        <h1>Admin page</h1>
+        <a href="viewticket.php">Head back to tickets</a>
+    </header>
+
     <?php
-    // connects to database
-    $config = config::getDBConfig();
-    $link = mysqli_connect($config->db_host, $config->db_user, $config->db_pass, $config->db_name)
-    OR Die("Could not connect to database!" . mysqli_error($link));
-    // takes data from the database and uses a while loop to pull all the data that exists
-    $sql = "SELECT * FROM accounts ORDER BY id ASC";
-        $stmt = mysqli_query($link, $sql);
-        echo "<br>";
-        echo "<table>";
-        echo "<tr><th>" . "ID" . "</th><th>" . "name" . "</th><th>" . "email" . "</th><th>" . "password hash" . "</th><th>" . "adminlevel" . "</th><th>" . "approved" . "</th><th>" . "last login" . "</th><th>" . "Registered Date" . "</th><th>" . "Edit" . "</th></tr>";
-        while ($row = mysqli_fetch_array($stmt)) 
-        {
-            echo "<tr class=\"hover\"><td>" . $row["id"] . "</td><td>" . $row["name"] . "</td><td>" . $row["email"] . "</td><td>" . $row["password"] . "</td><td>" . $row["adminlevel"] . "</td><td>" . $row["approved"] . "</td><td>" . $row["last_login"] . "</td><td>" . $row["insert_time"]  . "</td><td>" . "<a href= 'admineditpage.php?id=" . $row["id"] . "'>EDIT</a></td></tr>";                                                         
-        }
-        echo "</table>";
-        mysqli_close($link);
-    
+        $allUsers = $accounts->getAllUsers();
     ?>
+    <table>
+            <tr>
+                <th>ID</th>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Admin Level</th>
+                <th>Approved</th>
+                <th>Last Login</th>
+                <th>Registration Date</th>
+                <th></th>
+            </tr>
+            <?php foreach ($allUsers as $element): ?>
+                <tr><td><?= $element[0] ?></td><td><?= $element[1] ?></td><td><?= $element[2] ?></td><td><?= $element[3] ?></td><td><?= $element[4] ?></td><td><?= $element[5] ?></td><td><?= $element[6] ?></td><td><a href="admineditpage.php?id=<?= $element[0] ?>">EDIT</a></td></tr>
+            <?php endforeach; ?>
+        </table>
 </body>
 </html>

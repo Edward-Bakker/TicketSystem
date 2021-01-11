@@ -1,19 +1,31 @@
 body {
     font-family: Avenir, Arial, Times New Roman, sans-serif;
+    height: 100vh;
+    width: 100vw;
 }
 header {
     display: flex;
+    flex-flow: column nowrap;
     justify-content: center;
     align-items: center;
     background-color: black;
-    height: 80px;
-    padding-top: 20px;
+    height: 10vh;
+    padding: 5px;
 }
 header h1 {
     display: inline-block;
     color: gold;
     font-size: 3em;
     margin: 0;
+}
+
+header a {
+    color: white;
+    text-decoration: none;
+}
+
+header a:hover {
+    color: lightgrey;
 }
 
 table, th, td {
@@ -27,8 +39,10 @@ table {
 }
 th, td {
     padding:2px 4px;
-    border-bottom: 1px solid black;
 }
-.hover:hover {
+tr:nth-child(even) {
     background-color: lightgrey;
+}
+tr:hover {
+    background-color: darkgrey;
 }
