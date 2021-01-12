@@ -61,21 +61,15 @@
                         $ticketExists = false;
                         if (isset($ticketContent) && $ticketContent !== []) {
                             $ticketExists = true;
-                            if($accounts->getUserAdmin($userID) == 0 && $ticketContent[4] !== $userID)
-                            {
-                                header('location: viewticket.php', true);
-                            }
-                            else
-                            {
-                                if (isset($_POST['submit-close'])) {
-                                    $status = 1;
-                                    if ($ticketContent[3])
-                                        $status = 0;
+                            if (isset($_POST['submit-close'])) {
+                                $status = 1;
+                                if ($ticketContent[3])
+                                    $status = 0;
 
-                                    $tickets->setTicketStatus($ticketID, $status);
-                                    header('location: viewticket.php?id=' . $ticketID, true);
-                                }
+                                $tickets->setTicketStatus($ticketID, $status);
+                                header('location: viewticket.php?id=' . $ticketID, true);
                             }
+
                         }
 
                         if($accounts->getUserAdmin($userID) == 1)
@@ -205,15 +199,15 @@
                     if ($ticketContent[4] === $userID)
                         echo '<div class="comment own"><p>' . $ticketContent[2] . '</p></div>';
                     else
-                        echo '<div class="comment"><div class="name">'. $accounts->getUsersName($ticketContent[4]) . ' <span class="date">' . $ticketContent[6] . ' </span></div>' . $ticketContent[2] . '</div>';
+                        echo '<div class="comment"><p>' . $ticketContent[2] . '</p></div>';
 
                     $allComments = $tickets->getTicketComments($ticketID);
                     foreach ($allComments as $comment)
                     {
                         if ($comment[3] === $userID)
-                            echo '<div class="comment own"><p>' . $comment[1] . '</p></div>';
+                            echo '<div class="comment own"><b>' . $accounts->getUsersName($comment[3]) . '</b><p>' . $comment[1] . '</p></div>';
                         else
-                            echo '<div class="comment"><div class="name">'. $accounts->getUsersName($comment[3]) . ' <span class="date">' . $comment[5] . ' </span></div><p>' . $comment[1] . '</p></div>';
+                            echo '<div class="comment"><b>' . $accounts->getUsersName($comment[3]) . '</b><p>' . $comment[1] . '</p></div>';
                     }
                 }
                 ?>

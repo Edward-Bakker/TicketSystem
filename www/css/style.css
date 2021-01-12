@@ -289,7 +289,8 @@ nav h2 {
 }
 .ticket-content {
     display: flex;
-    flex-flow:  column nowrap;
+    flex-direction: column;
+    align-items: flex-start;
     font-size: 1.2em;
     margin: 15px 0;
     height: calc(100vh - 450px);
@@ -334,31 +335,30 @@ nav h2 {
 }
 
 .comment {
-    padding: 10px;
-    margin: 10px 0;
-    background-color: #FFD700;
-    border-radius: 10px;
-    width: fit-content;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: flex-start;
+    border-radius: 5px;
+    padding: 5px 10px;
+    background-color: gold;
+    margin-bottom: 10px;
+    font-size: 18px;
 }
 .comment img {
-    max-width: 50vh;
+    display: inline-block;
+    height: 120px;
+    width: fit-content;
 }
-.own {
-    text-align: right;
-    align-self: flex-end;
-    background-color: #D0CFCF;
+.comment b {
+    font-size: 16px;
 }
-.name {
+.comment-owner {
     font-weight: bold;
 }
-.date {
-    vertical-align: super;
-    font-size: .8rem;
-    font-weight: normal;
-}
-.comment a {
-    color: royalblue;
-    text-decoration: underline;
+.own {
+    align-self: flex-end;
+    background-color: #ddd;
+    align-items: flex-end;
 }
 
 .hidden {
@@ -394,7 +394,7 @@ nav h2 {
 
 
 @media only screen and (max-width: 1140px) {
-
+    
     .placeholder {
         display: none;
     }
@@ -453,7 +453,7 @@ nav h2 {
     }
     .burger-menu div a {
         text-align: center;
-        font-size: 20px;
+        font-size: 20px; 
         width: 164px;
     }
     #logout {
