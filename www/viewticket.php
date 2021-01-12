@@ -58,7 +58,7 @@
                         $ticketExists = false;
                         if (isset($ticketContent) && $ticketContent !== []) {
                             $ticketExists = true;
-                            if (isset($_POST['delete'])) {
+                            if (isset($_POST['submit-close'])) {
                                 $status = 1;
                                 if ($ticketContent[3])
                                     $status = 0;
