@@ -1,5 +1,5 @@
 <?php
-    require 'php/autoloader.php';
+require 'php/autoloader.php';
 
     $accounts = new Accounts();
     $tickets = new Tickets();
@@ -12,8 +12,8 @@
 
     if(isset($_POST['submit']))
     {
-        $title = filter_input(INPUT_POST, 'title', FILTER_SANITIZE_STRING);
-        $question = filter_input(INPUT_POST, 'question', FILTER_SANITIZE_STRING);
+        $comment = filter_input(INPUT_POST, 'answer', FILTER_SANITIZE_STRING);
+        $ticketID = $_GET["id"];
 
         if(file_exists($_FILES['file']['tmp_name']) || is_uploaded_file($_FILES['file']['tmp_name']))
         {
@@ -23,28 +23,28 @@
             $filehandler = new Filehandler();
 
             if($return = $filehandler->uploadfile($file, $fileName))
-            {
-                if(!empty($title) && !empty($question))
+            { 
+                if(!empty($comment))
                 {
                     if(in_array($return[1], ['png', 'jpeg'], true))
                     {
-                        $question = $question . '<br><img src="' . $return[0] . '" alt="Question image">';
+                        $comment = $comment . '<br><img src="' . $return[0] . '" alt="Question image">';
                     }
                     elseif (in_array($return[1], ['pdf'], true))
                     {
-                        $question = $question . '<br><a href="' . $return[0] . '" target="_blank"">PDF</a>';
+                        $comment = $comment . '<br><a href="' . $return[0] . '" target="_blank"">PDF</a>';
                     }
-                    $tickets->submitTicket($title, $question, $userID);
+                    $tickets->commentTicket($comment, $ticketID, $userID);
                 }
             }
             else
             {
-                if(!empty($title) && !empty($question))
+                if(!empty($comment))
                 {
-                    $tickets->submitTicket($title, $question, $userID);
+                    $tickets->commentTicket($comment, $ticketID, $userID);
                 }
             }
         }
-    }
-    header ('location: viewticket.php');
+     }
+   // header ('location: viewticket.php');
 ?>

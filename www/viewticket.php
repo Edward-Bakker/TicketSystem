@@ -208,7 +208,7 @@
             </div>
 
             <?php if($ticketExists && !$ticketContent[3]): ?>
-            <form class="answer-form" action="<?= $_SERVER['REQUEST_URI'] ?>" method="post" enctype="multipart/form-data">
+            <form class="answer-form" action="commentsubmit.php?id=<?= $ticketID ?>" method="post" enctype="multipart/form-data">
                 <label for="answer">Answer</label>
                 <textarea name="answer" id="answer"></textarea>
                 <input type="file" name="file">
