@@ -37,12 +37,12 @@
                     $tickets->submitTicket($title, $question, $userID);
                 }
             }
-            else
+        }
+        else
+        {
+            if(!empty($title) && !empty($question))
             {
-                if(!empty($title) && !empty($question))
-                {
-                    $tickets->submitTicket($title, $question, $userID);
-                }
+                $tickets->submitTicket($title, $question, $userID);
             }
         }
     }

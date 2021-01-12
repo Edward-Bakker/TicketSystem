@@ -10,21 +10,22 @@ require 'php/autoloader.php';
         header('location: index.php', true);
     }
 
-    if(isset($_POST['submit']))
+    $ticketID = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
+
+    if($accounts->getUserAdmin($userID) == 1 || $tickets->getTicket($ticketID)[4] === $userID)
     {
-        $comment = filter_input(INPUT_POST, 'answer', FILTER_SANITIZE_STRING);
-        $ticketID = $_GET["id"];
-
-        if(file_exists($_FILES['file']['tmp_name']) || is_uploaded_file($_FILES['file']['tmp_name']))
+        if(isset($_POST['submit']))
         {
-            $file = $_FILES['file']['tmp_name'];
-            $fileName = $_FILES['file']['name'];
+            $comment = filter_input(INPUT_POST, 'answer', FILTER_SANITIZE_STRING);
 
-            $filehandler = new Filehandler();
+            if(file_exists($_FILES['file']['tmp_name']) || is_uploaded_file($_FILES['file']['tmp_name']))
+            {
+                $file = $_FILES['file']['tmp_name'];
+                $fileName = $_FILES['file']['name'];
 
-            if($return = $filehandler->uploadfile($file, $fileName))
-            { 
-                if(!empty($comment))
+                $filehandler = new Filehandler();
+
+                if($return = $filehandler->uploadfile($file, $fileName))
                 {
                     if(in_array($return[1], ['png', 'jpeg'], true))
                     {
@@ -45,6 +46,6 @@ require 'php/autoloader.php';
                 }
             }
         }
-     }
-   // header ('location: viewticket.php');
-?>
+    }
+
+    header ('location: viewticket.php?id=' . $ticketID, true);
