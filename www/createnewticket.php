@@ -20,20 +20,129 @@
 <body>
 
 <header>
-	<div class="logo-wrap">
-		<a href="createnewticket.php"><h1 class="logo">ForexNinja Help Desk</h1></a>
+        <div class="logo-wrap">
+            <a href="viewticket.php"><h1 class="logo">ForexNinja Help Desk</h1></a>
 
-		<svg class="triangle">
-			<polygon points="0,0 50,0 0,100"/>
-		</svg>
-	</div>
+            <svg class="triangle">
+                <polygon points="0,0 50,0 0,100" />
+            </svg>
+        </div>
+        
+        <p id="ticket-burger-button" onclick="openTicket()">☰ Your Tickets</p>
+        
+        <img class="placeholder" src="assets/stocks-placeholder.png" alt="placeholder">
 
-	<img class="placeholder" src="assets/stocks-placeholder.png" alt="placeholder">
+        <div class="login-name">
+            <p>Welcome <?= $accounts->getUsersName($userID) ?></p>
+            
+            <button id="openbtn" onclick="openNav()">☰</button>
+        </div>
+        
+        
+    </header>
+    
+    <div id="sidepanel">
+            <button id="closebtnticket" onclick="closeTicket()">Your Tickets ☰</button>
+            <div class="burger">
+                <div class="ticket-list">
+                    <div class="scrollable">
+                        <?php
+                        $ticketID = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
 
-	<div class="login-name">
-	    Welcome <?= $accounts->getUsersName($userID) ?>
-	</div>
-</header>
+                        if (isset($ticketID) && !empty($ticketID)) {
+                            $ticketContent = $tickets->getTicket($ticketID);
+                        }
+
+                        $ticketExists = false;
+                        if (isset($ticketContent) && $ticketContent !== []) {
+                            $ticketExists = true;
+                            if (isset($_POST['delete'])) {
+                                $status = 1;
+                                if ($ticketContent[3])
+                                    $status = 0;
+
+                                $tickets->setTicketStatus($ticketID, $status);
+                                header('location: viewticket.php?id=' . $ticketID, true);
+                            }
+
+                        }
+
+                        if($accounts->getUserAdmin($userID) == 1)
+                            $allTickets = $tickets->getAllTickets();
+                        else
+                            $allTickets = $tickets->getUsersTickets($userID);
+
+                        foreach ($allTickets as $ticket) :
+                        ?>
+                            <div class="ticket content-box <?php if($_GET['id'] == $ticket[0]){echo("selected");}  ?>">
+                                <a href="viewticket.php?id=<?= $ticket[0] ?>">
+                                    <div class="ticket-list-top">
+                                        <p>ID: <?= $ticket[0] ?></p>
+                                        <p><?= $accounts->getUsersName($ticket[4]) ?></p>
+                                    </div>
+
+                                    <div class="ticket-list-title">
+                                        <p class="ticket-list-p"><?= $ticket[1] ?></p>
+                                    </div>
+
+                                    <div class="status-circle <?= ($ticket[3] == 0) ? 'open' : 'closed' ?>"></div>
+
+                                    <div class="ticket-list-bottom">
+                                        <p>CREATED ON: <?= $ticket[5] ?></p>
+                                    </div>
+                                </a>
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
+                </div>
+            </div>
+    </div>
+    <div id="cover-menu" onclick="closeNav()"></div>
+    
+    <div id="sidepanel-menu">
+            <button id="closebtn" onclick="closeNav()">☰</button>
+            <nav class="burger">
+                <div>
+                    <h2>Menu</h2>
+
+                    <div class="nav-link-wrapper">
+                        <a href="createnewticket.php">Create New Ticket</a>
+                        <a href="settings.php">Settings</a>
+                    </div>
+                </div> 
+
+                <div class="nav-logout-line">
+                    <a id="logout" href="login.php"><button class="button logout">LOGOUT</button></a>
+                </div>
+            </nav>
+    </div>
+    <div id="cover" onclick="closeTicket()"></div>
+    <script>
+            /*Opens and closes the sidebars; Creates the dimming effect on the rest of the page*/
+            function openNav() {
+                    document.getElementById("sidepanel-menu").style.width = "230px";
+                    document.getElementById("cover-menu").style.width = "1000px";
+                    document.getElementById("cover-menu").style.backgroundColor = "rgba(0,0,0,0.4)";
+            }
+
+            function closeNav() {
+                    document.getElementById("sidepanel-menu").style.width = "0";
+                    setTimeout(function(){document.getElementById("cover-menu").style.width = "0";}, 200);
+                    document.getElementById("cover-menu").style.backgroundColor = "rgba(0,0,0,0)";
+            }
+            
+            function openTicket() {
+                    document.getElementById("sidepanel").style.width = "230px";
+                    document.getElementById("cover").style.width = "1000px";
+                    document.getElementById("cover").style.backgroundColor = "rgba(0,0,0,0.4)";
+            }
+
+            function closeTicket() {
+                    document.getElementById("sidepanel").style.width = "0";
+                    setTimeout(function(){document.getElementById("cover").style.width = "0";}, 200);
+                    document.getElementById("cover").style.backgroundColor = "rgba(0,0,0,0)";
+            }
+    </script>
 
 <div class="wrapper">
     <div class="ticket-list">

@@ -14,6 +14,9 @@ font-weight: light;
 }
 
 /* GENERAL STYLING AND REPEATED CLASSES */
+html, body {
+    height: 100vh;
+}
 body {
     font-family: Avenir, Arial, Times New Roman, sans-serif;
     background-color: #EAEAEA;
@@ -116,10 +119,9 @@ header {
     justify-content: flex-start;
     align-items: center;
 }
-header p {
-    padding-bottom: 10px;
+#ticket-burger-button {
+    display: none;
 }
-
 
 
 /* the white background with round corners */
@@ -238,17 +240,19 @@ nav h2 {
 }
 .nav-link-wrapper a {
     display: block;
-    width: 70%;
+    width: 140px;
     margin: 20px auto 0 auto;
     padding-bottom: 10px;
     border-bottom: 1px solid #999;
-
+    text-align: center;
 }
 .logout {
     display: block;
     margin: 0;
 }
 .nav-logout-line {
+    display: flex;
+    justify-content: center;
     padding-top: 15px;
     width: 80%;
     border-top: 1px solid #999;
@@ -305,120 +309,187 @@ nav h2 {
     border-top: 2px solid #999;
 }
 
-#openbtn, #closebtn {
+#openbtn, #closebtn, #closebtnticket {
 	display: none;
 	background: none;
 	border: 0;
 	font-size: 0;
 }
-#openbtn:focus, #closebtn:focus {
+
+#openbtn:focus, #closebtn:focus, #closebtnticket:focus {
 	border: 0;
 	outline: none;
 }
-#sidepanel {
+#sidepanel, #sidepanel-menu {
 	display: none;
 	width: 0;
 }
-#cover {
+#cover, #cover-menu {
 	display: none;
+}
+.ticket-burger-button {
+    display: none;
 }
 
 @media only screen and (max-width: 1392px) {
 
+    .logo-wrap {
+        min-width: 557px;
+    }
 
-.logo-wrap {
-    min-width: 557px;
-}
-
-.login-name {
-    min-width: 270px;
-}
-.wrapper {
-    grid-template-columns: 300px auto 210px;
-    height: calc(100vh - 100px)
-}
-.ticket {
-    font-size: 0.8em;
-}
-.ticket-list-title {
-    font-size: 1em;
-}
-.status-circle {
-    width: 20px;
-    height: 20px;
-}
-.active-ticket, .create-ticket {
-    min-width: 575px;
-}
+    .login-name {
+        min-width: 270px;
+    }
+    .wrapper {
+        grid-template-columns: 300px auto 210px;
+        height: calc(100vh - 100px)
+    }
+    .ticket {
+        font-size: 0.8em;
+    }
+    .ticket-list-title {
+        font-size: 1em;
+    }
+    .status-circle {
+        width: 20px;
+        height: 20px;
+    }
 }
 
 
 @media only screen and (max-width: 1140px) {
     
-.placeholder {
-    display: none;
+    .placeholder {
+        display: none;
+    }
+    .login-name {
+        justify-content: space-between;
+    }
+    .wrapper {
+        grid-template-columns: 300px auto;
+        padding-right: 20px;
+        box-sizing: border-box;
+    }
+    nav {
+        display: none;
+    }
+    .burger-menu, .burger {
+        display: flex;
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        flex-direction: column;
+        box-sizing: border-box;
+        overflow-y: scroll;
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+    .burger::-webkit-scrollbar {
+        display: none;
+    }
+
+    #openbtn, #closebtn, #closebtnticket{
+        display: block;
+        font-size: 30px;
+    }
+    #closebtn {
+        margin: 12px 10px 0 0;
+    }
+    #sidepanel-menu, #sidepanel {
+        display: flex;
+        height: 100vh;
+        width: 0;
+        overflow-x: hidden;
+        position: absolute;
+        right: 0;
+        top: 0;
+        z-index: 3;
+        flex-direction: column;
+        align-items: flex-end;
+        transition: width 0.2s ease-out;
+        background-color: white;
+    }
+    .burger-menu div {
+        display: flex;
+        margin-top: 20px;
+        align-items: center;
+        flex-direction: column;
+    }
+    .burger-menu div a {
+        text-align: center;
+        font-size: 20px; 
+        width: 164px;
+    }
+    #logout {
+        width: auto;
+    }
+    #cover, #cover-menu {
+        display: block;
+        width: 0;
+        height: 100vh;
+        position: absolute;
+        left:0;
+        top: 0;
+        z-index: 2;
+        transition: background-color 0.2s ease-out;
+    }
 }
-.login-name {
-    justify-content: space-between;
+
+@media only screen and (max-width: 920px) {
+    .logo-wrap {
+        display: none;
+    }
+    header {
+        justify-content: space-between;
+    }
+    #ticket-burger-button {
+        display: inline-block;
+        margin: auto 20px;
+        padding: 0;
+    }
+    .wrapper {
+        grid-template-columns: auto;
+        padding-left: 20px;
+        box-sizing: border-box;
+    }
+    .wrapper .ticket-list {
+        display: none;
+    }
+    #sidepanel {
+        left: 0;
+    }
+    #closebtnticket {
+        width: 220px;
+        margin: 5px 0;
+    }
+    .ticket-list {
+        height: 100%;
+        width: 100%;
+        padding: 0;
+        margin-top: 0;
+        font-size: 1em;
+        background-color: #EAEAEA;
+    }
+    .ticket-list .scrollable {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        height: 90vh;
+        padding: 10px;
+        box-sizing: border-box;
+    }
+    .ticket {
+        width: 190px;
+    }
+
 }
-.wrapper {
-    grid-template-columns: 300px auto;
-    padding-right: 20px;
-    box-sizing: border-box;
-}
-nav {
-    display: none;
-}
-.burger {
-    display: flex;
-    width: 100%;
-    height: 100%;
-    margin: 0;
-    box-sizing: border-box;
-}
-#openbtn, #closebtn {
-    display: block;
-    font-size: 30px;
-}
-#closebtn {
-    margin: 12px 10px 0 0;
-}
-#sidepanel {
-    display: flex;
-    height: 100vh;
-    width: 0;
-    overflow-x: hidden;
-    position: absolute;
-    right: 0;
-    top: 0;
-    z-index: 3;
-    flex-direction: column;
-    align-items: flex-end;
-    transition: width 0.2s ease-out;
-    background-color: white;
-}
-.burger div {
-    display: flex;
-    margin-top: 20px;
-    align-items: center;
-    flex-direction: column;
-}
-.burger div a {
-    text-align: center;
-    font-size: 20px; 
-    width: 164px;
-}
-#logout {
-    width: auto;
-}
-#cover {
-    display: block;
-    width: 0;
-    height: 100vh;
-    position: absolute;
-    left:0;
-    top: 0;
-    z-index: 2;
-    transition: background-color 0.2s ease-out;
-}
+
+@media only screen and (max-width: 540px) {
+
+    .wrapper {
+        padding: 20px 0 0 0;
+        margin: 0;
+        height: calc(100vh - 70px);
+    }
 }
