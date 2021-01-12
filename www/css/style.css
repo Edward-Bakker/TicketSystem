@@ -288,6 +288,9 @@ nav h2 {
     display: inline-block;
 }
 .ticket-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
     font-size: 1.2em;
     margin: 15px 0;
     height: calc(100vh - 450px);
@@ -329,6 +332,33 @@ nav h2 {
 }
 .ticket-burger-button {
     display: none;
+}
+
+.comment {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: flex-start;
+    border-radius: 5px;
+    padding: 5px 10px;
+    background-color: gold;
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+.comment img {
+    display: inline-block;
+    height: 120px;
+    width: fit-content;
+}
+.comment b {
+    font-size: 16px;
+}
+.comment-owner {
+    font-weight: bold;
+}
+.own {
+    align-self: flex-end;
+    background-color: #ddd;
+    align-items: flex-end;
 }
 
 .hidden {

@@ -191,17 +191,17 @@
                 if ($ticketExists)
                 {
                     if ($ticketContent[4] === $userID)
-                        echo '<div class="comment own">' . $ticketContent[2] . '</div>';
+                        echo '<div class="comment own"><p>' . $ticketContent[2] . '</p></div>';
                     else
-                        echo '<div class="comment">' . $ticketContent[2] . '</div>';
+                        echo '<div class="comment"><p>' . $ticketContent[2] . '</p></div>';
 
                     $allComments = $tickets->getTicketComments($ticketID);
                     foreach ($allComments as $comment)
                     {
                         if ($comment[3] === $userID)
-                            echo '<div class="comment own"><p>' . $comment[1] . '</p></div>';
+                            echo '<div class="comment own"><b>' . $accounts->getUsersName($comment[3]) . '</b><p>' . $comment[1] . '</p></div>';
                         else
-                            echo '<div class="comment"><p>' . $comment[1] . '</p><br> - <i>' . $accounts->getUsersName($comment[3]) . '</i></div>';
+                            echo '<div class="comment"><b>' . $accounts->getUsersName($comment[3]) . '</b><p>' . $comment[1] . '</p></div>';
                     }
                 }
                 ?>
