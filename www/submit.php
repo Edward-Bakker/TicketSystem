@@ -32,7 +32,7 @@
                     }
                     elseif (in_array($return[1], ['pdf'], true))
                     {
-                        $question = $question . '<a href="' . $return[0] . '" target="_blank"">PDF</a>';
+                        $question = $question . '<br><a href="' . $return[0] . '" target="_blank"">PDF</a>';
                     }
                     $tickets->submitTicket($title, $question, $userID);
                 }
