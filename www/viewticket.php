@@ -175,7 +175,7 @@
             </div>
         </div>
 
-        <div class="active-ticket content-box">
+        <div class="active-ticket content-box <?php if (!$ticketExists) {echo("hidden");} ?>">
             <div class="ticket-top">
 
                 <div class="line">

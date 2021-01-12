@@ -331,6 +331,12 @@ nav h2 {
     display: none;
 }
 
+.hidden {
+    background-color: #EAEAEA;
+}
+.hidden .ticket-top, .hidden .ticket-content, .hidden .answer-form, .hidden .ticket-bottom {
+    display: none;
+}
 @media only screen and (max-width: 1392px) {
 
     .logo-wrap {
