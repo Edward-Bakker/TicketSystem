@@ -290,7 +290,7 @@ nav h2 {
 .ticket-content {
     font-size: 1.2em;
     margin: 15px 0;
-    height: auto;
+    height: calc(100vh - 450px);
 }
 .answer-form {
     padding: 10px 0 0 0;
