@@ -199,7 +199,7 @@
                     if ($ticketContent[4] === $userID)
                         echo '<div class="comment own"><p>' . $ticketContent[2] . '</p></div>';
                     else
-                        echo '<div class="comment"><div class="name">'. $accounts->getUsersName($ticketContent[4]) . '</div>' . $ticketContent[2] . '</div>';
+                        echo '<div class="comment"><div class="name">'. $accounts->getUsersName($ticketContent[4]) . ' <span class="date">' . $ticketContent[6] . ' </span></div>' . $ticketContent[2] . '</div>';
 
                     $allComments = $tickets->getTicketComments($ticketID);
                     foreach ($allComments as $comment)
@@ -207,7 +207,7 @@
                         if ($comment[3] === $userID)
                             echo '<div class="comment own"><p>' . $comment[1] . '</p></div>';
                         else
-                            echo '<div class="comment"><div class="name">'. $accounts->getUsersName($comment[3]) . '</div><p>' . $comment[1] . '</p></div>';
+                            echo '<div class="comment"><div class="name">'. $accounts->getUsersName($comment[3]) . ' <span class="date">' . $comment[5] . ' </span></div><p>' . $comment[1] . '</p></div>';
                     }
                 }
                 ?>

@@ -351,6 +351,11 @@ nav h2 {
 .name {
     font-weight: bold;
 }
+.date {
+    vertical-align: super;
+    font-size: .8rem;
+    font-weight: normal;
+}
 .comment a {
     color: royalblue;
     text-decoration: underline;
