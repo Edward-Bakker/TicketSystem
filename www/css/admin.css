@@ -2,6 +2,10 @@ body {
     font-family: Avenir, Arial, Times New Roman, sans-serif;
     height: 100vh;
     width: 100vw;
+    justify-content: center;
+    background-image: url('../assets/background.svg');
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 header {
     display: flex;
@@ -15,7 +19,7 @@ header {
 header h1 {
     display: inline-block;
     color: gold;
-    font-size: 3em;
+    font-size: 2em;
     margin: 0;
 }
 
@@ -33,9 +37,10 @@ table, th, td {
     text-align: center;
 }
 table {
-    width: 95vw;
+    width: 85vw;
     margin: 0 auto;
     box-sizing: border-box;
+   background-color: gold;
 }
 th, td {
     padding:2px 4px;
@@ -45,4 +50,13 @@ tr:nth-child(even) {
 }
 tr:hover {
     background-color: darkgrey;
+}
+#boxbox{
+    margin-left: 528px;
+    margin-top:12%;
+}
+
+}
+#tableadmin{
+    margin-top: 50px;
 }

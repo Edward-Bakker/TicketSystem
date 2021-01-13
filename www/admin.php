@@ -25,6 +25,7 @@
     <?php
         $allUsers = $accounts->getAllUsers();
     ?>
+    <div id="tableadmin">
     <table>
             <tr>
                 <th>ID</th>
@@ -40,5 +41,7 @@
                 <tr><td><?= $element[0] ?></td><td><?= $element[1] ?></td><td><?= $element[2] ?></td><td><?= $element[3] ?></td><td><?= $element[4] ?></td><td><?= $element[5] ?></td><td><?= $element[6] ?></td><td><a href="admineditpage.php?id=<?= $element[0] ?>">EDIT</a></td></tr>
             <?php endforeach; ?>
         </table>
+        </div>
+        
 </body>
 </html>
