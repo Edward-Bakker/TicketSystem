@@ -15,16 +15,16 @@
 /* GENERAL STYLING AND REPEATED CLASSES */
 html, body {
     height: 100vh;
-}
-body {
-    font-family: 'Roboto', Arial, Helvetica, sans-serif;
-    background-color: #EAEAEA;
     overflow-y: scroll;
     -ms-overflow-style: none;
     scrollbar-width: none;
 }
-body::-webkit-scrollbar {
+body::-webkit-scrollbar, html::-webkit-scrollbar {
     display: none;
+}
+body {
+    font-family: 'Roboto', Arial, Helvetica, sans-serif;
+    background-color: #EAEAEA; 
 }
 a {
     text-decoration: none;
