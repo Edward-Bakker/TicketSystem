@@ -8,14 +8,14 @@
     <title>HomePage</title>
 </head>
 <body>
-    
+
     <!--The White heading where the API will go-->
     <header class="heading">
-        <img src="assets/stocks-placeholder.png">
+        <img src="assets/stocks-placeholder.png" alt="Stock image">
     </header>
-    
+
     <div class="wrapper">
-        
+
 
         <!--The title FOREXNINJA-->
         <div class="title">

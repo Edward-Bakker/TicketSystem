@@ -10,7 +10,7 @@
     }
 ?>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 	<link rel="stylesheet" href="css/normalize.css">
 	<link rel="stylesheet" href="css/style.css">
@@ -27,20 +27,20 @@
                 <polygon points="0,0 50,0 0,100" />
             </svg>
         </div>
-        
+
         <p id="ticket-burger-button" onclick="openTicket()">☰ Your Tickets</p>
-        
+
         <img class="placeholder" src="assets/stocks-placeholder.png" alt="placeholder">
 
         <div class="login-name">
             <p>Welcome <?= $accounts->getUsersName($userID) ?></p>
-            
+
             <button id="openbtn" onclick="openNav()">☰</button>
         </div>
-        
-        
+
+
     </header>
-    
+
     <div id="sidepanel">
             <button id="closebtnticket" onclick="closeTicket()">Your Tickets ☰</button>
             <div class="burger">
@@ -98,7 +98,7 @@
             </div>
     </div>
     <div id="cover-menu" onclick="closeNav()"></div>
-    
+
     <div id="sidepanel-menu">
             <button id="closebtn" onclick="closeNav()">☰</button>
             <nav class="burger">
@@ -109,10 +109,10 @@
                         <a href="createnewticket.php">Create New Ticket</a>
                         <a href="settings.php">Settings</a>
                     </div>
-                </div> 
+                </div>
 
                 <div class="nav-logout-line">
-                    <a id="logout" href="login.php"><button class="button logout">LOGOUT</button></a>
+                    <a id="logout" class="button logout" href="login.php">LOGOUT</a>
                 </div>
             </nav>
     </div>
@@ -130,7 +130,7 @@
                     setTimeout(function(){document.getElementById("cover-menu").style.width = "0";}, 200);
                     document.getElementById("cover-menu").style.backgroundColor = "rgba(0,0,0,0)";
             }
-            
+
             function openTicket() {
                     document.getElementById("sidepanel").style.width = "230px";
                     document.getElementById("cover").style.width = "1000px";
@@ -204,7 +204,7 @@
 		</div>
 
 		<div class="nav-logout-line">
-			<a href = "logout.php"><button class="button logout">LOGOUT</button></a>
+			<a class="button logout" href="logout.php">LOGOUT</a>
 		</div>
 
 	</nav>

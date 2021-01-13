@@ -1,24 +1,23 @@
 @font-face {
-font-family: Avenir;
-src: url(assets/fonts/AvenirLTStd-Roman.otf);
+    font-family: Avenir-Roman;
+    src: url(../assets/fonts/AvenirLTStd-Roman.otf);
 }
 @font-face {
-font-family: Avenir;
-src: url(assets/fonts/AvenirLTStd-Black.otf);
-font-weight: bold;
+    font-family: Avenir-Black;
+    src: url(../assets/fonts/AvenirLTStd-Black.otf);
 }
 @font-face {
-font-family: Avenir;
-src: url(assets/fonts/AvenirLTStd-Book.otf);
-font-weight: light;
+    font-family: Avenir-Book;
+    src: url(../assets/fonts/AvenirLTStd-Book.otf);
 }
+@import url(https://fonts.googleapis.com/css?family=Roboto);
 
 /* GENERAL STYLING AND REPEATED CLASSES */
 html, body {
     height: 100vh;
 }
 body {
-    font-family: Avenir, Arial, Times New Roman, sans-serif;
+    font-family: 'Roboto', Arial, Helvetica, sans-serif;
     background-color: #EAEAEA;
     overflow-y: scroll;
     -ms-overflow-style: none;
@@ -96,6 +95,7 @@ header {
     display: flex;
 }
 .logo {
+    font-family: 'Avenir-Book', Arial, Helvetica, sans-serif;
     color: #FFD700;
     background-color: black;
     text-decoration: underline;
@@ -152,6 +152,7 @@ header {
     height: 100%;
 }
 .ticket-list-p {
+    font-family: 'Avenir-Book', Arial, Helvetica, sans-serif;
     font-size: 1.5em;
     margin-bottom: 10px;
 }
@@ -232,6 +233,7 @@ nav {
     justify-content: space-between;
 }
 nav h2 {
+    font-family: 'Avenir-Book', Arial, Helvetica, sans-serif;
     width: 80%;
     margin: 0 auto 0 auto;
     text-align: center;
@@ -247,7 +249,9 @@ nav h2 {
     text-align: center;
 }
 .logout {
-    display: block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     margin: 0;
 }
 .nav-logout-line {

@@ -10,7 +10,7 @@
     }
 ?>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
     <link rel="stylesheet" href="css/normalize.css">
@@ -44,12 +44,10 @@
     </header>
 
     <div id="sidepanel">
-                        <input type='checkbox' name='flagging' value='' class="flagging"/><label for="flagging"></label>
-
             <button id="closebtnticket" onclick="closeTicket()">Your Tickets ☰</button>
             <div class="burger">
                 <div class="ticket-list">
-                    
+
                     <div class="scrollable">
                         <?php
                         $ticketID = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
@@ -123,7 +121,7 @@
                 </div>
 
                 <div class="nav-logout-line">
-                    <a id="logout" href="login.php"><button class="button logout">LOGOUT</button></a>
+                    <a id="logout" class="button logout" href="login.php">LOGOUT</a>
                 </div>
             </nav>
     </div>
@@ -158,7 +156,6 @@
     <div class="wrapper">
         <div class="ticket-list">
             <p class="ticket-list-p">Your Tickets</p>
-                            <input type='checkbox' name='flagging' value='' class="flagging"/><label for="flagging"></label>
 
             <div class="scrollable">
                 <?php
@@ -166,7 +163,7 @@
                 ?>
                     <div class="ticket content-box <?php if($_GET['id'] == $ticket[0]){echo("selected");}  ?>">
                         <a href="viewticket.php?id=<?= $ticket[0] ?>">
-                            
+
                             <div class="ticket-list-top">
                                 <p>ID: <?= $ticket[0] ?></p>
                                 <p><?= $accounts->getUsersName($ticket[4]) ?></p>
@@ -175,7 +172,6 @@
                             <div class="ticket-list-title">
                                 <p class="ticket-list-p"><?= $ticket[1] ?></p>
                             </div>
-                            <input type='checkbox' name='flagging' value='' class="flagging"/><label for="flagging"></label>
                             <div class="status-circle <?= ($ticket[3] == 0) ? 'open' : 'closed' ?>"></div>
 
                             <div class="ticket-list-bottom">
@@ -192,7 +188,7 @@
 
                 <div class="line">
                     <form action="<?= $_SERVER['REQUEST_URI'] ?>" method="post">
-                        <input class="button" type="submit" name="submit-close" value="<?= ($ticketExists && !$ticketContent[3]) ? 'Close' : 'Open' ?> Ticket" id="submit">
+                        <input class="button" type="submit" name="submit-close" value="<?= ($ticketExists && !$ticketContent[3]) ? 'Close' : 'Open' ?> Ticket">
                     </form>
                 </div>
                 <h1><?= ($ticketExists) ? $ticketContent[1] : '' ?></h1>
@@ -225,7 +221,7 @@
                 <textarea name="answer" id="answer"></textarea>
                 <input type="file" name="file">
 
-                <input class="button" type="submit" name="submit" value="Submit" id="submit">
+                <input class="button" type="submit" name="submit" value="Submit">
             </form>
             <?php endif; ?>
 
@@ -237,7 +233,6 @@
         </div>
 
         <nav class="content-box">
-
             <div>
                 <h2>Menu</h2>
 
@@ -249,7 +244,7 @@
             </div>
 
             <div class="nav-logout-line">
-                <a href="logout.php"><button class="button logout">LOGOUT</button></a>
+                <a class="button logout" href="logout.php">LOGOUT</a>
             </div>
 
         </nav>
