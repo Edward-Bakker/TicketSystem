@@ -19,9 +19,9 @@
         <header>
             <h1>Admin edit page</h1>
             <a href="admin.php">Head back to admin</a>
-            
+
             <a href="viewticket.php">Head back to tickets</a>
-            
+
         </header>
         <?php
             $id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
@@ -29,20 +29,20 @@
         ?>
         <div id="boxbox">
         <form action="<?= $_SERVER['REQUEST_URI'] ?>" method="post">
-            
+
         <!-- dynamically inputs all data from the database into the form -->
-            <input type="Text" name="name" value="<?= $userInfo[1] ?>"> <b>Name</b> <br>
+            <input type="Text" name="name" value="<?= $userInfo[1] ?>" id="name"> <label for="name">Name</label><br>
             <br>
-            <input type="Text" name="email" value="<?= $userInfo[2] ?>"> <b>Email</b> <br>
+            <input type="Text" name="email" value="<?= $userInfo[2] ?>" id="email"> <label for="email">Email</label><br>
             <br>
-            <input type="Text" name="password"> <b>Password</b> <br>
+            <input type="Text" name="password" id="password"> <label for="password">Password</label><br>
             <br>
-            <input type="Text" name="adminlevel" value="<?= $userInfo[4] ?>"> <b>Admin Level(1 for admin, 0 for non-admin)</b> <br>
+            <input type="Text" name="adminlevel" value="<?= $userInfo[4] ?>" id="adminlevel"> <label for="adminlevel" title="0 - regular, 1 - admin">Admin level</label><br>
             <br>
-            <input type="Text" name="approved" value="<?= $userInfo[5] ?>"> <b>Approved(1 for approved, 0 for non-approved)</b> <br>
+            <input type="Text" name="approved" value="<?= $userInfo[5] ?>" id="approved"> <label for="approved" title="0 - not approved, 1 - approved">Approved</label><br>
             <br>
             <input type="Submit" name="submit" value="Submit">
-            
+
         </form>
         </div>
 
