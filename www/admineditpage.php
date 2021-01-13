@@ -37,9 +37,9 @@
             <br>
             <input type="Text" name="password"> <b>Password</b> <br>
             <br>
-            <input type="Text" name="adminlevel" value="<?= $userInfo[4] ?>"> <b>Admin Level</b> <br>
+            <input type="Text" name="adminlevel" value="<?= $userInfo[4] ?>"> <b>Admin Level(1 for admin, 0 for non-admin)</b> <br>
             <br>
-            <input type="Text" name="approved" value="<?= $userInfo[5] ?>"> <b>Approved</b> <br>
+            <input type="Text" name="approved" value="<?= $userInfo[5] ?>"> <b>Approved(1 for approved, 0 for non-approved)</b> <br>
             <br>
             <input type="Submit" name="submit" value="Submit">
             
