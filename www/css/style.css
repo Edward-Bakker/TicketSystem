@@ -16,7 +16,7 @@
 html, body {
     height: 100vh;
     overflow-y: scroll;
-    -ms-overflow-style: none;
+    -ms-overflow-style: none; /* Hiding scrollbars */
     scrollbar-width: none;
 }
 body::-webkit-scrollbar, html::-webkit-scrollbar {
@@ -312,6 +312,8 @@ nav h2 {
     border-top: 2px solid #999;
 }
 
+
+/* STYLING RELATED TO SIDEBARS THAT APPEAR ON SMALLER SCREENS */
 #openbtn, #closebtn, #closebtnticket {
 	display: none;
 	background: none;
@@ -334,6 +336,8 @@ nav h2 {
     display: none;
 }
 
+
+/* MESSAGING BETWEEN TICKET OWNER AND ADMINS */
 .comment {
     padding: 10px;
     margin: 10px 0;
@@ -362,21 +366,22 @@ nav h2 {
     text-decoration: underline;
 }
 
+
+
+/* hides main content box */
 .hidden {
     background-color: #EAEAEA;
 }
 .hidden .ticket-top, .hidden .ticket-content, .hidden .answer-form, .hidden .ticket-bottom {
     display: none;
 }
+
+
+
 @media only screen and (max-width: 1392px) {
-
-    .logo-wrap {
-        min-width: 557px;
-    }
-
-    .login-name {
-        min-width: 270px;
-    }
+    
+    /* reduces ticket list width */
+    
     .wrapper {
         grid-template-columns: 300px auto 210px;
         height: calc(100vh - 100px)
@@ -396,6 +401,10 @@ nav h2 {
 
 @media only screen and (max-width: 1140px) {
 
+    /* removes the menu on the page, turns it into a sidebar that appears on button click */
+    
+    
+    
     .placeholder {
         display: none;
     }
@@ -473,6 +482,10 @@ nav h2 {
 }
 
 @media only screen and (max-width: 920px) {
+    
+    /* removes the ticket list on the page, turns it into a sidebar that appears on button click */
+    
+    
     .logo-wrap {
         display: none;
     }
@@ -524,6 +537,9 @@ nav h2 {
 
 @media only screen and (max-width: 540px) {
 
+    /* makes the main content of the page take up more space on the screen */
+    
+    
     .wrapper {
         padding: 20px 0 0 0;
         margin: 0;
