@@ -1,7 +1,8 @@
 <?php
     require 'php/autoloader.php';
     $accounts = new Accounts();
-
+// checks if user is logged in and if the value returns 0 or false then directs the user back to index.php which clears the users session
+   //gets users id from the session id
     $userID = $_SESSION['userID'];
     if (!isset($userID) || $accounts->getUserApproved($userID) == 0) {
         header('location: index.php', true);
@@ -23,6 +24,7 @@
         <h1>User Settings</h1>
 
         <?php
+            // gets the users information from the database using the users id from the session
             $userInfo = $accounts->getUserInfo($userID);
         ?>
 
@@ -44,11 +46,11 @@
 
     <?php
 
-    //filters all data and edits the database on submit to what was entered
+    //filters all data and edits the database on submit to what was entered in the form
     if (isset($_POST["submit"])) {
         $name = filter_input(INPUT_POST, "name", FILTER_SANITIZE_STRING);
         $email = filter_input(INPUT_POST, "email", FILTER_SANITIZE_EMAIL);
-
+        // enters users information into the database
         $accounts->editAccountSettings($userID, $name, $email);
         header("Location: settings.php");
     }

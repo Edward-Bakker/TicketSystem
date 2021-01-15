@@ -1,6 +1,7 @@
 <?php
     require 'php/autoloader.php';
     $accounts = new Accounts();
+    // checks if user is logged in and is an admin and if the value returns 0 or false then directs the user back to index.php which clears the users session
     if(!isset($_SESSION['userID']) || $accounts->getUserAdmin($_SESSION['userID']) == 0)
     {
         header('location: index.php', true);
@@ -24,7 +25,9 @@
 
         </header>
         <?php
+        // gets the id that was passed in the url using a get
             $id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
+            //gets the users info from the database with the id that was passed in the url
             $userInfo = $accounts->getUserInfo($id);
         ?>
         <div id="boxbox">
@@ -57,10 +60,12 @@
             $approved = filter_input(INPUT_POST , 'approved' , FILTER_SANITIZE_STRING);
 
             if(!empty($password))
+            // checks if the password is empty or not and if not empty then will hash the new entered password
                 $password = password_hash($password, PASSWORD_DEFAULT);
             else
+            // if password was empty it will pass the existing password from the userinfo into the password variable so that the password wont be blank if nothing was entered
                 $password = $userInfo[3];
-
+             // sends all form data and hashed password to database
             $accounts->editAccounts($id, $name, $email, $password, $adminlevel, $approved);
             header('location: admin.php', true);
         }

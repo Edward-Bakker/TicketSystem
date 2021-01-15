@@ -10,10 +10,12 @@
     <body>
         <?php
             $accounts = new Accounts();
+            // Checks users session to see if they have logged in or not and uses oop in the accounts.php to return a true or false result
             if(isset($_SESSION['userID']) && $accounts->getUserApproved($_SESSION['userID']) == 1)
             {
                 header('location: viewticket.php', true);
             }
+            // takes email and password user entered and compares it to the values in the database and if returns true then adds users id to the session userID then headers user to viewticket.php
             if(isset($_POST['submit']))
             {
                 $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
