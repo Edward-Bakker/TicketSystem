@@ -45,6 +45,10 @@
             <button id="closebtnticket" onclick="closeTicket()">Your Tickets ☰</button>
             <div class="burger">
                 <div class="ticket-list">
+                    <form class ="functionsBurgerMenu" action="<?= $_SERVER['REQUEST_URI'] ?>" method="post">
+                                <input type=submit name="AscendingBurgerMenu" id="AscendingBurgerMenu" value="A-Z">
+                                <input type=submit name="DescendingBurgerMenu" id="DescendingBurgerMenu" value="Z-A">
+                     </form> 
                     <div class="scrollable">
                         <?php
                         $ticketID = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
@@ -74,6 +78,7 @@
 
                         foreach ($allTickets as $ticket) :
                         ?>
+                        <div id="HideTheTicketsBurgerMenu">
                             <div class="ticket content-box <?php if($_GET['id'] == $ticket[0]){echo("selected");}  ?>">
                                 <a href="viewticket.php?id=<?= $ticket[0] ?>">
                                     <div class="ticket-list-top">
@@ -92,7 +97,67 @@
                                     </div>
                                 </a>
                             </div>
+                        </div>
                         <?php endforeach; ?>
+                              <?php  
+                if(isset($_POST['AscendingBurgerMenu'])){
+                ?>
+                         
+                       <style>#HideTheTicketsBurgerMenu{display:none;} </style>
+                      <?php
+                        $AscendedTickets = $tickets->Ascending();
+                        foreach ($AscendedTickets as $ticket) :
+                      ?>
+                            <div class="ticket content-box <?php if($_GET['id'] == $ticket[0]){echo("selected");}  ?>">
+                                <a href="viewticket.php?id=<?= $ticket[0] ?>">
+                                    <div class="ticket-list-top">
+                                        <p>ID: <?= $ticket[0] ?></p>
+                                        <p><?= $accounts->getUsersName($ticket[4]) ?></p>
+                                    </div>
+
+                                    <div class="ticket-list-title">
+                                        <p class="ticket-list-p"><?= $ticket[1] ?></p>
+                                    </div>
+
+                                    <div class="status-circle <?= ($ticket[3] == 0) ? 'open' : 'closed' ?>"></div>
+
+                                    <div class="ticket-list-bottom">
+                                        <p>CREATED ON: <?= $ticket[5] ?></p>
+                                    </div>
+                                </a>
+                            </div>
+                            
+                        <?php endforeach;} ?>
+       
+            <?php
+              //function which sorts by descending
+                    if (isset($_POST['DescendingBurgerMenu'])) {
+            ?>
+                    <style>#HideTheTicketsBurgerMenu{display:none;} </style>
+                    <?php
+                       $DescendedTickets = $tickets->Descending();
+                        foreach ($DescendedTickets as $ticket) :
+                        ?>
+                            <div class="ticket content-box <?php if($_GET['id'] == $ticket[0]){echo("selected");}  ?>">
+                                <a href="viewticket.php?id=<?= $ticket[0] ?>">
+                                    <div class="ticket-list-top">
+                                        <p>ID: <?= $ticket[0] ?></p>
+                                        <p><?= $accounts->getUsersName($ticket[4]) ?></p>
+                                    </div>
+
+                                    <div class="ticket-list-title">
+                                        <p class="ticket-list-p"><?= $ticket[1] ?></p>
+                                    </div>
+
+                                    <div class="status-circle <?= ($ticket[3] == 0) ? 'open' : 'closed' ?>"></div>
+
+                                    <div class="ticket-list-bottom">
+                                        <p>CREATED ON: <?= $ticket[5] ?></p>
+                                    </div>
+                                </a>
+                            </div>
+
+                        <?php endforeach;} ?>
                     </div>
                 </div>
             </div>
@@ -147,6 +212,10 @@
 <div class="wrapper">
     <div class="ticket-list">
 		<p class="ticket-list-p">Your Tickets</p>
+                 <form class ="functions" action="<?= $_SERVER['REQUEST_URI'] ?>" method="post">
+                               <input type=submit name="Ascending" value="A-Z" id="Ascending">
+                               <input type=submit name="Descending" value="Z-A" id="Descending">                
+                 </form> 
 		<div class="scrollable">
             <?php
                 if($accounts->getUserAdmin($userID) == 1)
@@ -155,7 +224,7 @@
                 $allTickets = $tickets->getUsersTickets($userID);
 
                 foreach($allTickets as $ticket):
-            ?>
+            ?>      <div id="HideTheTickets">
 			<div class="ticket content-box">
 				<a href="viewticket.php?id=<?= $ticket[0] ?>">
 					<div class="ticket-list-top">
@@ -174,7 +243,68 @@
 					</div>
 				</a>
 			</div>
+                     </div>
             <?php endforeach; ?>
+                    
+                     <?php  
+                if(isset($_POST['Ascending'])){
+                ?>
+                         
+                       <style>#HideTheTickets{display:none;} </style>
+                      <?php
+                        $AscendedTickets = $tickets->Ascending();
+                        foreach ($AscendedTickets as $ticket) :
+                      ?>
+                            <div class="ticket content-box <?php if($_GET['id'] == $ticket[0]){echo("selected");}  ?>">
+                                <a href="viewticket.php?id=<?= $ticket[0] ?>">
+                                    <div class="ticket-list-top">
+                                        <p>ID: <?= $ticket[0] ?></p>
+                                        <p><?= $accounts->getUsersName($ticket[4]) ?></p>
+                                    </div>
+
+                                    <div class="ticket-list-title">
+                                        <p class="ticket-list-p"><?= $ticket[1] ?></p>
+                                    </div>
+
+                                    <div class="status-circle <?= ($ticket[3] == 0) ? 'open' : 'closed' ?>"></div>
+
+                                    <div class="ticket-list-bottom">
+                                        <p>CREATED ON: <?= $ticket[5] ?></p>
+                                    </div>
+                                </a>
+                            </div>
+                            
+                        <?php endforeach;} ?>
+       
+            <?php
+              //function which sorts by descending
+                    if (isset($_POST['Descending'])) {
+            ?>
+                    <style>#HideTheTickets{display:none;} </style>
+                    <?php
+                       $DescendedTickets = $tickets->Descending();
+                        foreach ($DescendedTickets as $ticket) :
+                        ?>
+                            <div class="ticket content-box <?php if($_GET['id'] == $ticket[0]){echo("selected");}  ?>">
+                                <a href="viewticket.php?id=<?= $ticket[0] ?>">
+                                    <div class="ticket-list-top">
+                                        <p>ID: <?= $ticket[0] ?></p>
+                                        <p><?= $accounts->getUsersName($ticket[4]) ?></p>
+                                    </div>
+
+                                    <div class="ticket-list-title">
+                                        <p class="ticket-list-p"><?= $ticket[1] ?></p>
+                                    </div>
+
+                                    <div class="status-circle <?= ($ticket[3] == 0) ? 'open' : 'closed' ?>"></div>
+
+                                    <div class="ticket-list-bottom">
+                                        <p>CREATED ON: <?= $ticket[5] ?></p>
+                                    </div>
+                                </a>
+                            </div>
+
+                        <?php endforeach;} ?>
 		</div>
 	</div>
 

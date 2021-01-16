@@ -149,11 +149,15 @@ header {
     padding: 0 0 10px 20px;
     margin-top: -5px;
     height: 100%;
+    
 }
 .ticket-list-p {
     font-family: 'Avenir-Book', Arial, Helvetica, sans-serif;
     font-size: 1.5em;
     margin-bottom: 10px;
+    width:14vw;
+    display:inline-block;
+    
 }
 .ticket {
     height: auto;
@@ -534,6 +538,81 @@ nav h2 {
     }
 
 }
+/*  
+styling for the Ascending and Descending buttons
+*/
+.functions 
+{
+    width: 7.7vw;
+    height:7vh;
+    display:inline-block;
+    margin-left:10%;
+    
+}
+#Ascending
+{   background: none;
+    color: inherit;
+    border: none;
+    font: inherit;
+    cursor: pointer;
+    outline: inherit;
+    width:4vw;
+    height:3vh;
+    display:inline-block;
+    
+  
+    
+}
+#Descending
+{
+    background: none;
+    color: inherit;
+    border: none;
+    font: inherit;
+    cursor: pointer;
+    outline: inherit;
+    width:4vw;
+    height:3vh;
+    display:inline-block;
+    margin-left:-15%;
+    
+}
+
+.functionsBurgerMenu
+{
+    width: 14vw;
+    height:3.5vh;
+    display:inline-block;
+    margin-left:70%;
+  
+}
+#AscendingBurgerMenu
+{   background: none;
+    color: inherit;
+    border: none;
+    font: inherit;
+    cursor: pointer;
+    outline: inherit;
+    width:5vw;
+    height:3vh;
+    display:inline-block;
+    padding: 0px;
+}
+
+#DescendingBurgerMenu
+{
+    background: none;
+    color: inherit;
+    border: none;
+    font: inherit;
+    cursor: pointer;
+    outline: inherit;
+    width:5vw;
+    height:3vh;
+    display:inline-block;
+    padding: 0px;
+}
+
 
 @media only screen and (max-width: 540px) {
 
